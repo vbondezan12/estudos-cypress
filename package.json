@@ -1,5 +1,10 @@
 {
+  "name": "ventanex-qe-cypress",
+  "version": "1.0.0",
+  "description": "Cypress Automation Framework",
+  "author": "Jeff Hamblen, Khannara Phay",
   "devDependencies": {
-    "cypress": "^12.17.1"
+    "cypress": "^4.2.0",
+    "@faker-js/faker": "^8.0.2"
   }
 }
