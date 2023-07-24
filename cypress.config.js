@@ -17,7 +17,7 @@ module.exports = defineConfig({
 
         },
         specPattern: "cypress/e2e/**/*.{js,jsx,ts,tsx,feature}",
-        baseUrl: "https://aps-clicktopay.uat.repay.net",
+        baseUrl: "https://uat-hq.secureconduit.net/sessions/login",
         chromeWebSecurity: false,
         defaultCommandTimeout: 10000,
         pageLoadTimeout: 20000,
@@ -36,14 +36,7 @@ module.exports = defineConfig({
             openMode: 0
         },
         env: {
-            unprivileged_username: "mishen1@repay.com",
-            username: 'mishen@repay.com',
-            invalidPass: '123ABC',
-            merchantId: "532",
-            name: "Mat Ishenbaev",
-            existingCompanyCode: "AW_NC",
-            invoice_EURO_URL : "https://aps-clicktopay.uat.repay.net/Order/Pay?guid=jngyimLj_2ggL86RjuX0BArDkTfszVfs&code=OsfFTNyBaGt2018BHn%252BdbvUIvuAlIrJ4maFW%252FXD8AQA%253D",
-            sales_order_EURO_URL : "https://aps-clicktopay.uat.repay.net/Order/Pay?guid=l-toSpKRCu_oeiTTl2FdPtIWPlck9dvk&code=whTLQKjxaEweE%252B3zK%252Bz5pJbq98ZsgzHvVX%252BSwuNqilI%253D",            
+            
         },
 
         USBank: {
