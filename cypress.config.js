@@ -1,5 +1,4 @@
 const { defineConfig } = require("cypress");
-const cucumber = require('cypress-cucumber-preprocessor').default;
 
 module.exports = defineConfig({
     projectId: 'tvrmvw',
@@ -18,31 +17,7 @@ module.exports = defineConfig({
 
         },
         specPattern: "cypress/e2e/**/*.{js,jsx,ts,tsx,feature}",
-        //excludeSpecPattern: "cypress/e2e/other/*.js",
         baseUrl: "https://aps-clicktopay.uat.repay.net",
-        acumatica: {
-            acumaticaUrl: "https://54.80.239.14/2022R2.CTP.UAT",
-        },
-        gateway: {
-            gatewayUrl: "https://gateway.repay.com/merchants/login.php",
-        },
-        createInvoiceUrl: "/api/invoices/create",
-        createSalesOrderUrl: "/api/so/create",
-        customer: {
-            guid: "hEdjFWdcgjwOMcN9x37SZk4COe6D4yrH",
-            erpId: "ERPID-F0802286-3053-4F02-9753-65F8A245323F"
-        },
-
-        cookiesName:"rememberDevice_537194149",
-        cookiesValue:"%241%248YsD9YlSwthVcWMKQn4tNw%3D%3D%24M7qyYxm5nHRVfxZ%2Fd4RVrWbvoQ8VzNsDYtr78ghjhoU%3D",
-        paymentInfo : {
-            creditCard : "4111111111111111",
-            ach : {
-                accountNumber : "123123321",
-                routingNumber : "123123123"
-            } 
-        },
-
         chromeWebSecurity: false,
         defaultCommandTimeout: 10000,
         pageLoadTimeout: 20000,
@@ -70,8 +45,9 @@ module.exports = defineConfig({
             invoice_EURO_URL : "https://aps-clicktopay.uat.repay.net/Order/Pay?guid=jngyimLj_2ggL86RjuX0BArDkTfszVfs&code=OsfFTNyBaGt2018BHn%252BdbvUIvuAlIrJ4maFW%252FXD8AQA%253D",
             sales_order_EURO_URL : "https://aps-clicktopay.uat.repay.net/Order/Pay?guid=l-toSpKRCu_oeiTTl2FdPtIWPlck9dvk&code=whTLQKjxaEweE%252B3zK%252Bz5pJbq98ZsgzHvVX%252BSwuNqilI%253D",            
         },
-        hostedForm: {
-            hosted_form_URL : "https://aps-clicktopay.uat.repay.net/EasyPay/PayStep2_V4",
+
+        USBank: {
+            base_url : "https://usbank-uat.secureconduit.net",
         },
         includeShadowDom: true,
     },
