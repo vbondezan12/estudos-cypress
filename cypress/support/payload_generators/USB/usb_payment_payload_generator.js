@@ -1,3 +1,5 @@
+import cypress from "cypress";
+
 const { faker } = require("@faker-js/faker");
 const moment = require("moment");
 
@@ -28,12 +30,15 @@ export class UsbPaymentPayloadGenerator {
             total_amount_due: faker.commerce.price(),
             note: faker.lorem.sentence(),
             name: faker.person.fullName(),
-            //ToDo: Figure out how to get different account holder IDs and pass them in
-            account_holder_id: '9009642',
+            account_holder_id: faker.finance.accountNumber(5),
             email: faker.internet.email({ firstName: 'Ventanex', lastName: 'Testing', provider: 'repay.com'}),
-            // ToDo: Figure out if these next 4 values can be anything different
+            // possible values: ach, debit, card
             payment_type: "ach",
+            // possible values: checking, savings
             checking: "checking",
+            /* account and routing can be hard-coded since we're not testing microbilt validation which is its own API
+               053200983 / 11101010 are a working combination. We can auto-generate if we want the payment to fail with faked numbers.
+             */
             account_number: '053200983',
             routing_number: '11101010',
             save_pay_account: false,
