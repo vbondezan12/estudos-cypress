@@ -40,8 +40,13 @@ module.exports = defineConfig({
         },
 
         USBank: {
-            base_url : "https://usbank-uat.secureconduit.net",
+            base_url : "https://usbank-uat.secureconduit.net/ivr/v1",
         },
+
+        Vhda: {
+            base_url : "https://repay-msp-uat.herokuapp.com/api/v1",
+        },
+
         includeShadowDom: true,
     },
 });
