@@ -1,0 +1,55 @@
+const api_headers = require ('../../../fixtures/usb_api_headers.json')
+
+export class UsbPaymentApi {
+    
+    createPayment(payment_payload) {
+        return cy.request({
+            method: 'POST',
+            url: Cypress.config().USBank.base_url + '/ivr/v1/payments',
+            failOnStatusCode: false,
+            body: payment_payload,
+            auth: Cypress.env('usb_auth_header'),
+            headers: api_headers
+        });
+    }
+
+    getBankInfo(query_parameters ={}){
+        return cy,request({
+            method: 'GET',
+            url: Cypress.config().USBank.base_url + '/ivr/v1/payments/get_bank_info',
+            qs: query_parameters,
+            auth: Cypress.env('usb_auth_header'),
+            headers: api_headers 
+        })
+    }
+
+    getAccounts(query_parameters ={}){
+        return cy,request({
+            method: 'GET',
+            url: Cypress.config().USBank.base_url + '/ivr/v1/accounts',
+            qs: query_parameters,
+            auth: Cypress.env('usb_auth_header'),
+            headers: api_headers
+        })
+    }
+
+    getPayAccounts(query_parameters ={}){
+        return cy,request({
+            method: 'GET',
+            url: Cypress.config().USBank.base_url + '/ivr/v1/pay_accounts',
+            qs: query_parameters,
+            auth: Cypress.env('usb_auth_header'),
+            headers: api_headers
+        })
+    }
+
+    getPayments(query_parameters ={}){
+        return cy,request({
+            method: 'GET',
+            url: Cypress.config().USBank.base_url + '/ivr/v1/payments',
+            qs: query_parameters,
+            auth: Cypress.env('usb_auth_header'),
+            headers: api_headers
+        })
+    }
+}
