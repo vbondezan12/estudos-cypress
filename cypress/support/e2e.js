@@ -12,11 +12,9 @@
 // You can read more here:
 // https://on.cypress.io/configuration
 // ***********************************************************
-require('cypress-xpath')
 
 // Import commands.js using ES2015 syntax:
 import './commands'
-import 'cypress-iframe'
 
 Cypress.on('uncaught:exception', (err, runnable) => {
   // returning false here prevents Cypress from failing the test
@@ -26,5 +24,4 @@ Cypress.on('uncaught:exception', (err, runnable) => {
 // require('./commands')cd
 
 // e2e.js file can be used for external plugins
-require('cypress-plugin-tab');
 import 'cypress-mochawesome-reporter/register';

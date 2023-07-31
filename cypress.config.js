@@ -5,7 +5,6 @@ module.exports = defineConfig({
     reporter: 'cypress-mochawesome-reporter',
     e2e: {
         setupNodeEvents(on, config) {
-            on('file:preprocessor', cucumber())
             require('cypress-mochawesome-reporter/plugin')(on);
             // const username = process.env.DB_USERNAME
             // const password = process.env.PASSWORD
@@ -16,7 +15,7 @@ module.exports = defineConfig({
             // return config
 
         },
-        specPattern: "cypress/e2e/**/*.{js,jsx,ts,tsx,feature}",
+        specPattern: "cypress/tests/**/*.{js,jsx,ts,tsx}",
         baseUrl: "https://uat-hq.secureconduit.net/sessions/login",
         chromeWebSecurity: false,
         defaultCommandTimeout: 10000,
