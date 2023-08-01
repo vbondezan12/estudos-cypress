@@ -134,4 +134,71 @@ export class VhdaPayloadGenerator {
         return recurringPayment;
     }
 
+    notification_preferences() {
+        let notificationTypes = {
+            sms: "true",
+            email: true
+        }
+
+        let notificationPreferences = {
+            email: faker.internet.email({ firstName: 'Ventanex', lastName: 'Testing', provider: 'repay.com'}),
+            phone: faker.phone.number(),
+            state: faker.location.state({ abbreviated: true }),
+            city: faker.location.city(),
+            address_line1: faker.location.streetAddress(true),
+            address_line2: faker.location.streetAddress(true),
+            zip: faker.location.zipCode(),
+            day_of_month: faker.number.int({ min: 1, max: 7 }),
+            payment_not_received: notificationTypes,
+            payment_posted: notificationTypes,
+            recurring_posted: notificationTypes,
+        }
+
+        return notificationPreferences;
+    }
+
+    payment() {
+        let payment = {
+            post_date: moment().format("YYYY-MM-DD"),
+            //ToDo: Can this be randomly generated?
+            pay_account_id: faker.finance.accountNumber(5),
+            delinquency_reason: faker.company.buzzNoun(),
+            total_payment: faker.commerce.price(),
+            late_fees_paid: faker.commerce.price(),
+            convenience_fee: faker.commerce.price(),
+            nsf_fees_paid: faker.commerce.price(),
+            corporate_advance: faker.commerce.price(),
+            escrow: faker.commerce.price(),
+            apply_towards_principal: faker.commerce.price(),
+            total_amount_due: faker.commerce.price(),
+            other_fees_paid: faker.commerce.price(),
+            suspense: faker.commerce.price(),
+            described_other_fees: faker.commerce.price(),
+            escrow_shortage: 'false',
+            pay_1_of_2: 'false',
+            //ToDo: What values can this be?
+            payment_type: 1,
+            //ToDd: Can this be a bank account or a card account?
+            pay_account: this.bank_accounts()
+        }
+
+        return payment;
+    }
+
+    updatedPassword(currentPassword) {
+        let newPassword = faker.internet.password()
+
+        let updatedPassword = {
+            current_password: currentPassword,
+            password: newPassword,
+            password_confirmation: newPassword,
+        }
+
+        let updatePassword = {
+            user: updatedPassword
+        }
+
+        return updatePassword;
+    }
+
 }
