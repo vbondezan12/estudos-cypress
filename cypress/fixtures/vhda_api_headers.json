@@ -1,0 +1,5 @@
+{
+    "Authorization": "Bearer ACCESS_TOKEN",
+    "Accept": "*/*",
+    "Content-Type": "application/json"
+}

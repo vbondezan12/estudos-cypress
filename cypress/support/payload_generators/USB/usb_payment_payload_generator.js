@@ -1,5 +1,3 @@
-import cypress from "cypress";
-
 const { faker } = require("@faker-js/faker");
 const moment = require("moment");
 

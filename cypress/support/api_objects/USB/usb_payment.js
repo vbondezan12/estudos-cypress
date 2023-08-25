@@ -5,7 +5,7 @@ export class UsbPaymentApi {
     createPayment(payment_payload) {
         return cy.request({
             method: 'POST',
-            url: Cypress.config().USBank.base_url + '/ivr/v1/payments',
+            url: Cypress.config().USBank.base_url + '/payments',
             failOnStatusCode: false,
             body: payment_payload,
             auth: Cypress.env('usb_auth_header'),
@@ -16,7 +16,7 @@ export class UsbPaymentApi {
     getBankInfo(query_parameters ={}){
         return cy,request({
             method: 'GET',
-            url: Cypress.config().USBank.base_url + '/ivr/v1/payments/get_bank_info',
+            url: Cypress.config().USBank.base_url + '/payments/get_bank_info',
             qs: query_parameters,
             auth: Cypress.env('usb_auth_header'),
             headers: api_headers 
@@ -26,7 +26,7 @@ export class UsbPaymentApi {
     getAccounts(query_parameters ={}){
         return cy,request({
             method: 'GET',
-            url: Cypress.config().USBank.base_url + '/ivr/v1/accounts',
+            url: Cypress.config().USBank.base_url + '/accounts',
             qs: query_parameters,
             auth: Cypress.env('usb_auth_header'),
             headers: api_headers
@@ -36,7 +36,7 @@ export class UsbPaymentApi {
     getPayAccounts(query_parameters ={}){
         return cy,request({
             method: 'GET',
-            url: Cypress.config().USBank.base_url + '/ivr/v1/pay_accounts',
+            url: Cypress.config().USBank.base_url + '/pay_accounts',
             qs: query_parameters,
             auth: Cypress.env('usb_auth_header'),
             headers: api_headers
@@ -46,7 +46,7 @@ export class UsbPaymentApi {
     getPayments(query_parameters ={}){
         return cy,request({
             method: 'GET',
-            url: Cypress.config().USBank.base_url + '/ivr/v1/payments',
+            url: Cypress.config().USBank.base_url + '/payments',
             qs: query_parameters,
             auth: Cypress.env('usb_auth_header'),
             headers: api_headers

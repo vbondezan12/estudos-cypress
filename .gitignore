@@ -113,6 +113,9 @@ cypress.env.json
 results/
 reports/
 
+#examples
+integration/examples/
+
 #screenshots
 screenshots/
 
