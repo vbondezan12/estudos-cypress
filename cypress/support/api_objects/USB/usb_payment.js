@@ -14,9 +14,10 @@ export class UsbPaymentApi {
     }
 
     getBankInfo(query_parameters ={}){
-        return cy,request({
+        return cy.request({
             method: 'GET',
             url: Cypress.config().USBank.base_url + '/payments/get_bank_info',
+            failOnStatusCode: false,
             qs: query_parameters,
             auth: Cypress.env('usb_auth_header'),
             headers: api_headers 
@@ -24,9 +25,10 @@ export class UsbPaymentApi {
     }
 
     getAccounts(query_parameters ={}){
-        return cy,request({
+        return cy.request({
             method: 'GET',
             url: Cypress.config().USBank.base_url + '/accounts',
+            failOnStatusCode: false,
             qs: query_parameters,
             auth: Cypress.env('usb_auth_header'),
             headers: api_headers
@@ -34,9 +36,10 @@ export class UsbPaymentApi {
     }
 
     getPayAccounts(query_parameters ={}){
-        return cy,request({
+        return cy.request({
             method: 'GET',
             url: Cypress.config().USBank.base_url + '/pay_accounts',
+            failOnStatusCode: false,
             qs: query_parameters,
             auth: Cypress.env('usb_auth_header'),
             headers: api_headers
@@ -44,9 +47,10 @@ export class UsbPaymentApi {
     }
 
     getPayments(query_parameters ={}){
-        return cy,request({
+        return cy.request({
             method: 'GET',
             url: Cypress.config().USBank.base_url + '/payments',
+            failOnStatusCode: false,
             qs: query_parameters,
             auth: Cypress.env('usb_auth_header'),
             headers: api_headers
