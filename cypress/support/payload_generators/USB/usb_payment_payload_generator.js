@@ -4,12 +4,14 @@ const moment = require("moment");
 export class UsbPaymentPayloadGenerator {
 
     generateData(client_id, loan_number) {
-        let data = {
-            type: 'payment',
-            attributes: this.generateAttributes(client_id, loan_number)
+        let jsonData = {
+            data: {
+                type: 'payment',
+                attributes: this.generateAttributes(client_id, loan_number)
+            }
         }
         
-        return data;
+        return jsonData;
     }
 
     generateAttributes(client_id, loan_number) {
