@@ -1,18 +1,29 @@
-const api_headers = require ('../../../fixtures/vhda_api_headers.json')
+const api_headers = require('../../../fixtures/vhda_api_headers.json')
 
 const url = Cypress.config().Vhda.base_url;
 
-export class VhdaApi{
+export class VhdaApi {
 
     updateHeaders(jwt) {
-        if(jwt) {
+        if (jwt) {
             this.headers = api_headers;
             this.headers.Authorization = this.headers.Authorization.replace('ACCESS_TOKEN', jwt);
         }
     }
 
-    createJwt(login_payload) {
+    createQuickPayJwt(login_payload) {
+        return cy.request({
+            method: 'POST',
+            url: url + '/quick_pay',
+            failOnStatusCode: false,
+            headers: this.headers,
+            body: login_payload
+        }).then((response) => {
+            cy.wrap(response.body.jwt).as('jwt');
+        });
+    }
 
+    createLoginJwt(login_payload) {
         return cy.request({
             method: 'POST',
             url: url + '/user_token',
@@ -22,11 +33,10 @@ export class VhdaApi{
         }).then((response) => {
             cy.wrap(response.body.jwt).as('jwt');
         });
-
     }
 
     multifactor(multifactor_payload, jwt) {
-        if(jwt) {
+        if (jwt) {
             this.updateHeaders(jwt)
         }
 
@@ -41,7 +51,7 @@ export class VhdaApi{
     }
 
     resendMultifactor(jwt) {
-        if(jwt) {
+        if (jwt) {
             this.updateHeaders(jwt)
         }
 
@@ -54,7 +64,7 @@ export class VhdaApi{
     }
 
     quickPay(quick_pay_payload, jwt) {
-        if(jwt) {
+        if (jwt) {
             this.updateHeaders(jwt)
         }
 
@@ -68,7 +78,7 @@ export class VhdaApi{
     }
 
     register(register_payload, jwt) {
-        if(jwt) {
+        if (jwt) {
             this.updateHeaders(jwt)
         }
 
@@ -82,7 +92,7 @@ export class VhdaApi{
     }
 
     resendRecoveryEmail(resend_recovery_email_payload, jwt) {
-        if(jwt) {
+        if (jwt) {
             this.updateHeaders(jwt)
         }
 
@@ -96,7 +106,7 @@ export class VhdaApi{
     }
 
     getAccounts(jwt) {
-        if(jwt) {
+        if (jwt) {
             this.updateHeaders(jwt)
         }
 
@@ -109,7 +119,7 @@ export class VhdaApi{
     }
 
     switchLoan(loan_number, jwt) {
-        if(jwt) {
+        if (jwt) {
             this.updateHeaders(jwt)
         }
 
@@ -122,7 +132,7 @@ export class VhdaApi{
     }
 
     newLoan(new_loan_payload, jwt) {
-        if(jwt) {
+        if (jwt) {
             this.updateHeaders(jwt)
         }
 
@@ -136,7 +146,7 @@ export class VhdaApi{
     }
 
     deleteLoan(loan_number, jwt) {
-        if(jwt) {
+        if (jwt) {
             this.updateHeaders(jwt)
         }
 
@@ -149,7 +159,7 @@ export class VhdaApi{
     }
 
     getDocuments(jwt) {
-        if(jwt) {
+        if (jwt) {
             this.updateHeaders(jwt)
         }
 
@@ -159,11 +169,11 @@ export class VhdaApi{
             url: url + '/documents?document_type=statements',
             failOnStatusCode: false,
             headers: this.headers,
-        });        
+        });
     }
 
     getEscrowShortage(jwt) {
-        if(jwt) {
+        if (jwt) {
             this.updateHeaders(jwt)
         }
 
@@ -176,7 +186,7 @@ export class VhdaApi{
     }
 
     getNotificationPreferences(jwt) {
-        if(jwt) {
+        if (jwt) {
             this.updateHeaders(jwt)
         }
 
@@ -189,7 +199,7 @@ export class VhdaApi{
     }
 
     updateNotificationPreferences(notification_preferences_paylod, jwt) {
-        if(jwt) {
+        if (jwt) {
             this.updateHeaders(jwt)
         }
 
@@ -203,7 +213,7 @@ export class VhdaApi{
     }
 
     getPayments(jwt) {
-        if(jwt) {
+        if (jwt) {
             this.updateHeaders(jwt)
         }
 
@@ -216,7 +226,7 @@ export class VhdaApi{
     }
 
     getPayment(payment_id, jwt) {
-        if(jwt) {
+        if (jwt) {
             this.updateHeaders(jwt)
         }
 
@@ -229,7 +239,7 @@ export class VhdaApi{
     }
 
     getMspOtherFees(jwt) {
-        if(jwt) {
+        if (jwt) {
             this.updateHeaders(jwt)
         }
 
@@ -242,7 +252,7 @@ export class VhdaApi{
     }
 
     voidPayment(payment_id, jwt) {
-        if(jwt) {
+        if (jwt) {
             this.updateHeaders(jwt)
         }
 
@@ -255,7 +265,7 @@ export class VhdaApi{
     }
 
     createPayment(payment_payload, jwt) {
-        if(jwt) {
+        if (jwt) {
             this.updateHeaders(jwt)
         }
 
@@ -269,7 +279,7 @@ export class VhdaApi{
     }
 
     updatePassword(updated_password_payload, jwt) {
-        if(jwt) {
+        if (jwt) {
             this.updateHeaders(jwt)
         }
 
@@ -283,7 +293,7 @@ export class VhdaApi{
     }
 
     getPayAccounts(jwt) {
-        if(jwt) {
+        if (jwt) {
             this.updateHeaders(jwt)
         }
 
@@ -296,7 +306,7 @@ export class VhdaApi{
     }
 
     setDefaultPayAccount(pay_account_id, jwt) {
-        if(jwt) {
+        if (jwt) {
             this.updateHeaders(jwt)
         }
 
@@ -309,7 +319,7 @@ export class VhdaApi{
     }
 
     deletePayAccount(pay_account_id, jwt) {
-        if(jwt) {
+        if (jwt) {
             this.updateHeaders(jwt)
         }
 
@@ -322,7 +332,7 @@ export class VhdaApi{
     }
 
     createBankAccounts(bank_account_payload, jwt) {
-        if(jwt) {
+        if (jwt) {
             this.updateHeaders(jwt)
         }
 
@@ -336,7 +346,7 @@ export class VhdaApi{
     }
 
     createCardAccounts(card_account_payload, jwt) {
-        if(jwt) {
+        if (jwt) {
             this.updateHeaders(jwt)
         }
 
@@ -350,7 +360,7 @@ export class VhdaApi{
     }
 
     getRecurringPayments(jwt) {
-        if(jwt) {
+        if (jwt) {
             this.updateHeaders(jwt)
         }
 
@@ -363,7 +373,7 @@ export class VhdaApi{
     }
 
     createRecurringPayment(recurring_payment_payload, jwt) {
-        if(jwt) {
+        if (jwt) {
             this.updateHeaders(jwt)
         }
 
@@ -377,7 +387,7 @@ export class VhdaApi{
     }
 
     updateRecurringPayment(recurring_payment_payload, recurring_payment_id, jwt) {
-        if(jwt) {
+        if (jwt) {
             this.updateHeaders(jwt)
         }
 
@@ -391,7 +401,7 @@ export class VhdaApi{
     }
 
     deleteRecurringPayment(recurring_payment_id, jwt) {
-        if(jwt) {
+        if (jwt) {
             this.updateHeaders(jwt)
         }
 
@@ -403,6 +413,5 @@ export class VhdaApi{
         });
     }
 
-    
 
 }
