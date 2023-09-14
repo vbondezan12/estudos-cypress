@@ -1,4 +1,4 @@
-const { defineConfig } = require("cypress");
+const { defineConfig } = require('cypress');
 
 module.exports = defineConfig({
     projectId: 'tvrmvw',
@@ -6,19 +6,12 @@ module.exports = defineConfig({
     e2e: {
         setupNodeEvents(on, config) {
             require('cypress-mochawesome-reporter/plugin')(on);
-            // const username = process.env.DB_USERNAME
-            // const password = process.env.PASSWORD
-            // if (!password){
-            //   throw new Error(`missing PASSWORD environment variable`)
-            // }
-            // config.env = {username, password}
-            // return config
-
         },
         specPattern: "cypress/tests/**/*.{js,jsx,ts,tsx}",
         baseUrl: "https://uat-hq.secureconduit.net/sessions/login",
         chromeWebSecurity: false,
         defaultCommandTimeout: 10000,
+        includeShadowDom: true,
         pageLoadTimeout: 20000,
         screenshotOnRunFailure: true,
         trashAssetsBeforeRuns: true,
@@ -28,24 +21,18 @@ module.exports = defineConfig({
         viewportWidth: 1920,
         reporter: 'cypress-multi-reporters',
         reporterOptions: {
-           configFile: 'reporter-config.json'
+            configFile: 'reporter-config.json'
         },
         retries: {
             runMode: 0,
             openMode: 0
         },
-        env: {
-            
+        env: {},
+        usbank: {
+            base_url: "https://usbank-uat.secureconduit.net/ivr/v1",
         },
-
-        USBank: {
-            base_url : "https://usbank-uat.secureconduit.net/ivr/v1",
-        },
-
-        Vhda: {
-            base_url : "https://repay-msp-uat.herokuapp.com/api/v1",
-        },
-
-        includeShadowDom: true,
+        vhda: {
+            base_url: "https://repay-msp-uat.herokuapp.com/api/v1",
+        }
     },
 });
