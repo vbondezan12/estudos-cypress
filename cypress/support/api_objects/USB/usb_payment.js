@@ -5,7 +5,7 @@ export class UsbPaymentApi {
     createPayment(payment_payload) {
         return cy.request({
             method: 'POST',
-            url: Cypress.config().USBank.base_url + '/payments',
+            url: Cypress.config().usbank.base_url + '/payments',
             failOnStatusCode: false,
             body: payment_payload,
             auth: Cypress.env('usb_auth_header'),

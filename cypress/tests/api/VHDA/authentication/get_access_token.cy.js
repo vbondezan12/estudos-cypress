@@ -9,7 +9,7 @@ describe('[VHDA]: Authentication', function () {
 
         cy.request({
             method: 'POST',
-            url: Cypress.config().Vhda.base_url + '/quick_pay',
+            url: Cypress.config().vhda.base_url + '/quick_pay',
             failOnStatusCode: true,
             headers: this.headers,
             body: credentials
@@ -25,7 +25,7 @@ describe('[VHDA]: Authentication', function () {
 
         cy.request({
             method: 'POST',
-            url: Cypress.config().Vhda.base_url + '/user_token',
+            url: Cypress.config().vhda.base_url + '/user_token',
             failOnStatusCode: true,
             headers: this.headers,
             body: credentials

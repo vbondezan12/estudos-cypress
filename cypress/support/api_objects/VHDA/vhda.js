@@ -1,6 +1,5 @@
 const api_headers = require('../../../fixtures/vhda_api_headers.json')
-
-const url = Cypress.config().Vhda.base_url;
+const url = Cypress.config().vhda.base_url;
 
 export class VhdaApi {
 
