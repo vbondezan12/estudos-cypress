@@ -33,6 +33,9 @@ module.exports = defineConfig({
         },
         vhda: {
             base_url: "https://repay-msp-uat.herokuapp.com/api/v1",
-        }
+        },
+        service_mac: {
+            base_url: "https://repay-servicemac-uat-upgrade.herokuapp.com/api/v1",
+        },
     },
 });
