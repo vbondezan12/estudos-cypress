@@ -18,5 +18,4 @@ describe('API Tests: SERVICE_MAC', function() {
             expect(response.status).to.eq(404);
         });
     });
-    
 })

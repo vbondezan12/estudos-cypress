@@ -3,10 +3,10 @@ import { ServiceMacAccount } from "../../../support/api_objects/ServiceMac/servi
 describe('API Tests: SERVICE_MAC', function() {
     const serviceMacApi = new ServiceMacAccount();
     
-    it('Get Accounts [200]: verify valid account',() => {
+    it('Get Payments [200]: verify valid account',() => {
         const account = 9017353
 
-        serviceMacApi.getAccountLookup(account).then((response) => {
+        serviceMacApi.getPayments(account).then((response) => {
             expect(response.status).to.eq(200);
         });
     });
@@ -14,9 +14,8 @@ describe('API Tests: SERVICE_MAC', function() {
     it('Get Accounts [404]: verify invalid loan has correct error',() => {
         const account = 123456789
 
-        serviceMacApi.getAccountLookup(account).then((response) => {
+        serviceMacApi.getPayments(account).then((response) => {
             expect(response.status).to.eq(404);
         });
     });
-    
 })
