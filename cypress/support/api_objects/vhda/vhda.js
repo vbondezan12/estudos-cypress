@@ -50,9 +50,9 @@ export class VhdaApi {
     }
 
     resendMultifactor(jwt) {
-        if (jwt) {
+
             this.updateHeaders(jwt)
-        }
+    
 
         return cy.request({
             method: 'GET',
