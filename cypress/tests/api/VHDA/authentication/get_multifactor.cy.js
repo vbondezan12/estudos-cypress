@@ -18,19 +18,13 @@ describe('VHDA: Multifactor', function () {
     })
 
     it('multifactor returns 200 with valid credentials', () => {
-        // vhdaApi.createQuickPayJwt(credentials);
-        // cy.get('@jwt').then(content => {
-        //      jwt = content;
-        // });
-
         vhdaApi.resendMultifactor(jwt).then((response) => {
             expect(response.status).to.eq(200);
         });
     }); 
   
     it('multifactor returns 401 with invalid credentials', () => {
-        cy.clearCookies();
-        vhdaApi.resendMultifactor("test").then((response) => {
+        vhdaApi.resendMultifactor(faker.string.uuid).then((response) => {
             expect(response.status).to.eq(401);
         });
     });
