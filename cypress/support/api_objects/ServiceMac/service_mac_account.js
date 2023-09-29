@@ -1,66 +1,71 @@
-const api_headers = require ('../../../fixtures/service_mac_api_headers.json')
+const api_headers = require('../../../fixtures/service_mac_api_headers.json')
+const environment = Cypress.env('service_mac');
 
 export class ServiceMacAccount {
-    
-    getAccountLookup(account){
+
+    getEnvironment() {
+        return environment
+    }
+
+    getAccountLookup(account) {
         return cy.request({
             method: 'GET',
             url: Cypress.config().service_mac.base_url + '/account_holders/' + account + '/accounts',
             failOnStatusCode: false,
             auth: Cypress.env('service_mac_auth_header'),
-            headers: api_headers 
-        })
-    }
-    
-    getAccountHolder(query_parameters ={}){
-        return cy.request({
-            method: 'GET',
-            url: Cypress.config().service_mac.base_url + '/account_holders' ,
-            failOnStatusCode: false,
-            qs: query_parameters,
-            auth: Cypress.env('service_mac_auth_header'),
-            headers: api_headers 
+            headers: api_headers
         })
     }
 
-    getPayments(account){
+    getAccountHolder(query_parameters = {}) {
+        return cy.request({
+            method: 'GET',
+            url: Cypress.config().service_mac.base_url + '/account_holders',
+            failOnStatusCode: false,
+            qs: query_parameters,
+            auth: Cypress.env('service_mac_auth_header'),
+            headers: api_headers
+        })
+    }
+
+    getPayments(account) {
         return cy.request({
             method: 'GET',
             url: Cypress.config().service_mac.base_url + '/account_holders/' + account + '/payments',
             failOnStatusCode: false,
             auth: Cypress.env('service_mac_auth_header'),
-            headers: api_headers 
+            headers: api_headers
         })
     }
 
-    getPaymentsTracking(account, tracking){
+    getPaymentsTracking(account, tracking) {
         return cy.request({
             method: 'GET',
             url: Cypress.config().service_mac.base_url + '/account_holders/' + account + '/payments/' + tracking,
             failOnStatusCode: false,
             auth: Cypress.env('service_mac_auth_header'),
-            headers: api_headers 
+            headers: api_headers
         })
     }
 
-    getPayAccounts(account){
+    getPayAccounts(account_holder) {
         return cy.request({
             method: 'GET',
-            url: Cypress.config().service_mac.base_url + '/account_holders/' + account + '/pay_accounts',
+            url: Cypress.config().service_mac.base_url + '/account_holders/' + account_holder + '/pay_accounts',
             failOnStatusCode: false,
             auth: Cypress.env('service_mac_auth_header'),
-            headers: api_headers 
+            headers: api_headers
         })
     }
 
-    getBankInfo(query_parameters ={}){
+    getBankInfo(query_parameters = {}) {
         return cy.request({
             method: 'GET',
             url: Cypress.config().service_mac.base_url + '/payments/get_bank_info',
             failOnStatusCode: false,
             qs: query_parameters,
             auth: Cypress.env('service_mac_auth_header'),
-            headers: api_headers 
+            headers: api_headers
         })
     }
 }

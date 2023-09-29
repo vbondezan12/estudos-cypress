@@ -122,3 +122,4 @@ screenshots/
 package-lock.json
 .idea
 .vscode
+xunit.xml

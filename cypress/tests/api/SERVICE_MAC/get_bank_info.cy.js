@@ -1,21 +1,28 @@
 import { ServiceMacAccount } from "../../../support/api_objects/ServiceMac/service_mac_account"
+import { faker } from "@faker-js/faker";
 
 describe('API Tests: SERVICE_MAC', function() {
     const serviceMacApi = new ServiceMacAccount();
     
-    it('Get Accounts [200]: verify valid account',() => {
-        const account = 9017353
-
-        serviceMacApi.getAccountLookup(account).then((response) => {
+    it('Get Bank Info [200]: verify valid bank info',() => {
+        const queryParameters = {
+            'routing_number': serviceMacApi.getEnvironment().routing_number
+        }
+        serviceMacApi.getBankInfo(queryParameters).then((response) => {
             expect(response.status).to.eq(200);
+            expect(response.body.bank_name).to.eq("US BANK NA");
+            expect(response.body.found).to.eq(true)
         });
     });
 
-    it('Get Accounts [404]: verify invalid loan has correct error',() => {
-        const account = 123456789
-
-        serviceMacApi.getAccountLookup(account).then((response) => {
-            expect(response.status).to.eq(404);
+    it('Get Bank Info [404]: verify invalid bank info',() => {
+        const queryParameters = {
+            'routing_number': faker.number.int({ min: 100000, max: 999999 })
+        }
+        serviceMacApi.getBankInfo(queryParameters).then((response) => {
+            expect(response.status).to.eq(200);
+            expect(response.body.bank_name).to.eq(null);
+            expect(response.body.found).to.eq(false)
         });
     });
 })
