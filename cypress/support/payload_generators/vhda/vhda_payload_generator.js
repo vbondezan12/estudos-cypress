@@ -1,5 +1,5 @@
-const { faker } = require("@faker-js/faker");
-const moment = require("moment");
+const { faker } = require('@faker-js/faker');
+const moment = require('moment');
 
 export class VhdaPayloadGenerator {
 
@@ -136,7 +136,7 @@ export class VhdaPayloadGenerator {
 
     notification_preferences() {
         let notificationTypes = {
-            sms: "true",
+            sms: 'true',
             email: true
         }
 
@@ -159,7 +159,7 @@ export class VhdaPayloadGenerator {
 
     payment() {
         let payment = {
-            post_date: moment().format("YYYY-MM-DD"),
+            post_date: moment().format('YYYY-MM-DD'),
             //ToDo: Can this be randomly generated?
             pay_account_id: faker.finance.accountNumber(5),
             delinquency_reason: faker.company.buzzNoun(),

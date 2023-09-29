@@ -1,5 +1,5 @@
-const { faker } = require("@faker-js/faker");
-const moment = require("moment");
+const { faker } = require('@faker-js/faker');
+const moment = require('moment');
 
 export class UsbPaymentPayloadGenerator {
 
@@ -18,7 +18,7 @@ export class UsbPaymentPayloadGenerator {
         let attributes = {
             client_id: client_id,
             loan_number: loan_number,
-            post_date: moment().format("YYYY-MM-DD"),
+            post_date: moment().format('YYYY-MM-DD'),
             payment_amount: faker.commerce.price(),
             transaction_fee: faker.commerce.price(),
             late_fees_paid: faker.commerce.price(),
@@ -33,9 +33,9 @@ export class UsbPaymentPayloadGenerator {
             account_holder_id: faker.finance.accountNumber(5),
             email: faker.internet.email({ firstName: 'Ventanex', lastName: 'Testing', provider: 'repay.com'}),
             // possible values: ach, debit, card
-            payment_type: "ach",
+            payment_type: 'ach',
             // possible values: checking, savings
-            checking: "checking",
+            checking: 'checking',
             /* account and routing can be hard-coded since we're not testing microbilt validation which is its own API
                053200983 / 11101010 are a working combination. We can auto-generate if we want the payment to fail with faked numbers.
              */

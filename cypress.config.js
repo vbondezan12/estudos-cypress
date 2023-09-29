@@ -7,8 +7,8 @@ module.exports = defineConfig({
         setupNodeEvents(on, config) {
             require('cypress-mochawesome-reporter/plugin')(on);
         },
-        specPattern: "cypress/tests/**/*.{js,jsx,ts,tsx}",
-        baseUrl: "https://uat-hq.secureconduit.net/sessions/login",
+        specPattern: 'cypress/tests/**/*.{js,jsx,ts,tsx}',
+        baseUrl: 'https://uat-hq.secureconduit.net/sessions/login',
         chromeWebSecurity: false,
         defaultCommandTimeout: 10000,
         includeShadowDom: true,
@@ -28,11 +28,17 @@ module.exports = defineConfig({
             openMode: 0
         },
         env: {},
+        hesc: {
+            base_url: 'https://hesc-uat.herokuapp.com/api/v1/agent'
+        },
+        launch: {
+            base_url: 'https://uat-launchservicing.secureconduit.net/api'
+        },
         usbank: {
-            base_url: "https://usbank-uat.secureconduit.net/ivr/v1",
+            base_url: 'https://usbank-uat.secureconduit.net/ivr/v1',
         },
         vhda: {
-            base_url: "https://repay-msp-uat.herokuapp.com/api/v1",
+            base_url: 'https://repay-msp-uat.herokuapp.com/api/v1',
         }
     },
 });

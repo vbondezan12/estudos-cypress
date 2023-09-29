@@ -3,7 +3,7 @@ import { VhdaPayloadGenerator } from '../../../../support/payload_generators/vhd
 
 const { faker } = require('@faker-js/faker');
 
-describe('VHDA: GET accounts', function () {
+describe('VHDA: GET payment', function () {
     const vhdaApi = new VhdaApi();
     const vhdaPayloadGenerator = new VhdaPayloadGenerator();
     const environment = Cypress.env('vhda');
@@ -14,19 +14,6 @@ describe('VHDA: GET accounts', function () {
         vhdaApi.createQuickPayJwt(credentials);
         cy.get('@jwt').then(content => {
             jwt = content
-        })
-    })
-
-    it('GET accounts returns 200 with valid jwt', () => {
-        vhdaApi.getAccounts(jwt).then((response) => {
-            expect(response.status).to.eq(200)
-            expect(response.body.data.attributes).to.exist;
-        })
-    })
-
-    it('GET accounts returns 401 with invalid jwt', () => {
-        vhdaApi.getAccounts(faker.finance.accountNumber(300)).then((response) => {
-            expect(response.status).to.eq(401);
         })
     })
 })

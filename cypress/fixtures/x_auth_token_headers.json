@@ -1,5 +1,5 @@
 {
-    "Authorization": "Bearer ACCESS_TOKEN",
     "Accept": "*/*",
+    "x-auth-token-headers": "TOKEN",
     "Content-Type": "application/json"
 }

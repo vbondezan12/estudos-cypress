@@ -1,0 +1,5 @@
+{
+    "Accept": "*/*",
+    "Authorization": "Basic TOKEN",
+    "Content-Type": "application/json"
+}
