@@ -1,4 +1,4 @@
-const api_headers = require('../../../fixtures/vhda_api_headers.json')
+const api_headers = require('../../../fixtures/bearer_token_headers.json')
 const url = Cypress.config().vhda.base_url;
 
 export class VhdaApi {
@@ -6,7 +6,7 @@ export class VhdaApi {
     updateHeaders(jwt) {
         if (jwt) {
             this.headers = api_headers;
-            this.headers.Authorization = this.headers.Authorization.replace('ACCESS_TOKEN', jwt);
+            this.headers.Authorization = this.headers.Authorization.replace('TOKEN', jwt);
         }
     }
 
