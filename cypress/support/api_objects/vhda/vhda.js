@@ -6,7 +6,7 @@ export class VhdaApi {
     updateHeaders(jwt) {
         if (jwt) {
             this.headers = api_headers;
-            this.headers.Authorization = this.headers.Authorization.replace('TOKEN', jwt);
+            this.headers.Authorization = 'Bearer ' + jwt;
         }
     }
 
@@ -50,9 +50,7 @@ export class VhdaApi {
     }
 
     resendMultifactor(jwt) {
-        if (jwt) {
-            this.updateHeaders(jwt)
-        }
+        this.updateHeaders(jwt)
 
         return cy.request({
             method: 'GET',
