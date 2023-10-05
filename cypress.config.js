@@ -38,7 +38,10 @@ module.exports = defineConfig({
             base_url: 'https://usbank-uat.secureconduit.net/ivr/v1',
         },
         vhda: {
-            base_url: 'https://repay-msp-uat.herokuapp.com/api/v1',
-        }
+            base_url: "https://repay-msp-uat.herokuapp.com/api/v1",
+        },
+        service_mac: {
+            base_url: "https://repay-servicemac-uat-upgrade.herokuapp.com/api/v1",
+        },
     },
 });

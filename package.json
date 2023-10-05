@@ -8,7 +8,8 @@
     "cypress:open:localhost": "ENV=localhost npm run cypress:open",
     "cypress:open:dev": "ENV=dev npm run cypress:open",
     "cypress:open:qa": "ENV=qa npm run cypress:open",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "service_mac": "npx cypress run --spec cypress/tests/api/SERVICE_MAC/*.cy.js"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.0.2",
