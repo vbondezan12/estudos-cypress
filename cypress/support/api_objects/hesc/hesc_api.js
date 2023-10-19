@@ -21,8 +21,8 @@ export class HescApi {
         }
     }
 
-    getAccountHolders() {
-        this.updateHeaders(environment.authorization);
+    getAccountHolders(token) {
+        this.updateHeaders(token);
 
         return cy.request({
             method: 'GET',
