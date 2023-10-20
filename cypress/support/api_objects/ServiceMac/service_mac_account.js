@@ -38,6 +38,39 @@ export class ServiceMacAccount {
         })
     }
 
+    postAccountHolder(payload_account_holder) {
+        return cy.request({
+            method: 'POST',
+            url: Cypress.config().service_mac.base_url + '/account_holders/',
+            body: payload_account_holder,
+            failOnStatusCode: false,
+            auth: Cypress.env('service_mac_auth_header'),
+            headers: api_headers
+        })
+    }
+
+    postLoanPaymentAccount(payload_loan_payment_account) {
+        return cy.request({
+            method: 'POST',
+            url: Cypress.config().service_mac.base_url + '/account_holders/',
+            body: payload_loan_payment_account,
+            failOnStatusCode: false,
+            auth: Cypress.env('service_mac_auth_header'),
+            headers: api_headers
+        })
+    }
+
+    postLoanPaymentPayAccountId(payload_loan_payment_pay_account_id) {
+        return cy.request({
+            method: 'POST',
+            url: Cypress.config().service_mac.base_url + '/account_holders/',
+            body: payload_loan_payment_pay_account_id,
+            failOnStatusCode: false,
+            auth: Cypress.env('service_mac_auth_header'),
+            headers: api_headers
+        })
+    }
+
     getPaymentsTracking(account, tracking) {
         return cy.request({
             method: 'GET',

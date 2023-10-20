@@ -5,7 +5,7 @@ describe('API Tests: SERVICE_MAC', function() {
     const serviceMacApi = new ServiceMacAccount();
     
     it('Get Payment tracking [200]: verify valid payments',() => {
-        const account = serviceMacApi.getEnvironment().account 
+        const account = serviceMacApi.getEnvironment().account
 
         serviceMacApi.getPayments(account).then((response) => {
             expect(response.status).to.eq(200);
