@@ -1,9 +1,9 @@
 import moment from 'moment';
-import { UsbPaymentApi } from '../../../../support/api_objects/usb/us_bank'
-import { UsbPaymentPayloadGenerator } from '../../../../support/payload_generators/usb/usb_payment_payload_generator';
+import { UsBankApi } from '../../../../support/api_objects/usbank/usbank_api'
+import { UsbPaymentPayloadGenerator } from '../../../../support/payload_generators/usbank/usb_payment_payload_generator';
 
-describe('USB: Payment', function () {
-    const usbApi = new UsbPaymentApi();
+describe('usbank: Payment', function () {
+    const usbApi = new UsBankApi();
     const usbPayloadGenerator = new UsbPaymentPayloadGenerator();
 
     it('Create Payment: verify valid payment data creates a payment', () => {

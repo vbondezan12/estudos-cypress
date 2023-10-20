@@ -27,7 +27,6 @@ module.exports = defineConfig({
             runMode: 0,
             openMode: 0
         },
-        env: {},
         hesc: {
             base_url: 'https://hesc-uat.herokuapp.com/api/v1/agent'
         },
@@ -40,8 +39,8 @@ module.exports = defineConfig({
         vhda: {
             base_url: "https://repay-msp-uat.herokuapp.com/api/v1",
         },
-        service_mac: {
+        servicemac: {
             base_url: "https://repay-servicemac-uat-upgrade.herokuapp.com/api/v1",
         },
-    },
+    }
 });

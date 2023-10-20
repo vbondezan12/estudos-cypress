@@ -1,12 +1,12 @@
-import { ServiceMacAccount } from "../../../support/api_objects/ServiceMac/service_mac_account"
+import { ServiceMacApi } from "../../../support/api_objects/servicemac/servicemac_api"
 import { faker } from "@faker-js/faker";
 
-describe('API Tests: SERVICE_MAC', function() {
-    const serviceMacApi = new ServiceMacAccount();
-    
-    it('Get Bank Info [200]: verify valid bank info',() => {
+describe('API Tests: servicemac', function () {
+    const serviceMacApi = new ServiceMacApi();
+
+    it('Get Bank Info [200]: verify valid bank info', () => {
         const queryParameters = {
-            'routing_number': serviceMacApi.getEnvironment().routing_number
+            'routing_number': serviceMacApi.cypressEnv.routing_number
         }
         serviceMacApi.getBankInfo(queryParameters).then((response) => {
             expect(response.status).to.eq(200);
@@ -15,7 +15,7 @@ describe('API Tests: SERVICE_MAC', function() {
         });
     });
 
-    it('Get Bank Info [404]: verify invalid bank info',() => {
+    it('Get Bank Info [404]: verify invalid bank info', () => {
         const queryParameters = {
             'routing_number': faker.number.int({ min: 100000, max: 999999 })
         }

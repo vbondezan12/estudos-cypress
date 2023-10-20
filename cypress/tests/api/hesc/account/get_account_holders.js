@@ -1,7 +1,5 @@
 import { HescApi } from '../../../../support/api_objects/hesc/hesc_api.js'
 
-const { faker } = require('@faker-js/faker');
-
 describe('HESC: Accounts', function () {
     const hescApi = new HescApi();
 

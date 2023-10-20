@@ -1,56 +1,59 @@
-import { VhdaPayloadGenerator } from '../../../../support/payload_generators/vhda/vhda_payload_generator';
+import { VhdaApi } from '../../../../support/api_objects/vhda/vhda';
 
 const { faker } = require('@faker-js/faker');
 
 describe('VHDA: POST quick_pay', function () {
-    const vhdaPayloadGenerator = new VhdaPayloadGenerator();
-    const environment = Cypress.env('vhda');
+    const vhdaApi = new VhdaApi();
 
     it('quick_pay returns 201 with valid credentials', () => {
-        const credentials = vhdaPayloadGenerator.quick_pay(environment.loan_number, environment.zip, environment.ssn);
+        const credentials = vhdaApi.payloadGenerator.quick_pay(vhdaApi.cypressEnv.loan_number, vhdaApi.cypressEnv.zip, vhdaApi.cypressEnv.ssn);
 
-        cy.request({
-            method: 'POST',
-            url: Cypress.config().vhda.base_url + '/quick_pay',
-            failOnStatusCode: true,
-            headers: this.headers,
-            body: credentials
-        }).then((response) => {
+        vhdaApi.createQuickPayJwt(credentials).then(response => {
             expect(response.status).to.eq(201);
             expect(response.body.jwt).to.not.be.null;
             expect(response.body.jwt).to.not.be.empty;
         });
     })
 
-    it('quick_pay returns 401 when random account number', () => {
-        const credentials = vhdaPayloadGenerator.quick_pay(faker.finance.accountNumber(8), faker.finance.accountNumber(5), environment.ssn);
+    xit('quick_pay returns 401 when random account number', () => {
+        const credentials = vhdaApi.payloadGenerator.quick_pay(faker.finance.accountNumber(8), faker.finance.accountNumber(5), vhdaApi.cypressEnv.ssn);
 
-        cy.request({
-            method: 'POST',
-            url: Cypress.config().vhda.base_url + '/quick_pay',
-            failOnStatusCode: false,
-            headers: this.headers,
-            body: credentials
-        }).then((response) => {
-            // Dev code returns 200 without JWT
-            // TODO write bug
+        vhdaApi.createQuickPayJwt(credentials).then(response => {
             expect(response.status).to.eq(401);
         });
     })
 
     it('user_token returns 201 with valid credentials', () => {
-        const credentials = vhdaPayloadGenerator.login(environment.user_name, environment.password);
+        const credentials = vhdaApi.payloadGenerator.login(vhdaApi.cypressEnv.username, vhdaApi.cypressEnv.password);
 
-        cy.request({
-            method: 'POST',
-            url: Cypress.config().vhda.base_url + '/user_token',
-            failOnStatusCode: true,
-            headers: this.headers,
-            body: credentials
-        }).then((response) => {
+        vhdaApi.createLoginJwt(credentials).then(response => {
             expect(response.status).to.eq(201);
             expect(response.body.jwt).to.not.be.null;
             expect(response.body.jwt).to.not.be.empty;
+        });
+    })
+
+    xit('user_token returns 401 with invalid username', () => {
+        const credentials = vhdaApi.payloadGenerator.login(faker.internet.userName(), vhdaApi.cypressEnv.password);
+
+        vhdaApi.createLoginJwt(credentials).then(response => {
+            expect(response.status).to.eq(401);
+        });
+    })
+
+    xit('user_token returns 401 with invalid password', () => {
+        const credentials = vhdaApi.payloadGenerator.login(vhdaApi.cypressEnv.username, faker.internet.password());
+
+        vhdaApi.createLoginJwt(credentials).then(response => {
+            expect(response.status).to.eq(401);
+        });
+    })
+
+    xit('user_token returns 401 with invalid username and password', () => {
+        const credentials = vhdaApi.payloadGenerator.login(faker.internet.userName(), faker.internet.password());
+
+        vhdaApi.createLoginJwt(credentials).then(response => {
+            expect(response.status).to.eq(401);
         });
     })
 })

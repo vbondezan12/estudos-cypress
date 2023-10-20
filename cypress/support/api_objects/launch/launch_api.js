@@ -1,35 +1,19 @@
-const api_headers = require('../../../fixtures/x_auth_token_headers.json')
-const environment = Cypress.env('launch');
+import { AuthenticationUtils } from '../../utils/authentication_utils';
+
+const AUTHENTICATION_TYPE = 'basic';
+
+const authenticationUtils = new AuthenticationUtils();
+const base_url = Cypress.config().launch.base_url;
 
 export class LaunchApi {
-
-    /**
-     * Fetch the Cypress environment
-     * @returns Cypress environment
-     */
-    getEnvironment() {
-        return environment;
-    }
-
-    getBaseUrl() {
-        return Cypress.config().launch.base_url;
-    }
-
-    updateHeaders(token) {
-        if (token) {
-            this.headers = api_headers;
-            this.headers.Authorization = this.headers.Authorization.replace('TOKEN', token);
-        }
-    }
+    cypressEnv = Cypress.env('launch');
 
     getPayAccounts() {
-        this.updateHeaders(environment.authorization);
-
         return cy.request({
             method: 'GET',
-            url: this.getBaseUrl() + '/pay_accounts',
+            url: `${ base_url }/pay_accounts`,
             failOnStatusCode: false,
-            headers: this.headers
+            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
         });
     }
 }
