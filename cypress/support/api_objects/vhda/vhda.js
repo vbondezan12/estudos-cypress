@@ -41,7 +41,7 @@ export class VhdaApi {
 
         return cy.request({
             method: 'POST',
-            url: url + '//multifactor',
+            url: url + '/multifactor',
             failOnStatusCode: false,
             headers: this.headers,
             body: multifactor_payload
@@ -134,8 +134,8 @@ export class VhdaApi {
         }
 
         return cy.request({
-            method: 'GET',
-            url: url + '/account_details/',
+            method: 'POST',
+            url: url + '/account_details',
             failOnStatusCode: false,
             headers: this.headers,
             body: new_loan_payload
