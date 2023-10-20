@@ -9,7 +9,12 @@
     "cypress:open:dev": "ENV=dev npm run cypress:open",
     "cypress:open:qa": "ENV=qa npm run cypress:open",
     "cypress:open": "cypress open",
-    "service_mac": "npx cypress run --spec cypress/tests/api/SERVICE_MAC/*.cy.js"
+    "api:all": "npx cypress run --spec cypress/tests/api/*/*/*.cy.js",
+    "api:hesc": "npx cypress run --spec cypress/tests/api/servicemac/*/*.cy.js",
+    "api:lauch": "npx cypress run --spec cypress/tests/api/launch/*/*.cy.js",
+    "api:servicemac": "npx cypress run --spec cypress/tests/api/servicemac/*/*.cy.js",
+    "api:usbank": "npx cypress run --spec cypress/tests/api/usbank/*/*.cy.js",
+    "api:vhda": "npx cypress run --spec cypress/tests/api/vhda/*/*.cy.js"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.0.2",

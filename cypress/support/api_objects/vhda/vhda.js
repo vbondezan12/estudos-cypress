@@ -1,414 +1,300 @@
-const api_headers = require('../../../fixtures/bearer_token_headers.json')
-const url = Cypress.config().vhda.base_url;
+import { AuthenticationUtils } from '../../utils/authentication_utils';
+import { VhdaPayloadGenerator } from '../../payload_generators/vhda/vhda_payload_generator';
+
+const AUTHENTICATION_TYPE = 'bearer';
+
+const authenticationUtils = new AuthenticationUtils();
+const base_url = Cypress.config().vhda.base_url;
 
 export class VhdaApi {
+    cypressEnv = Cypress.env('vhda');
 
-    updateHeaders(jwt) {
-        if (jwt) {
-            this.headers = api_headers;
-            this.headers.Authorization = 'Bearer ' + jwt;
-        }
-    }
+    payloadGenerator = new VhdaPayloadGenerator();
 
     createQuickPayJwt(login_payload) {
         return cy.request({
             method: 'POST',
-            url: url + '/quick_pay',
+            url: `${ base_url }/quick_pay`,
             failOnStatusCode: false,
-            headers: this.headers,
             body: login_payload
         }).then((response) => {
-            cy.wrap(response.body.jwt).as('jwt');
+            window.sessionStorage.setItem('session_auth_token', response.body.jwt);
         });
     }
 
     createLoginJwt(login_payload) {
         return cy.request({
             method: 'POST',
-            url: url + '/user_token',
+            url: `${ base_url }/user_token`,
             failOnStatusCode: false,
-            headers: this.headers,
             body: login_payload
         }).then((response) => {
-            cy.wrap(response.body.jwt).as('jwt');
+            window.sessionStorage.setItem('session_auth_token', response.body.jwt);
         });
     }
 
     multifactor(multifactor_payload, jwt) {
-        if (jwt) {
-            this.updateHeaders(jwt)
-        }
-
         return cy.request({
             method: 'POST',
-            url: url + '/multifactor',
+            url: `${ base_url }/multifactor`,
             failOnStatusCode: false,
-            headers: this.headers,
+            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
             body: multifactor_payload
         });
-
     }
 
     resendMultifactor(jwt) {
-        this.updateHeaders(jwt)
-
         return cy.request({
             method: 'GET',
-            url: url + '/multifactor/resend',
+            url: `${ base_url }/multifactor/resend`,
             failOnStatusCode: false,
-            headers: this.headers,
+            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
         });
     }
 
     quickPay(quick_pay_payload, jwt) {
-        if (jwt) {
-            this.updateHeaders(jwt)
-        }
-
         return cy.request({
             method: 'POST',
-            url: url + '/quick_pay',
+            url: `${ base_url }/quick_pay`,
             failOnStatusCode: false,
-            headers: this.headers,
+            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
             body: quick_pay_payload
         });
     }
 
     register(register_payload, jwt) {
-        if (jwt) {
-            this.updateHeaders(jwt)
-        }
-
         return cy.request({
             method: 'POST',
-            url: url + '/users',
+            url: `${ base_url }/users`,
             failOnStatusCode: false,
-            headers: this.headers,
+            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
             body: register_payload
         });
     }
 
     resendRecoveryEmail(resend_recovery_email_payload, jwt) {
-        if (jwt) {
-            this.updateHeaders(jwt)
-        }
-
         return cy.request({
             method: 'POST',
-            url: url + '/users/send_recovery_email',
+            url: `${ base_url }/users/send_recovery_email`,
             failOnStatusCode: false,
-            headers: this.headers,
+            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
             body: resend_recovery_email_payload
         });
     }
 
     getAccounts(jwt) {
-        if (jwt) {
-            this.updateHeaders(jwt)
-        }
-
         return cy.request({
             method: 'GET',
-            url: url + '/accounts',
+            url: `${ base_url }/accounts`,
             failOnStatusCode: false,
-            headers: this.headers,
+            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
         });
     }
 
     switchLoan(loan_number, jwt) {
-        if (jwt) {
-            this.updateHeaders(jwt)
-        }
-
         return cy.request({
             method: 'GET',
-            url: url + '/account_details/' + loan_number,
+            url: `${ base_url }/account_details/${ loan_number }`,
             failOnStatusCode: false,
-            headers: this.headers,
+            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
         });
     }
 
     newLoan(new_loan_payload, jwt) {
-        if (jwt) {
-            this.updateHeaders(jwt)
-        }
-
         return cy.request({
             method: 'POST',
-            url: url + '/account_details',
+            url: `${ base_url }/account_details`,
             failOnStatusCode: false,
-            headers: this.headers,
+            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
             body: new_loan_payload
         });
     }
 
     deleteLoan(loan_number, jwt) {
-        if (jwt) {
-            this.updateHeaders(jwt)
-        }
-
         return cy.request({
             method: 'DELETE',
-            url: url + '/account_details/' + loan_number,
+            url: `${ base_url }/account_details/${ loan_number }`,
             failOnStatusCode: false,
-            headers: this.headers,
+            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
         });
     }
 
     getDocuments(jwt) {
-        if (jwt) {
-            this.updateHeaders(jwt)
-        }
-
         //ToDo: Are there other document types? Are there other query parameters for this?
         return cy.request({
             method: 'GET',
-            url: url + '/documents?document_type=statements',
+            url: `${ base_url }/documents?document_type=statements`,
             failOnStatusCode: false,
-            headers: this.headers,
+            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
         });
     }
 
     getEscrowShortage(jwt) {
-        if (jwt) {
-            this.updateHeaders(jwt)
-        }
-
         return cy.request({
             method: 'GET',
-            url: url + '/escrow_shortage',
+            url: `${ base_url }/escrow_shortage`,
             failOnStatusCode: false,
-            headers: this.headers,
+            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
         });
     }
 
     getNotificationPreferences(jwt) {
-        if (jwt) {
-            this.updateHeaders(jwt)
-        }
-
         return cy.request({
             method: 'GET',
-            url: url + '/notification_preferences',
+            url: `${ base_url }/notification_preferences`,
             failOnStatusCode: false,
-            headers: this.headers,
+            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
         });
     }
 
-    updateNotificationPreferences(notification_preferences_paylod, jwt) {
-        if (jwt) {
-            this.updateHeaders(jwt)
-        }
-
+    updateNotificationPreferences(notification_preferences_payload, jwt) {
         return cy.request({
             method: 'PATCH',
-            url: url + '/notification_preferences',
+            url: `${ base_url }/notification_preferences`,
             failOnStatusCode: false,
-            headers: this.headers,
-            body: notification_preferences_paylod
+            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
+            body: notification_preferences_payload
         });
     }
 
     getPayments(jwt) {
-        if (jwt) {
-            this.updateHeaders(jwt)
-        }
-
         return cy.request({
             method: 'GET',
-            url: url + '/payments',
+            url: `${ base_url }/payments`,
             failOnStatusCode: false,
-            headers: this.headers,
+            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
         });
     }
 
     getPayment(payment_id, jwt) {
-        if (jwt) {
-            this.updateHeaders(jwt)
-        }
-
         return cy.request({
             method: 'GET',
-            url: url + '/payments/' + payment_id,
+            url: `${ base_url }/payments/payment_id`,
             failOnStatusCode: false,
-            headers: this.headers,
+            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
         });
     }
 
     getMspOtherFees(jwt) {
-        if (jwt) {
-            this.updateHeaders(jwt)
-        }
-
         return cy.request({
             method: 'GET',
-            url: url + '/payments/msp_other_fees',
+            url: `${ base_url }/payments/msp_other_fees`,
             failOnStatusCode: false,
-            headers: this.headers,
+            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
         });
     }
 
     voidPayment(payment_id, jwt) {
-        if (jwt) {
-            this.updateHeaders(jwt)
-        }
-
         return cy.request({
             method: 'PATCH',
-            url: url + '/payments/' + payment_id + '/void',
+            url: `${ base_url }/payments/${ payment_id }/void`,
             failOnStatusCode: false,
-            headers: this.headers,
+            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
         });
     }
 
     createPayment(payment_payload, jwt) {
-        if (jwt) {
-            this.updateHeaders(jwt)
-        }
-
         return cy.request({
             method: 'POST',
-            url: url + '/payments',
+            url: `${ base_url }/payments`,
             failOnStatusCode: false,
-            headers: this.headers,
+            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
             body: payment_payload
         });
     }
 
     updatePassword(updated_password_payload, jwt) {
-        if (jwt) {
-            this.updateHeaders(jwt)
-        }
-
         return cy.request({
             method: 'PATCH',
-            url: url + '/profiles/',
+            url: `${ base_url }/profiles`,
             failOnStatusCode: false,
-            headers: this.headers,
+            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
             body: updated_password_payload
         });
     }
 
     getPayAccounts(jwt) {
-        if (jwt) {
-            this.updateHeaders(jwt)
-        }
-
         return cy.request({
             method: 'GET',
-            url: url + '/pay_accounts',
+            url: `${ base_url }/pay_accounts`,
             failOnStatusCode: false,
-            headers: this.headers,
+            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
         });
     }
 
     setDefaultPayAccount(pay_account_id, jwt) {
-        if (jwt) {
-            this.updateHeaders(jwt)
-        }
-
         return cy.request({
             method: 'PUT',
-            url: url + '/pay_accounts/' + pay_account_id + '/default',
+            url: `${ base_url }/pay_accounts/${ pay_account_id }/default`,
             failOnStatusCode: false,
-            headers: this.headers,
+            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
         });
     }
 
     deletePayAccount(pay_account_id, jwt) {
-        if (jwt) {
-            this.updateHeaders(jwt)
-        }
-
         return cy.request({
             method: 'DELETE',
-            url: url + '/pay_accounts/' + pay_account_id,
+            url: `${ base_url }/pay_accounts/${ pay_account_id }`,
             failOnStatusCode: false,
-            headers: this.headers,
+            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
         });
     }
 
     createBankAccounts(bank_account_payload, jwt) {
-        if (jwt) {
-            this.updateHeaders(jwt)
-        }
-
         return cy.request({
             method: 'POST',
-            url: url + '/bank_accounts',
+            url: `${ base_url }/bank_accounts`,
             failOnStatusCode: false,
-            headers: this.headers,
+            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
             body: bank_account_payload
         });
     }
 
     createCardAccounts(card_account_payload, jwt) {
-        if (jwt) {
-            this.updateHeaders(jwt)
-        }
-
         return cy.request({
             method: 'POST',
-            url: url + '/card_accounts',
+            url: `${ base_url }/card_accounts`,
             failOnStatusCode: false,
-            headers: this.headers,
+            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
             body: card_account_payload
         });
     }
 
     getRecurringPayments(jwt) {
-        if (jwt) {
-            this.updateHeaders(jwt)
-        }
-
         return cy.request({
             method: 'GET',
-            url: url + '/recurring_payments',
+            url: `${ base_url }/recurring_payments`,
             failOnStatusCode: false,
-            headers: this.headers,
+            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
         });
     }
 
     createRecurringPayment(recurring_payment_payload, jwt) {
-        if (jwt) {
-            this.updateHeaders(jwt)
-        }
-
         return cy.request({
             method: 'POST',
-            url: url + '/recurring_payments',
+            url: `${ base_url }/recurring_payments`,
             failOnStatusCode: false,
-            headers: this.headers,
+            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
             body: recurring_payment_payload
         });
     }
 
     updateRecurringPayment(recurring_payment_payload, recurring_payment_id, jwt) {
-        if (jwt) {
-            this.updateHeaders(jwt)
-        }
-
         return cy.request({
             method: 'PATCH',
-            url: url + '/recurring_payments/' + recurring_payment_id,
+            url: `${ base_url }/recurring_payments/${ recurring_payment_id }`,
             failOnStatusCode: false,
-            headers: this.headers,
+            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
             body: recurring_payment_payload
         });
     }
 
     deleteRecurringPayment(recurring_payment_id, jwt) {
-        if (jwt) {
-            this.updateHeaders(jwt)
-        }
-
         return cy.request({
             method: 'PATCH',
-            url: url + '/recurring_payments/' + recurring_payment_id,
+            url: `${ base_url }/recurring_payments/${ recurring_payment_id }`,
             failOnStatusCode: false,
-            headers: this.headers,
+            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
         });
     }
-
-
 }

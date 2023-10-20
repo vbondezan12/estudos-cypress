@@ -1,25 +1,18 @@
 import { VhdaApi } from '../../../../support/api_objects/vhda/vhda';
-import { VhdaPayloadGenerator } from '../../../../support/payload_generators/vhda/vhda_payload_generator';
 
 const { faker } = require('@faker-js/faker');
 
 describe('VHDA: GET accounts', function () {
     const vhdaApi = new VhdaApi();
-    const vhdaPayloadGenerator = new VhdaPayloadGenerator();
-    const environment = Cypress.env('vhda');
-    let credentials = vhdaPayloadGenerator.quick_pay(environment.loan_number, environment.zip, environment.ssn);
-    let jwt = null;
+    const credentials = vhdaApi.payloadGenerator.quick_pay(vhdaApi.cypressEnv.loan_number, vhdaApi.cypressEnv.zip, vhdaApi.cypressEnv.ssn);
 
     before(() => {
         vhdaApi.createQuickPayJwt(credentials);
-        cy.get('@jwt').then(content => {
-            jwt = content
-        })
     })
 
     it('GET accounts returns 200 with valid jwt', () => {
-        vhdaApi.getAccounts(jwt).then((response) => {
-            expect(response.status).to.eq(200)
+        vhdaApi.getAccounts().then((response) => {
+            expect(response.status).to.eq(200);
             expect(response.body.data.attributes).to.exist;
         })
     })
