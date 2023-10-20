@@ -1,116 +1,90 @@
-const api_headers = require('../../../fixtures/basic_token_headers.json')
-const environment = Cypress.env('hesc');
+import { AuthenticationUtils } from '../../utils/authentication_utils';
+
+const AUTHENTICATION_TYPE = 'basic';
+
+const authenticationUtils = new AuthenticationUtils();
+const base_url = Cypress.config().hesc.base_url;
 
 /**
  * HTTPS operations for HESC API
  */
 export class HescApi {
-
-    /**
-     * Fetch the Cypress environment
-     * @returns Cypress environment
-     */
-    getEnvironment() {
-        return environment;
-    }
-
-    updateHeaders(token) {
-        if (token) {
-            this.headers = api_headers;
-            this.headers.Authorization = this.headers.Authorization.replace('TOKEN', token);
-        }
-    }
+    cypressEnv = Cypress.env('hesc');
 
     getAccountHolders() {
-        this.updateHeaders(environment.authorization);
-
         return cy.request({
             method: 'GET',
-            url: Cypress.config().hesc.base_url + '/account_holders',
+            url: `${ base_url }/account_holders`,
             failOnStatusCode: false,
-            headers: this.headers
+            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
         });
     }
 
     getPayments(account_holder_id) {
-        this.updateHeaders(environment.authorization);
-
         return cy.request({
             method: 'GET',
-            url: Cypress.config().hesc.base_url + `/account_holders/${ account_holder_id }/payments`,
+            url: `${ base_url }/account_holders/${ account_holder_id }/payments`,
             failOnStatusCode: false,
-            headers: this.headers
+            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
         });
     }
 
     getPayAccounts(account_holder_id) {
-        this.updateHeaders(environment.authorization);
-
         return cy.request({
             method: 'GET',
-            url: Cypress.config().hesc.base_url + `/account_holders/${ account_holder_id }/pay_accounts`,
+            url: `${ base_url }/account_holders/${ account_holder_id }/pay_accounts`,
             failOnStatusCode: false,
-            headers: this.headers
+            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
         });
     }
 
     createBankAccount(payload, account_holder_id) {
-        this.updateHeaders(environment.authorization);
-
         return cy.request({
             method: 'POST',
-            url: Cypress.config().hesc.base_url + `/account_holders/${ account_holder_id }/bank_accounts`,
+            url: `${ base_url }/account_holders/${ account_holder_id }/bank_accounts`,
             failOnStatusCode: false,
             body: payload,
-            headers: this.headers
+            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
         });
     }
 
     createAccountHolder(payload) {
-        this.updateHeaders(environment.authorization);
-
         return cy.request({
             method: 'POST',
-            url: Cypress.config().hesc.base_url + `/account_holders`,
+            url: `${ base_url }/account_holders`,
             failOnStatusCode: false,
             body: payload,
-            headers: this.headers
+            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
         });
     }
 
     createCards(payload, account_holder_id) {
-        this.updateHeaders(environment.authorization);
-
         return cy.request({
             method: 'POST',
-            url: Cypress.config().hesc.base_url + `/account_holders/${ account_holder_id }/cards`,
+            url: `${ base_url }/account_holders/${ account_holder_id }/cards`,
             failOnStatusCode: false,
             body: payload,
-            headers: this.headers
+            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
         });
     }
 
     createLoanPayments(payload, account_holder_id) {
-        this.updateHeaders(environment.authorization);
-
         return cy.request({
             method: 'POST',
-            url: Cypress.config().hesc.base_url + `/account_holders/${ account_holder_id }/loan_payments`,
+            url: `${ base_url }/account_holders/${ account_holder_id }/loan_payments`,
             failOnStatusCode: false,
             body: payload,
-            headers: this.headers
+            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
         });
     }
 
     createLoanPaymentsWithPayAccount(payload, account_holder_id) {
-        this.updateHeaders(environment.authorization);
-
         return cy.request({
             method: 'POST',
-            url: Cypress.config().hesc.base_url + `/account_holders/${ account_holder_id }/loan_payments/with_pay_account`,
+            url: `${ base_url }/account_holders/${ account_holder_id }/loan_payments/with_pay_account`,
             failOnStatusCode: false,
             body: payload,
-            headers: this.headers
+            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
         });
     }
 }

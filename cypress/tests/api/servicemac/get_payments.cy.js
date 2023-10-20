@@ -1,15 +1,15 @@
 import { faker } from "@faker-js/faker";
-import { ServiceMacAccount } from "../../../support/api_objects/ServiceMac/service_mac_account"
+import { ServiceMacApi } from "../../../support/api_objects/servicemac/servicemac_api"
 
-describe('API Tests: SERVICE_MAC', function() {
-    const serviceMacApi = new ServiceMacAccount();
+describe('API Tests: servicemac', function() {
+    const serviceMacApi = new ServiceMacApi();
     
     it('Get Payment tracking [200]: verify valid payments',() => {
-        const account = serviceMacApi.getEnvironment().account 
+        const account = serviceMacApi.cypressEnv.account
 
         serviceMacApi.getPayments(account).then((response) => {
             expect(response.status).to.eq(200);
-            expect(response.body.data.id).to.eq(serviceMacApi.getEnvironment().tracking);
+            expect(response.body.data.id).to.eq(serviceMacApi.cypressEnv.tracking);
         });
     });
 

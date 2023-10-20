@@ -1,13 +1,13 @@
-import { UsbPaymentApi } from '../../../../support/api_objects/usb/us_bank'
+import { UsBankApi } from '../../../../support/api_objects/usbank/usbank_api'
 
 describe('US Bank: Pay Account', function () {
-    const usbApi = new UsbPaymentApi();
+    const usbApi = new UsBankApi();
     let queryParameters;
 
     before(() => {
         queryParameters = {
-            'loan_number': usbApi.getEnvironment().loan_number,
-            'client_id': usbApi.getEnvironment().client_id
+            'loan_number': usbApi.cypressEnv.loan_number,
+            'client_id': usbApi.cypressEnv.client_id
         };
     })
 
