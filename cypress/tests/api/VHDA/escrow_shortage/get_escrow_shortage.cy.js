@@ -5,9 +5,9 @@ const { faker } = require('@faker-js/faker');
 
 describe('VHDA: GetNotificationPreferences', function () {
     const vhdaPayloadGenerator = new VhdaPayloadGenerator();
-    const environment = Cypress.env('vhda_loan');
+    const environment = Cypress.env('vhda');
     const vhdaApi = new VhdaApi();
-    let credentials = vhdaPayloadGenerator.quick_pay(environment.loan_number1, environment.zip1, environment.ssn1);
+    let credentials = vhdaPayloadGenerator.quick_pay(environment.loan_number, environment.zip, environment.ssn);
     let jwt = null;
 
     before(() => {
