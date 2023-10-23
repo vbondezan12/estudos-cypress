@@ -12,14 +12,12 @@ describe('VHDA: GetNotificationPreferences', function () {
 
     before(() => {
         vhdaApi.createQuickPayJwt(credentials);
-        cy.get('@jwt').then(content => {
-            jwt = content
-        })
     })
 
     it('get escrow shortage returns 200 with valid credentials', () => {
-        vhdaApi.getEscrowShortage(jwt).then((response) => {
+        vhdaApi.getEscrowShortage().then((response) => {
             expect(response.status).to.eq(200);
+            expect(response.body).to.not.equal(null);
         });
     }); 
   
@@ -27,6 +25,7 @@ describe('VHDA: GetNotificationPreferences', function () {
         vhdaApi.getEscrowShortage(faker.string.uuid).then((response) => {
             expect(response.status).to.eq(401);
             expect(response.body).to.not.equal(null);
+            
         });
     });
 });
