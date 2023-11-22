@@ -15,7 +15,7 @@ export class ServiceMacLoanPaymentAccount {
 
     generateAttributes(amount) {
         let attributes = {
-            payment_amount: amount,
+            payment_amount: faker.number.int({ min: 0, max: 5 }),
             post_date: moment().format('YYYY-MM-DD'),
             transaction_fee: faker.number.int({ min: 0, max: 5 }),
             late_fees_paid: faker.number.int({ min: 0, max: 5 }),
@@ -24,7 +24,7 @@ export class ServiceMacLoanPaymentAccount {
             suspense: faker.number.int({ min: 0, max: 5 }),
             escrow: faker.number.int({ min: 0, max: 5 }),
             apply_towards_principal: faker.number.int({ min: 0, max: 5 }),
-            total_amount_due: amount,
+            total_amount_due: null,
             pay_account: {
                 //how to get information for the fiels below ?
                 pay_account_type: "BankAccount",
@@ -35,6 +35,7 @@ export class ServiceMacLoanPaymentAccount {
                 save_pay_account: true
             },
         }
+        attributes.total_amount_due = attributes.payment_amount + attributes.transaction_fee + attributes.late_fees_paid + attributes.nsf_fees_paid + attributes.other_fees_paid + attributes.suspense + attributes.escrow + attributes.apply_towards_principal
 
         return attributes;
     }
@@ -53,38 +54,6 @@ export class ServiceMacLoanPaymentAccount {
                 nsf_fees_paid = faker.number.int({ min: 0, max: 5 });
         }
         return
-    }
-
-
-    generatelateFeesPaid() {
-        const late_fees_paid = faker.number.int({ min: 0, max: 5 });
-        return late_fees_paid
-    }
-
-    generateNsfFeesPaid() {
-        const nsf_fees_paid = faker.number.int({ min: 0, max: 5 });
-        return nsf_fees_paid
-    }
-
-    generateOtherFeesPaid() {
-        const other_fees_paid = faker.number.int({ min: 0, max: 5 });
-        return other_fees_paid
-    }
-    generatePaymentAmount() {
-        const payment_amount = faker.number.int({ min: 0, max: 5 });
-        return payment_amount
-    }
-    generateSuspense() {
-        const suspense = faker.number.int({ min: 0, max: 5 });
-        return suspense
-    }
-    generateEscrow() {
-        const suspense = faker.number.int({ min: 0, max: 5 });
-        return suspense
-    }
-    generateApplyTowardsprincipal() {
-        const apply_towards_principal = faker.number.int({ min: 0, max: 5 });
-        return apply_towards_principal
     }
 
 }
