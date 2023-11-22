@@ -1,5 +1,6 @@
 const { faker } = require('@faker-js/faker');
 
+
 export class ServiceMacAccountHolderPayloadGenerator {
 
     generateData(loan_number) {

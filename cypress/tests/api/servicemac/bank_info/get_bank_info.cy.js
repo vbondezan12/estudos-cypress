@@ -1,4 +1,4 @@
-import { ServiceMacApi } from "../../../support/api_objects/servicemac/servicemac_api"
+import { ServiceMacApi } from "../../../../support/api_objects/servicemac/servicemac_api"
 import { faker } from "@faker-js/faker";
 
 describe('API Tests: servicemac', function () {

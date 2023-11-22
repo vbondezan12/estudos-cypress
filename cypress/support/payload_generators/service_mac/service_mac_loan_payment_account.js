@@ -1,29 +1,30 @@
+import moment from 'moment';
 const { faker } = require('@faker-js/faker');
 
 export class ServiceMacLoanPaymentAccount {
 
-    generateData(loan_number) {
+    generateData() {
         let jsonData = {
             data: {
                 type: 'payments',
-                attributes: this.generateAttributes(loan_number)
+                attributes: this.generateAttributes()
             }
         }
         cy.log(JSON.stringify(jsonData));
         return jsonData;
     }
 
-    generateAttributes(amount) {
+    generateAttributes() {
         let attributes = {
-            payment_amount: faker.number.int({ min: 0, max: 5 }),
+            payment_amount: faker.number.int({ min: 0, max: 10 }),
             post_date: moment().format('YYYY-MM-DD'),
-            transaction_fee: faker.number.int({ min: 0, max: 5 }),
-            late_fees_paid: faker.number.int({ min: 0, max: 5 }),
-            nsf_fees_paid: faker.number.int({ min: 0, max: 5 }),
-            other_fees_paid: faker.number.int({ min: 0, max: 5 }),
-            suspense: faker.number.int({ min: 0, max: 5 }),
-            escrow: faker.number.int({ min: 0, max: 5 }),
-            apply_towards_principal: faker.number.int({ min: 0, max: 5 }),
+            transaction_fee: faker.number.int({ min: 0, max: 10 }),
+            late_fees_paid: faker.number.int({ min: 0, max: 10 }),
+            nsf_fees_paid: 0,
+            other_fees_paid: 0,
+            suspense: faker.number.int({ min: 0, max: 10 }),
+            escrow: faker.number.int({ min: 0, max: 10 }),
+            apply_towards_principal: faker.number.int({ min: 0, max: 10 }),
             total_amount_due: null,
             pay_account: {
                 //how to get information for the fiels below ?
