@@ -1,7 +1,7 @@
 import { faker } from "@faker-js/faker";
-import { HescApi } from '../../../../support/api_objects/hesc/hesc_api.js'
+import { HescApi } from '../../../../../support/api_objects/hesc/hesc_api.js'
 
-describe('HESC: Accounts', function () {
+describe('HESC: API tests', function () {
     const hescApi = new HescApi();
     const environment = Cypress.env('hesc');
 

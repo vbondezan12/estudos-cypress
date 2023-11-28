@@ -1,7 +1,7 @@
 import { faker } from "@faker-js/faker";
-import { HescApi } from '../../../../support/api_objects/hesc/hesc_api.js'
+import { HescApi } from '../../../../../support/api_objects/hesc/hesc_api.js'
 
-describe('HESC: Accounts', function () {
+describe('HESC: API tests', function () {
     const hescApi = new HescApi();
     const environment = Cypress.env('hesc');
 
@@ -12,7 +12,8 @@ describe('HESC: Accounts', function () {
     });
 
     it('Get payments: return 404 with invalid account number', () => {
-        hescApi.getPayments(faker.finance.accountNumber(300)).then((response) => {
+        const account = faker.number.int({ min: 1000000, max: 9999999 })
+        hescApi.getPayments(account).then((response) => {
             expect(response.status).to.eq(404);
         });
     });
