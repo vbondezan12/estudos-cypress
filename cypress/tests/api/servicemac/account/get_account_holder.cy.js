@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker";
-import { ServiceMacApi } from "../../../support/api_objects/servicemac/servicemac_api"
+import { ServiceMacApi } from "../../../../support/api_objects/servicemac/servicemac_api"
 
 describe('API Tests: servicemac', function () {
     const serviceMacApi = new ServiceMacApi();

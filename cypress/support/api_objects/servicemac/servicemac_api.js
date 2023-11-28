@@ -1,4 +1,5 @@
 import { AuthenticationUtils } from '../../utils/authentication_utils';
+import moment from 'moment';
 
 const AUTHENTICATION_TYPE = 'basic';
 
@@ -60,6 +61,39 @@ export class ServiceMacApi extends AuthenticationUtils {
             url: `${ base_url }/payments/get_bank_info`,
             failOnStatusCode: false,
             qs: query_parameters,
+            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
+        })
+    }
+
+    postAccountHolder(account_holder) {
+        return cy.request({
+            method: 'POST',
+            url: `${ base_url }/account_holders/`,
+            body: account_holder,
+            failOnStatusCode: false,
+            auth: Cypress.env('service_mac_auth_header'),
+            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
+        })
+    }
+
+    postLoanPaymentAccount(payload_loan_payment_account) {
+        return cy.request({
+            method: 'POST',
+            url: `${ base_url }/account_holders/${ this.cypressEnv.account }/payments/with_pay_account`,
+            body: payload_loan_payment_account,
+            failOnStatusCode: false,
+            auth: Cypress.env('service_mac_auth_header'),
+            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
+        })
+    }
+
+    postLoanPaymentPayAccountId(payload_loan_payment_pay_account_id) {
+        return cy.request({
+            method: 'POST',
+            url: `${ base_url }/account_holders/ ${ this.cypressEnv.account } /payments/with_pay_account`,
+            body: payload_loan_payment_pay_account_id,
+            failOnStatusCode: false,
+            auth: Cypress.env('service_mac_auth_header'),
             headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
         })
     }
