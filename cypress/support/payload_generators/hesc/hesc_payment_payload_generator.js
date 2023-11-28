@@ -10,7 +10,6 @@ export class HescPaymentPayloadGenerator {
                 attributes: this.generateAttributes(accountNumber, routingNumber)
             }
         }
-        cy.log(JSON.stringify(jsonData));
         return jsonData;
     }
     
