@@ -1,255 +1,229 @@
 {
-    "$schema": "http://json-schema.org/draft-06/schema#",
-    "$ref": "get_account_lookup",
-    "definitions": {
-        "Welcome2": {
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+        "data": {
             "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "data": {
-                    "$ref": "#/definitions/Data"
-                }
-            },
-            "required": [
-                "data"
-            ],
-            "title": "Welcome2"
-        },
-        "Data": {
-            "type": "object",
-            "additionalProperties": false,
             "properties": {
                 "type": {
                     "type": "string"
                 },
                 "attributes": {
-                    "$ref": "#/definitions/Attributes"
+                    "type": "object",
+                    "properties": {
+                        "loan_number": {
+                            "type": "string"
+                        },
+                        "next_payment_due_at": {
+                            "type": "string"
+                        },
+                        "last_payment_at": {
+                            "type": "string"
+                        },
+                        "interest_rate": {
+                            "type": "string"
+                        },
+                        "current_balance": {
+                            "type": "string"
+                        },
+                        "original_amount": {
+                            "type": "string"
+                        },
+                        "principal": {
+                            "type": "string"
+                        },
+                        "remaining_term": {
+                            "type": "string"
+                        },
+                        "original_term": {
+                            "type": "string"
+                        },
+                        "terms_paid": {
+                            "type": "integer"
+                        },
+                        "total_due": {
+                            "type": "string"
+                        },
+                        "late_fee": {
+                            "type": "string"
+                        },
+                        "nsf_fee": {
+                            "type": "string"
+                        },
+                        "other_fee": {
+                            "type": "string"
+                        },
+                        "corporate_advance": {
+                            "type": "string"
+                        },
+                        "escrow": {
+                            "type": "string"
+                        },
+                        "escrow_balance": {
+                            "type": "string"
+                        },
+                        "suspense": {
+                            "type": "string"
+                        },
+                        "convenience_fee": {
+                            "type": "string"
+                        },
+                        "total_amount_due": {
+                            "type": "string"
+                        },
+                        "payment_amount": {
+                            "type": "string"
+                        },
+                        "client_post_date": {
+                            "type": "string"
+                        },
+                        "borrower_ssn": {
+                            "type": "string"
+                        },
+                        "co_borrower_ssn": {
+                            "type": "string"
+                        },
+                        "borrower_full_name": {
+                            "type": "string"
+                        },
+                        "coborrower_full_name": {
+                            "type": "string"
+                        },
+                        "co_borrower_email": {
+                            "type": "string"
+                        },
+                        "borrower_email": {
+                            "type": "null"
+                        },
+                        "address": {
+                            "type": "string"
+                        },
+                        "zip": {
+                            "type": "string"
+                        },
+                        "hard_stop": {
+                            "type": "boolean"
+                        },
+                        "has_transfer_stop": {
+                            "type": "boolean"
+                        },
+                        "has_pending_payments": {
+                            "type": "boolean"
+                        },
+                        "too_many_pending": {
+                            "type": "boolean"
+                        },
+                        "delinquent": {
+                            "type": "boolean"
+                        },
+                        "delinquent_count": {
+                            "type": "integer"
+                        },
+                        "delinquent_payments": {
+                            "type": "array",
+                            "items": [
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "payment_amount": {
+                                            "type": "string"
+                                        },
+                                        "number_of_payments": {
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "required": [
+                                        "payment_amount",
+                                        "number_of_payments"
+                                    ]
+                                }
+                            ]
+                        },
+                        "maxed_delinquent": {
+                            "type": "boolean"
+                        },
+                        "recurring_date": {
+                            "type": "null"
+                        },
+                        "loan_type": {
+                            "type": "string"
+                        },
+                        "default_pay_account_id": {
+                            "type": "null"
+                        },
+                        "transfer_date": {
+                            "type": "null"
+                        },
+                        "payment_not_allowed": {
+                            "type": "boolean"
+                        },
+                        "class_code": {
+                            "type": "string"
+                        },
+                        "has_customer_blocks": {
+                            "type": "boolean"
+                        },
+                        "loan_account_type": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "loan_number",
+                        "next_payment_due_at",
+                        "last_payment_at",
+                        "interest_rate",
+                        "current_balance",
+                        "original_amount",
+                        "principal",
+                        "remaining_term",
+                        "original_term",
+                        "terms_paid",
+                        "total_due",
+                        "late_fee",
+                        "nsf_fee",
+                        "other_fee",
+                        "corporate_advance",
+                        "escrow",
+                        "escrow_balance",
+                        "suspense",
+                        "convenience_fee",
+                        "total_amount_due",
+                        "payment_amount",
+                        "client_post_date",
+                        "borrower_ssn",
+                        "co_borrower_ssn",
+                        "borrower_full_name",
+                        "coborrower_full_name",
+                        "co_borrower_email",
+                        "borrower_email",
+                        "address",
+                        "zip",
+                        "hard_stop",
+                        "has_transfer_stop",
+                        "has_pending_payments",
+                        "too_many_pending",
+                        "delinquent",
+                        "delinquent_count",
+                        "delinquent_payments",
+                        "maxed_delinquent",
+                        "recurring_date",
+                        "loan_type",
+                        "default_pay_account_id",
+                        "transfer_date",
+                        "payment_not_allowed",
+                        "class_code",
+                        "has_customer_blocks",
+                        "loan_account_type"
+                    ]
                 }
             },
             "required": [
-                "attributes",
-                "type"
-            ],
-            "title": "Data"
-        },
-        "Attributes": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "loan_number": {
-                    "type": "string"
-                },
-                "next_payment_due_at": {
-                    "type": "string",
-                    "format": "date"
-                },
-                "last_payment_at": {
-                    "type": "string",
-                    "format": "date"
-                },
-                "interest_rate": {
-                    "type": "string"
-                },
-                "current_balance": {
-                    "type": "string"
-                },
-                "original_amount": {
-                    "type": "string"
-                },
-                "principal": {
-                    "type": "string"
-                },
-                "remaining_term": {
-                    "type": "string",
-                    "format": "integer"
-                },
-                "original_term": {
-                    "type": "string",
-                    "format": "integer"
-                },
-                "terms_paid": {
-                    "type": "integer"
-                },
-                "total_due": {
-                    "type": "string"
-                },
-                "late_fee": {
-                    "type": "string"
-                },
-                "nsf_fee": {
-                    "type": "string"
-                },
-                "other_fee": {
-                    "type": "string"
-                },
-                "corporate_advance": {
-                    "type": "string"
-                },
-                "escrow": {
-                    "type": "string"
-                },
-                "escrow_balance": {
-                    "type": "string"
-                },
-                "suspense": {
-                    "type": "string"
-                },
-                "convenience_fee": {
-                    "type": "string"
-                },
-                "total_amount_due": {
-                    "type": "string"
-                },
-                "payment_amount": {
-                    "type": "string"
-                },
-                "client_post_date": {
-                    "type": "string",
-                    "format": "date"
-                },
-                "borrower_ssn": {
-                    "type": "string"
-                },
-                "co_borrower_ssn": {
-                    "type": "string"
-                },
-                "borrower_full_name": {
-                    "type": "string"
-                },
-                "coborrower_full_name": {
-                    "type": "string"
-                },
-                "co_borrower_email": {
-                    "type": "string"
-                },
-                "borrower_email": {
-                    "type": "null"
-                },
-                "address": {
-                    "type": "string"
-                },
-                "zip": {
-                    "type": "string",
-                    "format": "integer"
-                },
-                "hard_stop": {
-                    "type": "boolean"
-                },
-                "has_transfer_stop": {
-                    "type": "boolean"
-                },
-                "has_pending_payments": {
-                    "type": "boolean"
-                },
-                "too_many_pending": {
-                    "type": "boolean"
-                },
-                "delinquent": {
-                    "type": "boolean"
-                },
-                "delinquent_count": {
-                    "type": "integer"
-                },
-                "delinquent_payments": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/DelinquentPayment"
-                    }
-                },
-                "maxed_delinquent": {
-                    "type": "boolean"
-                },
-                "recurring_date": {
-                    "type": "null"
-                },
-                "loan_type": {
-                    "type": "string"
-                },
-                "default_pay_account_id": {
-                    "type": "null"
-                },
-                "transfer_date": {
-                    "type": "null"
-                },
-                "payment_not_allowed": {
-                    "type": "boolean"
-                },
-                "class_code": {
-                    "type": "string"
-                },
-                "has_customer_blocks": {
-                    "type": "boolean"
-                },
-                "loan_account_type": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "address",
-                "borrower_email",
-                "borrower_full_name",
-                "borrower_ssn",
-                "class_code",
-                "client_post_date",
-                "co_borrower_email",
-                "co_borrower_ssn",
-                "coborrower_full_name",
-                "convenience_fee",
-                "corporate_advance",
-                "current_balance",
-                "default_pay_account_id",
-                "delinquent",
-                "delinquent_count",
-                "delinquent_payments",
-                "escrow",
-                "escrow_balance",
-                "hard_stop",
-                "has_customer_blocks",
-                "has_pending_payments",
-                "has_transfer_stop",
-                "interest_rate",
-                "last_payment_at",
-                "late_fee",
-                "loan_account_type",
-                "loan_number",
-                "loan_type",
-                "maxed_delinquent",
-                "next_payment_due_at",
-                "nsf_fee",
-                "original_amount",
-                "original_term",
-                "other_fee",
-                "payment_amount",
-                "payment_not_allowed",
-                "principal",
-                "recurring_date",
-                "remaining_term",
-                "suspense",
-                "terms_paid",
-                "too_many_pending",
-                "total_amount_due",
-                "total_due",
-                "transfer_date",
-                "zip"
-            ],
-            "title": "Attributes"
-        },
-        "DelinquentPayment": {
-            "type": "object",
-            "additionalProperties": false,
-            "properties": {
-                "payment_amount": {
-                    "type": "string"
-                },
-                "number_of_payments": {
-                    "type": "integer"
-                }
-            },
-            "required": [
-                "number_of_payments",
-                "payment_amount"
-            ],
-            "title": "DelinquentPayment"
+                "type",
+                "attributes"
+            ]
         }
-    }
+    },
+    "required": [
+        "data"
+    ]
 }

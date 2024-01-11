@@ -90,8 +90,18 @@ export class ServiceMacApi extends AuthenticationUtils {
     postLoanPaymentPayAccountId(payload_loan_payment_pay_account_id) {
         return cy.request({
             method: 'POST',
-            url: `${ base_url }/account_holders/ ${ this.cypressEnv.account } /payments/with_pay_account`,
+            url: `${ base_url }/account_holders/${ this.cypressEnv.account }/payments`,
             body: payload_loan_payment_pay_account_id,
+            failOnStatusCode: false,
+            auth: Cypress.env('service_mac_auth_header'),
+            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
+        })
+    }
+    postToken(token_payload) {
+        return cy.request({
+            method: 'POST',
+            url: `${ base_url }/tokens`,
+            body: token_payload,
             failOnStatusCode: false,
             auth: Cypress.env('service_mac_auth_header'),
             headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)

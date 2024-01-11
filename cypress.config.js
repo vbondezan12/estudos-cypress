@@ -40,7 +40,7 @@ module.exports = defineConfig({
             base_url: "https://repay-msp-uat.herokuapp.com/api/v1",
         },
         servicemac: {
-            base_url: "https://repay-servicemac-uat-upgrade.herokuapp.com/api/v1",
+            base_url: "https://repay-servicemac-uat-2376079e9ee5.herokuapp.com/api/v1",
         },
     }
 });

@@ -15,7 +15,7 @@ describe('API Tests: servicemac', function () {
     });
 
     it('Get Payment tracking [404]: verify invalid payments tracking', () => {
-        const account = serviceMacApi.environment.account
+        const account = serviceMacApi.cypressEnv.account
         const tracking = faker.number.int({ min: 1000000, max: 9999999 })
 
         serviceMacApi.getPaymentsTracking(account, tracking).then((response) => {

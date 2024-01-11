@@ -1,45 +1,48 @@
 import { faker } from "@faker-js/faker";
 import { ServiceMacApi } from "../../../../support/api_objects/servicemac/servicemac_api"
-import { ServiceMacLoanPaymentAccount } from "../../../../support/payload_generators/service_mac/service_mac_loan_payment_account";
+import { ServiceMacLoanPaymentPayAccountId } from "../../../../support/payload_generators/service_mac/service_mac_loan_payment_pay_account_id";
 const moment = require('moment');
 
 describe('API Tests: SERVICE_MAC', function () {
     const serviceMacApi = new ServiceMacApi();
-    const serviceMacPayloadGenerator = new ServiceMacLoanPaymentAccount();
+    const serviceMacPayloadGenerator = new ServiceMacLoanPaymentPayAccountId();
 
     it('Post Loan Payment with Account [200]: post valid Payment', () => {
         //this scenario can fail if faker creates the same amounts
 
         let payload = serviceMacPayloadGenerator.generateData();
+        payload.data.attributes.pay_account_id = serviceMacApi.cypressEnv.account_id
+        cy.log(JSON.stringify(payload))
 
-        serviceMacApi.postLoanPaymentAccount(payload).then((response) => {
+        serviceMacApi.postLoanPaymentPayAccountId(payload).then((response) => {
             expect(response.status).to.eq(201);
             expect(response.body.data.attributes.transaction_date).to.eq(moment().format('YYYY-MM-DD'));
-            expect(response.body.data.attributes.loan_number).to.eq(serviceMacApi.cypressEnv.loan_number)
+            expect(response.body.data.relationships.pay_account.data.id).to.eq(serviceMacApi.cypressEnv.account_id)
         });
     });
 
     it('Post Loan Payment with Account [422]: post invalid Payment', () => {
         let payload = serviceMacPayloadGenerator.generateData()
-        payload.data.attributes.pay_account.account_number = faker.number.int({ min: 10000000000, max: 99999999999 }).toString()
-        payload.data.attributes.pay_account.routing_number = faker.number.int({ min: 10000000000, max: 99999999999 }).toString()
-        cy.log(JSON.stringify(payload))
-        serviceMacApi.postLoanPaymentAccount(payload).then((response) => {
+        payload.data.attributes.pay_account_id = serviceMacApi.cypressEnv.account_id
+        payload.data.attributes.late_fees_paid = faker.number.int({ min: 10000000000, max: 99999999999 }).toString()
 
-            expect(response.status).to.eq(422);
-            expect(response.body.errors.account_number[0]).to.eq('is not valid');
-        });
+        serviceMacApi.postLoanPaymentPayAccountId(payload).then((response) => {
+            expect(response.status).to.eq(422);            
+            expect(response.body.errors.late_fees).to.be.an('array');
+            expect(response.body.errors.late_fees).to.deep.include('cannot be paid because none are owed.')
+        }); 
     });
 
     it('Post Loan Payment with Account [422]: post duplicated payment', () => {
         //this scenario can fail if faker creates the same amounts
 
         let payload = serviceMacPayloadGenerator.generateData()
+        payload.data.attributes.pay_account_id = serviceMacApi.cypressEnv.account_id
         cy.log(JSON.stringify(payload))
         const MAX_ATTEMPTS = 2
 
         for (let numberOfExecutions = 0; numberOfExecutions < MAX_ATTEMPTS ; numberOfExecutions++) {
-            serviceMacApi.postLoanPaymentAccount(payload).then((response) => {
+            serviceMacApi.postLoanPaymentPayAccountId(payload).then((response) => {
                 // First call needs to pass for the validation works on the second call as duplicated request
                 if (numberOfExecutions !== 0) {
                     expect(response.status).to.eq(422);
@@ -51,10 +54,11 @@ describe('API Tests: SERVICE_MAC', function () {
 
     it('Post Loan Payment with Account [422]: invalid total_amount_due', () => {
         let payload = serviceMacPayloadGenerator.generateData()
+        payload.data.attributes.pay_account_id = serviceMacApi.cypressEnv.account_id
         const totalAmount = payload.data.attributes.total_amount_due
         delete payload.data.attributes.total_amount_due
         cy.log(JSON.stringify(payload))
-        serviceMacApi.postLoanPaymentAccount(payload).then((response) => {
+        serviceMacApi.postLoanPaymentPayAccountId(payload).then((response) => {
 
 
             expect(response.status).to.eq(422);
