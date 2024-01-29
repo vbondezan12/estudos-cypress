@@ -75,7 +75,7 @@ export class VhdaPayloadGenerator {
     new_loan(loanNumber, zipCode, SSN){
         let loan = {
             loan_number: loanNumber,
-            zip_code: zipCode,
+            zip: zipCode,
             ssn: SSN,
             nickname: faker.internet.displayName()
         }
