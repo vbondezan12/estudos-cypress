@@ -23,7 +23,7 @@ export class VhdaPayloadGenerator {
 
         let multifactor = {
             token: localToken
-        }         
+        }
 
         return multifactor;
     }
@@ -43,7 +43,7 @@ export class VhdaPayloadGenerator {
     }
 
     register(loanNumber, zipCode, SSN) {
-        let userEmail = faker.internet.email({ firstName: 'Ventanex', lastName: 'Testing', provider: 'repay.com'});
+        let userEmail = faker.internet.email({ firstName: 'Ventanex', lastName: 'Testing', provider: 'repay.com' });
         let userPassword = faker.internet.password()
 
         let createUser = {
@@ -63,7 +63,7 @@ export class VhdaPayloadGenerator {
 
         return user;
     }
-    
+
     resend_recovery_email(userEmail) {
         let email = {
             email: userEmail
@@ -72,7 +72,7 @@ export class VhdaPayloadGenerator {
         return email;
     }
 
-    new_loan(loanNumber, zipCode, SSN){
+    new_loan(loanNumber, zipCode, SSN) {
         let loan = {
             loan_number: loanNumber,
             zip: zipCode,
@@ -85,9 +85,9 @@ export class VhdaPayloadGenerator {
 
     bank_accounts() {
         let bankAccount = {
-            routing_number: '053200983',
-            name: faker.person.fullName,
-            account_number: '11101010',
+            routing_number: '011000028',
+            name: `${faker.person.fullName}`,
+            account_number: `${faker.number.int()}`,
             // possible values: checking, savings
             checking: 'checking',
             account_business: 'personal',
@@ -97,6 +97,22 @@ export class VhdaPayloadGenerator {
         }
 
         return bankAccount;
+    }
+
+    invalidbank_accounts() {
+        let invalidbankAccount = {
+            routing_number: '011000028',
+            name: `${faker.person.fullName}`,
+            account_number: '011000028',
+            // possible values: checking, savings
+            checking: 'checking',
+            account_business: 'personal',
+            nickname: faker.internet.displayName(),
+            save_pay_account: 'true',
+            default: 'true'
+        }
+
+        return invalidbankAccount;
     }
 
     card_accounts() {
@@ -118,7 +134,7 @@ export class VhdaPayloadGenerator {
             card_name: faker.person.fullName(),
             payment_type: '7'
         }
-        
+
         return cardAccount;
     }
 
@@ -141,7 +157,7 @@ export class VhdaPayloadGenerator {
         }
 
         let notificationPreferences = {
-            email: faker.internet.email({ firstName: 'Ventanex', lastName: 'Testing', provider: 'repay.com'}),
+            email: faker.internet.email({ firstName: 'Ventanex', lastName: 'Testing', provider: 'repay.com' }),
             phone: faker.phone.number(),
             state: faker.location.state({ abbreviated: true }),
             city: faker.location.city(),
