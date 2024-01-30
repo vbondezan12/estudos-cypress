@@ -14,7 +14,7 @@ export class VhdaApi {
     createQuickPayJwt(login_payload) {
         return cy.request({
             method: 'POST',
-            url: `${ base_url }/quick_pay`,
+            url: `${base_url}/quick_pay`,
             failOnStatusCode: false,
             body: login_payload
         }).then((response) => {
@@ -25,7 +25,7 @@ export class VhdaApi {
     createLoginJwt(login_payload) {
         return cy.request({
             method: 'POST',
-            url: `${ base_url }/user_token`,
+            url: `${base_url}/user_token`,
             failOnStatusCode: false,
             body: login_payload
         }).then((response) => {
@@ -36,7 +36,7 @@ export class VhdaApi {
     multifactor(multifactor_payload, jwt) {
         return cy.request({
             method: 'POST',
-            url: `${ base_url }/multifactor`,
+            url: `${base_url}/multifactor`,
             failOnStatusCode: false,
             headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
             body: multifactor_payload
@@ -46,7 +46,7 @@ export class VhdaApi {
     resendMultifactor(jwt) {
         return cy.request({
             method: 'GET',
-            url: `${ base_url }/multifactor/resend`,
+            url: `${base_url}/multifactor/resend`,
             failOnStatusCode: false,
             headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
         });
@@ -55,7 +55,7 @@ export class VhdaApi {
     quickPay(quick_pay_payload, jwt) {
         return cy.request({
             method: 'POST',
-            url: `${ base_url }/quick_pay`,
+            url: `${base_url}/quick_pay`,
             failOnStatusCode: false,
             headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
             body: quick_pay_payload
@@ -65,7 +65,7 @@ export class VhdaApi {
     register(register_payload, jwt) {
         return cy.request({
             method: 'POST',
-            url: `${ base_url }/users`,
+            url: `${base_url}/users`,
             failOnStatusCode: false,
             headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
             body: register_payload
@@ -75,7 +75,7 @@ export class VhdaApi {
     resendRecoveryEmail(resend_recovery_email_payload, jwt) {
         return cy.request({
             method: 'POST',
-            url: `${ base_url }/users/send_recovery_email`,
+            url: `${base_url}/users/send_recovery_email`,
             failOnStatusCode: false,
             headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
             body: resend_recovery_email_payload
@@ -85,7 +85,7 @@ export class VhdaApi {
     getAccounts(jwt) {
         return cy.request({
             method: 'GET',
-            url: `${ base_url }/accounts`,
+            url: `${base_url}/accounts`,
             failOnStatusCode: false,
             headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
         });
@@ -94,7 +94,7 @@ export class VhdaApi {
     switchLoan(loan_number, jwt) {
         return cy.request({
             method: 'GET',
-            url: `${ base_url }/account_details/${ loan_number }`,
+            url: `${base_url}/account_details/${loan_number}`,
             failOnStatusCode: false,
             headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
         });
@@ -103,7 +103,7 @@ export class VhdaApi {
     newLoan(new_loan_payload, jwt) {
         return cy.request({
             method: 'POST',
-            url: `${ base_url }/account_details`,
+            url: `${base_url}/account_details`,
             failOnStatusCode: false,
             headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
             body: new_loan_payload
@@ -113,7 +113,7 @@ export class VhdaApi {
     deleteLoan(loan_number, jwt) {
         return cy.request({
             method: 'DELETE',
-            url: `${ base_url }/account_details/${ loan_number }`,
+            url: `${base_url}/account_details/${loan_number}`,
             failOnStatusCode: false,
             headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
         });
@@ -123,7 +123,7 @@ export class VhdaApi {
         //ToDo: Are there other document types? Are there other query parameters for this?
         return cy.request({
             method: 'GET',
-            url: `${ base_url }/documents?document_type=statements`,
+            url: `${base_url}/documents?document_type=statements`,
             failOnStatusCode: false,
             headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
         });
@@ -132,7 +132,7 @@ export class VhdaApi {
     getEscrowShortage(jwt) {
         return cy.request({
             method: 'GET',
-            url: `${ base_url }/escrow_shortage`,
+            url: `${base_url}/escrow_shortage`,
             failOnStatusCode: false,
             headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
         });
@@ -141,7 +141,7 @@ export class VhdaApi {
     getNotificationPreferences(jwt) {
         return cy.request({
             method: 'GET',
-            url: `${ base_url }/notification_preferences`,
+            url: `${base_url}/notification_preferences`,
             failOnStatusCode: false,
             headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
         });
@@ -150,7 +150,7 @@ export class VhdaApi {
     updateNotificationPreferences(notification_preferences_payload, jwt) {
         return cy.request({
             method: 'PATCH',
-            url: `${ base_url }/notification_preferences`,
+            url: `${base_url}/notification_preferences`,
             failOnStatusCode: false,
             headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
             body: notification_preferences_payload
@@ -160,7 +160,7 @@ export class VhdaApi {
     getPayments(jwt) {
         return cy.request({
             method: 'GET',
-            url: `${ base_url }/payments`,
+            url: `${base_url}/payments`,
             failOnStatusCode: false,
             headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
         });
@@ -169,7 +169,7 @@ export class VhdaApi {
     getPayment(payment_id, jwt) {
         return cy.request({
             method: 'GET',
-            url: `${ base_url }/payments/payment_id`,
+            url: `${base_url}/payments/payment_id`,
             failOnStatusCode: false,
             headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
         });
@@ -178,7 +178,7 @@ export class VhdaApi {
     getMspOtherFees(jwt) {
         return cy.request({
             method: 'GET',
-            url: `${ base_url }/payments/msp_other_fees`,
+            url: `${base_url}/payments/msp_other_fees`,
             failOnStatusCode: false,
             headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
         });
@@ -187,7 +187,7 @@ export class VhdaApi {
     voidPayment(payment_id, jwt) {
         return cy.request({
             method: 'PATCH',
-            url: `${ base_url }/payments/${ payment_id }/void`,
+            url: `${base_url}/payments/${payment_id}/void`,
             failOnStatusCode: false,
             headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
         });
@@ -196,7 +196,7 @@ export class VhdaApi {
     createPayment(payment_payload, jwt) {
         return cy.request({
             method: 'POST',
-            url: `${ base_url }/payments`,
+            url: `${base_url}/payments`,
             failOnStatusCode: false,
             headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
             body: payment_payload
@@ -206,7 +206,7 @@ export class VhdaApi {
     updatePassword(updated_password_payload, jwt) {
         return cy.request({
             method: 'PATCH',
-            url: `${ base_url }/profiles`,
+            url: `${base_url}/profiles`,
             failOnStatusCode: false,
             headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
             body: updated_password_payload
@@ -216,7 +216,7 @@ export class VhdaApi {
     getPayAccounts(jwt) {
         return cy.request({
             method: 'GET',
-            url: `${ base_url }/pay_accounts`,
+            url: `${base_url}/pay_accounts`,
             failOnStatusCode: false,
             headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
         });
@@ -225,7 +225,7 @@ export class VhdaApi {
     setDefaultPayAccount(pay_account_id, jwt) {
         return cy.request({
             method: 'PUT',
-            url: `${ base_url }/pay_accounts/${ pay_account_id }/default`,
+            url: `${base_url}/pay_accounts/${pay_account_id}/default`,
             failOnStatusCode: false,
             headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
         });
@@ -234,7 +234,7 @@ export class VhdaApi {
     deletePayAccount(pay_account_id, jwt) {
         return cy.request({
             method: 'DELETE',
-            url: `${ base_url }/pay_accounts/${ pay_account_id }`,
+            url: `${base_url}/pay_accounts/${pay_account_id}`,
             failOnStatusCode: false,
             headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
         });
@@ -243,17 +243,18 @@ export class VhdaApi {
     createBankAccounts(bank_account_payload, jwt) {
         return cy.request({
             method: 'POST',
-            url: `${ base_url }/bank_accounts`,
+            url: `${base_url}/bank_accounts`,
             failOnStatusCode: false,
             headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
             body: bank_account_payload
         });
+
     }
 
     createCardAccounts(card_account_payload, jwt) {
         return cy.request({
             method: 'POST',
-            url: `${ base_url }/card_accounts`,
+            url: `${base_url}/card_accounts`,
             failOnStatusCode: false,
             headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
             body: card_account_payload
@@ -263,7 +264,7 @@ export class VhdaApi {
     getRecurringPayments(jwt) {
         return cy.request({
             method: 'GET',
-            url: `${ base_url }/recurring_payments`,
+            url: `${base_url}/recurring_payments`,
             failOnStatusCode: false,
             headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
         });
@@ -272,7 +273,7 @@ export class VhdaApi {
     createRecurringPayment(recurring_payment_payload, jwt) {
         return cy.request({
             method: 'POST',
-            url: `${ base_url }/recurring_payments`,
+            url: `${base_url}/recurring_payments`,
             failOnStatusCode: false,
             headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
             body: recurring_payment_payload
@@ -282,7 +283,7 @@ export class VhdaApi {
     updateRecurringPayment(recurring_payment_payload, recurring_payment_id, jwt) {
         return cy.request({
             method: 'PATCH',
-            url: `${ base_url }/recurring_payments/${ recurring_payment_id }`,
+            url: `${base_url}/recurring_payments/${recurring_payment_id}`,
             failOnStatusCode: false,
             headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
             body: recurring_payment_payload
@@ -292,7 +293,7 @@ export class VhdaApi {
     deleteRecurringPayment(recurring_payment_id, jwt) {
         return cy.request({
             method: 'PATCH',
-            url: `${ base_url }/recurring_payments/${ recurring_payment_id }`,
+            url: `${base_url}/recurring_payments/${recurring_payment_id}`,
             failOnStatusCode: false,
             headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt)),
         });
