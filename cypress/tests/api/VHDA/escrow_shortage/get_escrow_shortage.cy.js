@@ -3,7 +3,7 @@ import { VhdaPayloadGenerator } from '../../../../support/payload_generators/vhd
 
 const { faker } = require('@faker-js/faker');
 
-describe('VHDA: GetNotificationPreferences', function () {
+describe('VHDA: GetEscrowShortage', function () {
     const vhdaPayloadGenerator = new VhdaPayloadGenerator();
     const environment = Cypress.env('vhda');
     const vhdaApi = new VhdaApi();
@@ -19,13 +19,13 @@ describe('VHDA: GetNotificationPreferences', function () {
             expect(response.status).to.eq(200);
             expect(response.body).to.not.equal(null);
         });
-    }); 
-  
+    });
+
     it('get escrow shortage returns 401 with invalid credentials', () => {
         vhdaApi.getEscrowShortage(faker.string.uuid).then((response) => {
             expect(response.status).to.eq(401);
             expect(response.body).to.not.equal(null);
-            
+
         });
     });
 });

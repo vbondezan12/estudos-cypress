@@ -2,7 +2,7 @@ import { faker } from '@faker-js/faker';
 import { VhdaApi } from '../../../../support/api_objects/vhda/vhda';
 import { VhdaPayloadGenerator } from '../../../../support/payload_generators/vhda/vhda_payload_generator';
 
-describe('VHDA: Create Loan', function () {
+describe('VHDA: Create Bank Account', function () {
     const vhdaApi = new VhdaApi();
     const credentials = vhdaApi.payloadGenerator.quick_pay(vhdaApi.cypressEnv.loan_number, vhdaApi.cypressEnv.zip, vhdaApi.cypressEnv.ssn);
     let Accountcreate = vhdaApi.payloadGenerator.bank_accounts();
@@ -20,7 +20,6 @@ describe('VHDA: Create Loan', function () {
 
     it('Create Bank Account:Verify valid account data creates a new loan account', () => {
         vhdaApi.createBankAccounts(Accountcreate).then((response) => {
-            console.log(response);
             expect(response.status).to.eq(200);
             expect(response.body.data.id).to.not.equal(null);
         });

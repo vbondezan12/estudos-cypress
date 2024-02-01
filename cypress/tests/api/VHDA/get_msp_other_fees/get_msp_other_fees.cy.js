@@ -3,7 +3,7 @@ import { VhdaPayloadGenerator } from '../../../../support/payload_generators/vhd
 
 const { faker } = require('@faker-js/faker');
 
-describe('VHDA: GetNotificationPreferences', function () {
+describe('VHDA: GetMSPOtherFees', function () {
     const vhdaPayloadGenerator = new VhdaPayloadGenerator();
     const environment = Cypress.env('vhda_loan');
     const vhdaApi = new VhdaApi();
@@ -17,14 +17,14 @@ describe('VHDA: GetNotificationPreferences', function () {
         })
     })
 
-    it('get notification preferences returns 200 with valid credentials', () => {
+    it('get MSP other Fees returns 200 with valid credentials', () => {
         vhdaApi.getMspOtherFees(jwt).then((response) => {
             expect(response.status).to.eq(200);
             expect(response.body).to.not.equal(null);
         });
-    }); 
-  
-    it('get notification preferences returns 401 with invalid credentials', () => {
+    });
+
+    it('get MSP other Fees returns 401 with invalid credentials', () => {
         vhdaApi.getMspOtherFees(faker.string.uuid).then((response) => {
             expect(response.status).to.eq(401);
         });
