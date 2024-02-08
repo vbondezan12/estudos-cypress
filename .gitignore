@@ -119,7 +119,6 @@ integration/examples/
 #screenshots
 screenshots/
 
-package-lock.json
 .idea
 .vscode
 xunit.xml
