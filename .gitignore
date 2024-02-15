@@ -106,18 +106,17 @@ dist
 node_modules
 .DS_Store
 debug.feature
+
 # config file for portal credentials
 cypress.env.json
-
-#results
-results/
-reports/
+cypress/reports/
+cypress/screenshots/
+cypress/videos/
 
 #examples
 integration/examples/
 
-#screenshots
-screenshots/
+
 
 .idea
 .vscode

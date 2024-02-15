@@ -1,32 +1,25 @@
-const { defineConfig } = require('cypress');
+const {defineConfig} = require('cypress');
 
 module.exports = defineConfig({
-    projectId: 'tvrmvw',
+    projectId: 'lift-cypress-automation',
     reporter: 'cypress-mochawesome-reporter',
+    video: true,
+    reporterOptions: {
+        charts: true,
+        embeddedScreenshots: true,
+        inlineAssets: true,
+        saveAllAttempts: false,
+        ignoreVideos: false,
+        videoOnFailOnly: true,
+        quiet: false,
+        debug: false
+    },
     e2e: {
-        setupNodeEvents(on, config) {
+        setupNodeEvents(on) {
             require('cypress-mochawesome-reporter/plugin')(on);
         },
         specPattern: 'cypress/tests/**/*.{js,jsx,ts,tsx}',
-        baseUrl: 'https://uat-hq.secureconduit.net/sessions/login',
-        chromeWebSecurity: false,
-        defaultCommandTimeout: 10000,
-        includeShadowDom: true,
-        pageLoadTimeout: 20000,
-        screenshotOnRunFailure: true,
-        trashAssetsBeforeRuns: true,
-        video: false,
-        videoUploadOnPasses: false,
-        viewportHeight: 1080,
-        viewportWidth: 1920,
-        reporter: 'cypress-multi-reporters',
-        reporterOptions: {
-            configFile: 'reporter-config.json'
-        },
-        retries: {
-            runMode: 0,
-            openMode: 0
-        },
+
         hesc: {
             base_url: 'https://hesc-uat.herokuapp.com/api/v1/agent'
         },
