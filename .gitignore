@@ -121,3 +121,8 @@ integration/examples/
 .idea
 .vscode
 xunit.xml
+
+.env*
+.flaskenv*
+!.env.project
+!.env.vault

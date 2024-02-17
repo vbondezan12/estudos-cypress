@@ -1,5 +1,5 @@
 {
-    "Accept": "*/*",
-    "x-auth-token-headers": "TOKEN",
-    "Content-Type": "application/json"
+  "Accept": "*/*",
+  "x-auth-token-headers": "TOKEN",
+  "Content-Type": "application/json"
 }

@@ -5,23 +5,33 @@
   "author": "Jeff Hamblen, Khannara Phay",
   "scripts": {
     "api:all": "cypress run --spec cypress/tests/api/*/*/*.cy.js",
+    "api:all:qa": "npm run api:all -- --config-file cypress/config/env/qa.config.js --env env=qa",
+    "api:all:uat": "npm run api:all -- --config-file cypress/config/env/uat.config.js --env env=uat",
     "api:hesc": "cypress run --spec cypress/tests/api/servicemac/*/*.cy.js",
-    "api:lauch": "cypress run --spec cypress/tests/api/launch/*/*.cy.js",
+    "api:launch": "cypress run --spec cypress/tests/api/launch/*/*.cy.js",
     "api:servicemac": "cypress run --spec cypress/tests/api/servicemac/*/*.cy.js",
-    "api:usbank": "cypress run --spec cypress/tests/api/usbank/*/*.cy.js",
+    "api:usbank": "cypress run --spec cypress/tests/api/us_bank/*/*.cy.js",
     "api:vhda": "cypress run --spec cypress/tests/api/vhda/*/*.cy.js",
-    "cypress:open:localhost": "ENV=localhost npm run cypress:open",
-    "cypress:open:dev": "ENV=dev npm run cypress:open",
-    "cypress:open:qa": "ENV=qa npm run cypress:open",
     "cypress:open": "cypress open",
-    "start:ci": "serve --no-clipboard --listen ${PORT:-8080}"
-  },
-  "devDependencies": {
-    "@faker-js/faker": "^8.0.2",
-    "cypress": "^13.2.0",
-    "cypress-mochawesome-reporter": "^3.8.1"
+    "cypress:open:qa": "npm run cypress:open -- --config-file cypress/config/env/qa.config.js --env env=qa",
+    "cypress:open:uat": "npm run cypress:open -- --config-file cypress/config/env/uat.config.js --env env=uat",
+    "lint": "npx eslint 'cypress/**'",
+    "pre-commit": "npm run lint && npm run api:all:qa"
   },
   "dependencies": {
+    "@dotenvx/dotenvx": "^0.15.4",
+    "@faker-js/faker": "^8.0.2",
+    "cypress": "^13.2.0",
+    "cypress-mochawesome-reporter": "^3.8.1",
+    "dotenv": "^16.4.4",
+    "fast-xml-parser": "^4.3.4",
     "moment": "^2.29.4"
+  },
+  "devDependencies": {
+    "@stylistic/eslint-plugin": "^1.6.2",
+    "@stylistic/eslint-plugin-js": "^1.6.2",
+    "eslint": "^8.56.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-cypress": "^2.15.1"
   }
 }

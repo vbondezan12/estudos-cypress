@@ -1,110 +1,110 @@
 import { AuthenticationUtils } from '../../utils/authentication_utils';
-import moment from 'moment';
 
 const AUTHENTICATION_TYPE = 'basic';
 
 const authenticationUtils = new AuthenticationUtils();
-const base_url = Cypress.config().servicemac.base_url;
+const baseUrl = Cypress.config().servicemac.base_url;
 
 export class ServiceMacApi extends AuthenticationUtils {
-    cypressEnv = Cypress.env('service_mac');
+  cypressEnv = Cypress.env('service_mac');
 
-    getAccountLookup(account) {
-        return cy.request({
-            method: 'GET',
-            url: `${ base_url }/account_holders/${ account }/accounts`,
-            failOnStatusCode: false,
-            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
-        })
-    }
+  getAccountLookup(account) {
+    return cy.request({
+      method: 'GET',
+      url: `${ baseUrl }/bodys/${ account }/accounts`,
+      failOnStatusCode: false,
+      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
+    });
+  }
 
-    getAccountHolder(query_parameters = {}) {
-        return cy.request({
-            method: 'GET',
-            url: `${ base_url }/account_holders`,
-            failOnStatusCode: false,
-            qs: query_parameters,
-            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
-        })
-    }
+  getAccountHolder(queryParameters = {}) {
+    return cy.request({
+      method: 'GET',
+      url: `${ baseUrl }/bodys`,
+      failOnStatusCode: false,
+      qs: queryParameters,
+      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
+    });
+  }
 
-    getPayments(account) {
-        return cy.request({
-            method: 'GET',
-            url: `${ base_url }/account_holders/${ account }/payments`,
-            failOnStatusCode: false,
-            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
-        })
-    }
+  getPayments(account) {
+    return cy.request({
+      method: 'GET',
+      url: `${ baseUrl }/bodys/${ account }/payments`,
+      failOnStatusCode: false,
+      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
+    });
+  }
 
-    getPaymentsTracking(account, tracking) {
-        return cy.request({
-            method: 'GET',
-            url: `${ base_url }/account_holders/${ account }/payments/${ tracking }`,
-            failOnStatusCode: false,
-            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
-        })
-    }
+  getPaymentsTracking(account, tracking) {
+    return cy.request({
+      method: 'GET',
+      url: `${ baseUrl }/bodys/${ account }/payments/${ tracking }`,
+      failOnStatusCode: false,
+      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
+    });
+  }
 
-    getPayAccounts(account) {
-        return cy.request({
-            method: 'GET',
-            url: `${ base_url }/account_holders/${ account }/pay_accounts`,
-            failOnStatusCode: false,
-            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
-        })
-    }
+  getPayAccounts(account) {
+    return cy.request({
+      method: 'GET',
+      url: `${ baseUrl }/bodys/${ account }/pay_accounts`,
+      failOnStatusCode: false,
+      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
+    });
+  }
 
-    getBankInfo(query_parameters = {}) {
-        return cy.request({
-            method: 'GET',
-            url: `${ base_url }/payments/get_bank_info`,
-            failOnStatusCode: false,
-            qs: query_parameters,
-            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
-        })
-    }
+  getBankInfo(queryParameters = {}) {
+    return cy.request({
+      method: 'GET',
+      url: `${ baseUrl }/payments/get_bank_info`,
+      failOnStatusCode: false,
+      qs: queryParameters,
+      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
+    });
+  }
 
-    postAccountHolder(account_holder) {
-        return cy.request({
-            method: 'POST',
-            url: `${ base_url }/account_holders/`,
-            body: account_holder,
-            failOnStatusCode: false,
-            auth: Cypress.env('service_mac_auth_header'),
-            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
-        })
-    }
+  postAccountHolder(body) {
+    return cy.request({
+      method: 'POST',
+      url: `${ baseUrl }/bodys/`,
+      body: body,
+      failOnStatusCode: false,
+      auth: Cypress.env('service_mac_auth_header'),
+      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
+    });
+  }
 
-    postLoanPaymentAccount(payload_loan_payment_account) {
-        return cy.request({
-            method: 'POST',
-            url: `${ base_url }/account_holders/${ this.cypressEnv.account }/payments/with_pay_account`,
-            body: payload_loan_payment_account,
-            failOnStatusCode: false,
-            auth: Cypress.env('service_mac_auth_header'),
-            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
-        })
-    }
+  postLoanPaymentAccount(body) {
+    return cy.request({
+      method: 'POST',
+      url: `${ baseUrl }/bodys/${ this.cypressEnv.account }/payments/with_pay_account`,
+      body: body,
+      failOnStatusCode: false,
+      auth: Cypress.env('service_mac_auth_header'),
+      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
+    });
+  }
 
-    postLoanPaymentPayAccountId(payload_loan_payment_pay_account_id) {
-        return cy.request({
-            method: 'POST',
-            url: `${ base_url }/account_holders/${ this.cypressEnv.account }/payments`,
-            body: payload_loan_payment_pay_account_id,
-            failOnStatusCode: false,
-            auth: Cypress.env('service_mac_auth_header'),
-            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
-        })
-    }
-    postToken(token_payload) {
-        return cy.request({
-            method: 'POST',
-            url: `${ base_url }/tokens`,
-            body: token_payload,
-            failOnStatusCode: false,
-            auth: Cypress.env('service_mac_auth_header'),
-            headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
-        })
-    }
+  postLoanPaymentPayAccountId(body) {
+    return cy.request({
+      method: 'POST',
+      url: `${ baseUrl }/bodys/${ this.cypressEnv.account }/payments`,
+      body: body,
+      failOnStatusCode: false,
+      auth: Cypress.env('service_mac_auth_header'),
+      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
+    });
+  }
+
+  postToken(body) {
+    return cy.request({
+      method: 'POST',
+      url: `${ baseUrl }/tokens`,
+      body: body,
+      failOnStatusCode: false,
+      auth: Cypress.env('service_mac_auth_header'),
+      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
+    });
+  }
 }
