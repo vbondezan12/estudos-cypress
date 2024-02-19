@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { HescApi } from 'cypress/support/api_objects/hesc/hesc_api';
+import { HescApi } from '../../../../../support/api_objects/hesc/hesc_api.js';
 
 describe('HESC: API tests', function () {
   const hescApi = new HescApi();

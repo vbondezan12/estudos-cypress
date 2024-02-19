@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
-import { ServiceMacApi } from '../../../../support/api_objects/servicemac/servicemac_api';
+import { ServiceMacApi } from '../../../../support/api_objects/service_mac/servicemac_api';
 
-describe('API Tests: servicemac', function () {
+describe('API Tests: ServiceMac', function () {
   const serviceMacApi = new ServiceMacApi();
 
   it('Get Payment tracking [200]: verify valid payments tracking', () => {

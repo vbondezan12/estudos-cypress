@@ -21,25 +21,21 @@ export class VhdaPayloadGenerator {
       token: userToken
     };
 
-    let multifactor = {
+    return {
       token: localToken
     };
-
-    return multifactor;
   }
 
-  quick_pay(loanNumber, zipCode, SSN) {
+  quickPay(loanNumber, zipCode, SSN) {
     let authorization = {
       loan_number: loanNumber,
       zip: zipCode,
       ssn: SSN
     };
 
-    let auth = {
+    return {
       auth: authorization
     };
-
-    return auth;
   }
 
   register(loanNumber, zipCode, SSN) {
@@ -57,34 +53,28 @@ export class VhdaPayloadGenerator {
       username: faker.internet.userName()
     };
 
-    let user = {
+    return {
       user: createUser
     };
-
-    return user;
   }
 
-  resend_recovery_email(userEmail) {
-    let email = {
+  resendRecoveryEmail(userEmail) {
+    return {
       email: userEmail
     };
-
-    return email;
   }
 
-  new_loan(loanNumber, zipCode, SSN) {
-    let loan = {
+  newLoan(loanNumber, zipCode, SSN) {
+    return {
       loan_number: loanNumber,
       zip: zipCode,
       ssn: SSN,
       nickname: faker.internet.displayName()
     };
-
-    return loan;
   }
 
-  bank_accounts() {
-    let bankAccount = {
+  bankAccounts() {
+    return {
       routing_number: '011000028',
       name: `${ faker.person.fullName }`,
       account_number: `${ faker.number.int() }`,
@@ -95,12 +85,10 @@ export class VhdaPayloadGenerator {
       save_pay_account: 'true',
       default: 'true'
     };
-
-    return bankAccount;
   }
 
-  invalidbank_accounts() {
-    let invalidbankAccount = {
+  invalidBankAccounts() {
+    return {
       routing_number: '011000028',
       name: `${ faker.person.fullName }`,
       account_number: '011000028',
@@ -111,12 +99,10 @@ export class VhdaPayloadGenerator {
       save_pay_account: 'true',
       default: 'true'
     };
-
-    return invalidbankAccount;
   }
 
-  card_accounts() {
-    let cardAccount = {
+  cardAccounts() {
+    return {
       default: 'false',
       card_default: 'false',
       save_pay_account: 'true',
@@ -134,29 +120,25 @@ export class VhdaPayloadGenerator {
       card_name: faker.person.fullName(),
       payment_type: '7'
     };
-
-    return cardAccount;
   }
 
-  recurring_payment() {
-    let recurringPayment = {
+  recurringPayment() {
+    return {
       start_date: moment().format('YYYY-MM-DD'),
       payment_amount: faker.commerce.price(),
       total_amount_due: faker.commerce.price(),
       payment_type: '1',
-      pay_account: this.bank_accounts()
+      pay_account: this.bankAccounts()
     };
-
-    return recurringPayment;
   }
 
-  notification_preferences() {
+  notificationPreferences() {
     let notificationTypes = {
       sms: 'true',
       email: true
     };
 
-    let notificationPreferences = {
+    return {
       email: faker.internet.email({ firstName: 'Ventanex', lastName: 'Testing', provider: 'repay.com' }),
       phone: faker.phone.number(),
       state: faker.location.state({ abbreviated: true }),
@@ -167,14 +149,12 @@ export class VhdaPayloadGenerator {
       day_of_month: faker.number.int({ min: 1, max: 7 }),
       payment_not_received: notificationTypes,
       payment_posted: notificationTypes,
-      recurring_posted: notificationTypes,
+      recurring_posted: notificationTypes
     };
-
-    return notificationPreferences;
   }
 
   payment() {
-    let payment = {
+    return {
       post_date: moment().format('YYYY-MM-DD'),
       // ToDo: Can this be randomly generated?
       pay_account_id: faker.finance.accountNumber(5),
@@ -195,26 +175,22 @@ export class VhdaPayloadGenerator {
       // ToDo: What values can this be?
       payment_type: 1,
       // ToDd: Can this be a bank account or a card account?
-      pay_account: this.bank_accounts()
+      pay_account: this.bankAccounts()
     };
-
-    return payment;
   }
 
-  updatedPassword(currentPassword) {
+  updatePassword(currentPassword) {
     let newPassword = faker.internet.password();
 
     let updatedPassword = {
       current_password: currentPassword,
       password: newPassword,
-      password_confirmation: newPassword,
+      password_confirmation: newPassword
     };
 
-    let updatePassword = {
+    return {
       user: updatedPassword
     };
-
-    return updatePassword;
   }
 
 }

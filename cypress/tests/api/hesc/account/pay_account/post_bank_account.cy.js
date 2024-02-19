@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
-import { HescPaymentPayloadGenerator } from 'cypress/support/payload_generators/hesc/hesc_payment_payload_generator';
-import { HescApi } from 'cypress/support/api_objects/hesc/hesc_api';
+import { HescApi } from '../../../../../support/api_objects/hesc/hesc_api.js'
+import { HescPaymentPayloadGenerator } from '../../../../../support/payload_generators/hesc/hesc_payment_payload_generator.js'
 
 describe('HESC: API tests', function () {
   const hescApi = new HescApi();

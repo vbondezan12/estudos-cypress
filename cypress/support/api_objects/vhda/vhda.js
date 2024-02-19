@@ -2,7 +2,6 @@ import { VhdaPayloadGenerator } from '../../payload_generators/vhda/vhda_payload
 import { AuthenticationUtils } from '../../utils/authentication_utils';
 
 const AUTHENTICATION_TYPE = 'bearer';
-
 const authenticationUtils = new AuthenticationUtils();
 const baseUrl = Cypress.config().vhda.base_url;
 

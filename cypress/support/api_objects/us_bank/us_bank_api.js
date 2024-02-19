@@ -1,12 +1,15 @@
+import { UsbPaymentPayloadGenerator } from '../../payload_generators/us_bank/us_bank_payment_payload_generator';
 import { AuthenticationUtils } from '../../utils/authentication_utils';
 
 const AUTHENTICATION_TYPE = 'basic';
 
 const authenticationUtils = new AuthenticationUtils();
-const baseUrl = Cypress.config().usbank.base_url;
+const baseUrl = Cypress.config().usBank.base_url;
 
 export class UsBankApi {
-  cypressEnv = Cypress.env('usbank');
+  cypressEnv = Cypress.env('usBank');
+
+  payloadGenerator = new UsbPaymentPayloadGenerator();
 
   createPayment(body) {
     return cy.request({

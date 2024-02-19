@@ -1,24 +1,21 @@
-import { VhdaApi } from 'cypress/support/api_objects/vhda/vhda';
-import { VhdaPayloadGenerator } from 'cypress/support/payload_generators/vhda/vhda_payload_generator';
+import { VhdaApi } from '../../../../support/api_objects/vhda/vhda';
 
 const { faker } = require('@faker-js/faker');
 
 describe('vhda: GetMSPOtherFees', function () {
-  const vhdaPayloadGenerator = new VhdaPayloadGenerator();
-  const environment = Cypress.env('vhda_loan');
   const vhdaApi = new VhdaApi();
-  let credentials = vhdaPayloadGenerator.quick_pay(environment.loan_number1, environment.zip1, environment.ssn1);
-  let jwt = null;
+  let credentials = vhdaApi.payloadGenerator.quickPay(
+    vhdaApi.cypressEnv.loan_number,
+    vhdaApi.cypressEnv.zip,
+    vhdaApi.cypressEnv.ssn
+  );
 
   before(() => {
     vhdaApi.createQuickPayJwt(credentials);
-    cy.get('@jwt').then(content => {
-      jwt = content;
-    });
   });
 
   it('get MSP other Fees returns 200 with valid credentials', () => {
-    vhdaApi.getMspOtherFees(jwt).then((response) => {
+    vhdaApi.getMspOtherFees().then((response) => {
       expect(response.status).to.eq(200);
       expect(response.body).to.not.equal(null);
     });

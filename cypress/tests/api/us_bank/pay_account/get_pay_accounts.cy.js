@@ -1,4 +1,4 @@
-import { UsBankApi } from '../../../../support/api_objects/usbank/usbank_api';
+import { UsBankApi } from '../../../../support/api_objects/us_bank/us_bank_api';
 
 describe('US Bank: Pay Account', function () {
   const usbApi = new UsBankApi();

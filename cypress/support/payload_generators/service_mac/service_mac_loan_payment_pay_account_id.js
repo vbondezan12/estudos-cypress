@@ -11,7 +11,7 @@ export class ServiceMacLoanPaymentPayAccountId {
         attributes: this.generateAttributes()
       }
     };
-    cy.log(JSON.stringify(jsonData));
+
     return jsonData;
   }
 

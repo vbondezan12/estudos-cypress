@@ -3,10 +3,10 @@ import { VhdaApi } from '../../../../support/api_objects/vhda/vhda';
 
 describe('vhda: Send Recovery Email', function () {
   const vhdaApi = new VhdaApi();
-  const credentials = vhdaApi.payloadGenerator.quick_pay(vhdaApi.cypressEnv.loan_number, vhdaApi.cypressEnv.zip,
+  const credentials = vhdaApi.payloadGenerator.quickPay(vhdaApi.cypressEnv.loan_number, vhdaApi.cypressEnv.zip,
     vhdaApi.cypressEnv.ssn);
-  let email = vhdaApi.payloadGenerator.resend_recovery_email(vhdaApi.cypressEnv.user_name);
-  let invalidemail = vhdaApi.payloadGenerator.resend_recovery_email(`${ faker.string.uuid }`);
+  let email = vhdaApi.payloadGenerator.resendRecoveryEmail(vhdaApi.cypressEnv.user_name);
+  let invalidEmail = vhdaApi.payloadGenerator.resendRecoveryEmail(`${ faker.string.uuid }`);
 
   beforeEach(() => {
     vhdaApi.createQuickPayJwt(credentials);
@@ -19,7 +19,7 @@ describe('vhda: Send Recovery Email', function () {
   });
 
   it('Send Recovery Email:Verify invalid email Id gives an error', () => {
-    vhdaApi.resendRecoveryEmail(invalidemail).then((response) => {
+    vhdaApi.resendRecoveryEmail(invalidEmail).then((response) => {
       expect(response.status).to.eq(404);
     });
   });

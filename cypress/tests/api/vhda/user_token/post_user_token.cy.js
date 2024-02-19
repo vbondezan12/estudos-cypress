@@ -1,5 +1,4 @@
-import { VhdaApi } from 'cypress/support/api_objects/vhda/vhda';
-
+import { VhdaApi } from '../../../../support/api_objects/vhda/vhda';
 const { faker } = require('@faker-js/faker');
 
 describe('vhda: POST user_token', function () {

@@ -1,7 +1,7 @@
-import { ServiceMacApi } from '../../../../support/api_objects/servicemac/servicemac_api';
-import { ServiceMacToken } from 'cypress/support/payload_generators/service_mac/service_mac_token';
+import { ServiceMacApi } from '../../../../support/api_objects/service_mac/servicemac_api';
+import { ServiceMacToken } from '../../../../support/payload_generators/service_mac/service_mac_token';
 
-describe('API Tests: servicemac', function () {
+describe('API Tests: ServiceMac', function () {
   const serviceMacApi = new ServiceMacApi();
   const serviceMacPayloadGenerator = new ServiceMacToken();
 

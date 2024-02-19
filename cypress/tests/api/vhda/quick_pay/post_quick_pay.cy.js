@@ -6,8 +6,11 @@ describe('vhda: POST quick_pay', function () {
   const vhdaApi = new VhdaApi();
 
   it('quick_pay returns 201 with valid credentials', () => {
-    const credentials = vhdaApi.payloadGenerator.quick_pay(vhdaApi.cypressEnv.loan_number, vhdaApi.cypressEnv.zip,
-      vhdaApi.cypressEnv.ssn);
+    const credentials = vhdaApi.payloadGenerator.quickPay(
+      vhdaApi.cypressEnv.loan_number,
+      vhdaApi.cypressEnv.zip,
+      vhdaApi.cypressEnv.ssn
+    );
 
     vhdaApi.createQuickPayJwt(credentials).then(response => {
       expect(response.status).to.eq(201);
@@ -17,7 +20,7 @@ describe('vhda: POST quick_pay', function () {
   });
 
   xit('quick_pay returns 401 when random account number', () => {
-    const credentials = vhdaApi.payloadGenerator.quick_pay(faker.finance.accountNumber(8),
+    const credentials = vhdaApi.payloadGenerator.quickPay(faker.finance.accountNumber(8),
       faker.finance.accountNumber(5), vhdaApi.cypressEnv.ssn);
 
     vhdaApi.createQuickPayJwt(credentials).then(response => {

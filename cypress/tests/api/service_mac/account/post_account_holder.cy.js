@@ -1,19 +1,15 @@
 import { faker } from '@faker-js/faker';
-import { ServiceMacApi } from 'cypress/support/api_objects/servicemac/servicemac_api';
-import { ServiceMacAccountHolderPayloadGenerator } from 'cypress/support/payload_generators/service_mac/service_mac_account_holder_payload_generator';
+import { ServiceMacApi } from '../../../../support/api_objects/service_mac/servicemac_api';
 
-describe('API Tests: SERVICE_MAC', function () {
+describe('API Tests: ServiceMac', function () {
   const serviceMacApi = new ServiceMacApi();
-  const serviceMacAccountHolder = new ServiceMacAccountHolderPayloadGenerator();
 
   it('Post Account Holder [200]: post valid account holder', () => {
 
     const loanNumber = serviceMacApi.cypressEnv.loan_number;
-    let payload = serviceMacAccountHolder.generateData(loanNumber);
-    cy.log(JSON.stringify(payload));
+    let payload = serviceMacApi.payloadGenerator.generateData(loanNumber);
 
     serviceMacApi.postAccountHolder(payload).then((response) => {
-
       expect(response.status).to.eq(201);
       expect(response.body.data.id).to.eq(serviceMacApi.cypressEnv.account);
     });
@@ -21,7 +17,7 @@ describe('API Tests: SERVICE_MAC', function () {
 
   it('Post Account Holder [404]: post invalid account holder', () => {
     const account = faker.number.int({ min: 10000000000, max: 99999999999 });
-    const payload = serviceMacAccountHolder.generateData(account);
+    const payload = serviceMacApi.payloadGenerator.generateData(account);
 
     serviceMacApi.postAccountHolder(payload).then((response) => {
       expect(response.status).to.eq(404);
@@ -31,7 +27,7 @@ describe('API Tests: SERVICE_MAC', function () {
 
   it('Post Account Holder [422]: Loan Number field mandatory', () => {
     const account = faker.number.int({ min: 10000000000, max: 99999999999 });
-    const payload = serviceMacAccountHolder.generateData(account);
+    const payload = serviceMacApi.payloadGenerator.generateData(account);
     delete payload.data.attributes.loan_number;
 
     serviceMacApi.postAccountHolder(payload).then((response) => {
@@ -46,7 +42,7 @@ describe('API Tests: SERVICE_MAC', function () {
 
   it('Post Account Holder [422]: ssn field mandatory', () => {
     const account = faker.number.int({ min: 10000000000, max: 99999999999 });
-    const payload = serviceMacAccountHolder.generateData(account);
+    const payload = serviceMacApi.payloadGenerator.generateData(account);
     delete payload.data.attributes.ssn;
 
     serviceMacApi.postAccountHolder(payload).then((response) => {
@@ -62,7 +58,7 @@ describe('API Tests: SERVICE_MAC', function () {
 
   it('Post Account Holder [422]: name field mandatory', () => {
     const account = faker.number.int({ min: 10000000000, max: 99999999999 });
-    const payload = serviceMacAccountHolder.generateData(account);
+    const payload = serviceMacApi.payloadGenerator.generateData(account);
     delete payload.data.attributes.name;
 
     serviceMacApi.postAccountHolder(payload).then((response) => {
@@ -78,7 +74,7 @@ describe('API Tests: SERVICE_MAC', function () {
 
   it('Post Account Holder [422]: All mandatory fields', () => {
     const account = faker.number.int({ min: 10000000000, max: 99999999999 });
-    const payload = serviceMacAccountHolder.generateData(account);
+    const payload = serviceMacApi.payloadGenerator.generateData(account);
     delete payload.data.attributes;
 
     serviceMacApi.postAccountHolder(payload).then((response) => {

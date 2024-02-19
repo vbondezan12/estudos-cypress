@@ -1,15 +1,15 @@
-import { UsBankApi } from '../../../../support/api_objects/usbank/usbank_api';
+import { UsBankApi } from '../../../../support/api_objects/us_bank/us_bank_api';
 
 describe('US Bank: Bank Info', function () {
-  const usbankApi = new UsBankApi();
+  const usBankApi = new UsBankApi();
 
   it('Get Bank Info: verify valid bank returns correct data', () => {
     const queryParameters = {
-      'client_id': usbankApi.cypressEnv.client_id,
-      'routing_number': usbankApi.cypressEnv.routing_number
+      'client_id': usBankApi.cypressEnv.client_id,
+      'routing_number': usBankApi.cypressEnv.routing_number
     };
 
-    usbankApi.getBankInfo(queryParameters).then((response) => {
+    usBankApi.getBankInfo(queryParameters).then((response) => {
       expect(response.status).to.eq(200);
       expect(response.body.bank_name).to.eq('US BANK NA');
       expect(response.body.found).to.eq(true);

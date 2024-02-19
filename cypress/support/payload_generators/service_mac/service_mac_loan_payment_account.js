@@ -10,7 +10,7 @@ export class ServiceMacLoanPaymentAccount {
         attributes: this.generateAttributes()
       }
     };
-    cy.log(JSON.stringify(jsonData));
+    (JSON.stringify(jsonData));
     return jsonData;
   }
 

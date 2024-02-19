@@ -44,6 +44,8 @@ All scripts can be found in `package.json` and can be executed via `npm run <scr
 
 - Prefer single quotes `'` over double quotes `"`
 - Variable names should be in camelCase: `myVariableName`, `anotherVariableNameThatIsLonger`
+- File and directory name should be lowercase and use underscores: `name`, `long_name`, `even_longer_name`
+- All Cypress test files should have `.cy.js` extension
 - Tip: Execute `npm run lint` to help identify any code styling problems
 
 ## Pull Request Process

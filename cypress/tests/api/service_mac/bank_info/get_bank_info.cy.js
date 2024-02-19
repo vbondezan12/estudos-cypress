@@ -1,7 +1,7 @@
-import { ServiceMacApi } from '../../../../support/api_objects/servicemac/servicemac_api';
+import { ServiceMacApi } from '../../../../support/api_objects/service_mac/servicemac_api';
 import { faker } from '@faker-js/faker';
 
-describe('API Tests: servicemac', function () {
+describe('API Tests: ServiceMac', function () {
   const serviceMacApi = new ServiceMacApi();
 
   it('Get Bank Info [200]: verify valid bank info', () => {

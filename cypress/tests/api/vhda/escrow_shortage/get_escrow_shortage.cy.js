@@ -1,13 +1,14 @@
 import { VhdaApi } from '../../../../support/api_objects/vhda/vhda';
-import { VhdaPayloadGenerator } from '../../../../support/payload_generators/vhda/vhda_payload_generator';
 
 const { faker } = require('@faker-js/faker');
 
 describe('vhda: GetEscrowShortage', function () {
-  const vhdaPayloadGenerator = new VhdaPayloadGenerator();
-  const environment = Cypress.env('vhda');
   const vhdaApi = new VhdaApi();
-  let credentials = vhdaPayloadGenerator.quick_pay(environment.loan_number, environment.zip, environment.ssn);
+  let credentials = vhdaApi.payloadGenerator.quickPay(
+    vhdaApi.cypressEnv.loan_number,
+    vhdaApi.cypressEnv.zip,
+    vhdaApi.cypressEnv.ssn
+  );
 
   before(() => {
     vhdaApi.createQuickPayJwt(credentials);
@@ -24,7 +25,6 @@ describe('vhda: GetEscrowShortage', function () {
     vhdaApi.getEscrowShortage(faker.string.uuid).then((response) => {
       expect(response.status).to.eq(401);
       expect(response.body).to.not.equal(null);
-
     });
   });
 });

@@ -1,12 +1,15 @@
+import { ServiceMacAccountHolderPayloadGenerator } from '../../payload_generators/service_mac/service_mac_account_holder_payload_generator';
 import { AuthenticationUtils } from '../../utils/authentication_utils';
 
 const AUTHENTICATION_TYPE = 'basic';
 
 const authenticationUtils = new AuthenticationUtils();
-const baseUrl = Cypress.config().servicemac.base_url;
+const baseUrl = Cypress.config().serviceMac.base_url;
 
 export class ServiceMacApi extends AuthenticationUtils {
-  cypressEnv = Cypress.env('service_mac');
+  cypressEnv = Cypress.env('serviceMac');
+
+  payloadGenerator = new ServiceMacAccountHolderPayloadGenerator();
 
   getAccountLookup(account) {
     return cy.request({
@@ -70,7 +73,6 @@ export class ServiceMacApi extends AuthenticationUtils {
       url: `${ baseUrl }/bodys/`,
       body: body,
       failOnStatusCode: false,
-      auth: Cypress.env('service_mac_auth_header'),
       headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
     });
   }
@@ -81,7 +83,6 @@ export class ServiceMacApi extends AuthenticationUtils {
       url: `${ baseUrl }/bodys/${ this.cypressEnv.account }/payments/with_pay_account`,
       body: body,
       failOnStatusCode: false,
-      auth: Cypress.env('service_mac_auth_header'),
       headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
     });
   }
@@ -92,7 +93,6 @@ export class ServiceMacApi extends AuthenticationUtils {
       url: `${ baseUrl }/bodys/${ this.cypressEnv.account }/payments`,
       body: body,
       failOnStatusCode: false,
-      auth: Cypress.env('service_mac_auth_header'),
       headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
     });
   }
@@ -103,7 +103,6 @@ export class ServiceMacApi extends AuthenticationUtils {
       url: `${ baseUrl }/tokens`,
       body: body,
       failOnStatusCode: false,
-      auth: Cypress.env('service_mac_auth_header'),
       headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
     });
   }

@@ -36,10 +36,10 @@ module.exports = defineConfig(
       selene: {
         base_url: 'https://selene-qa-1771372db722.herokuapp.com/'
       },
-      servicemac: {
+      serviceMac: {
         base_url: 'https://repay-servicemac-uat-2376079e9ee5.herokuapp.com/api/v1'
       },
-      usbank: {
+      usBank: {
         base_url: 'https://usbank-uat.secureconduit.net/ivr/v1'
       },
       vhda: {

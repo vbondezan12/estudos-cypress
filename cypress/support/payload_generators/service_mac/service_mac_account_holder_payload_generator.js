@@ -8,7 +8,6 @@ export class ServiceMacAccountHolderPayloadGenerator {
         type: 'account_holder', attributes: this.generateAttributes(loanNumber)
       }
     };
-    cy.log(JSON.stringify(jsonData));
 
     return jsonData;
   }
