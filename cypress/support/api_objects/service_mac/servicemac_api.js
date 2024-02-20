@@ -4,7 +4,7 @@ import { AuthenticationUtils } from '../../utils/authentication_utils';
 const AUTHENTICATION_TYPE = 'basic';
 
 const authenticationUtils = new AuthenticationUtils();
-const baseUrl = Cypress.config().serviceMac.base_url;
+const baseUrl = Cypress.config().serviceMac.baseUrl;
 
 export class ServiceMacApi extends AuthenticationUtils {
   cypressEnv = Cypress.env('serviceMac');

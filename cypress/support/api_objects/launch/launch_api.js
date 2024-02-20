@@ -2,7 +2,7 @@ import { AuthenticationUtils } from '../../utils/authentication_utils';
 
 const AUTHENTICATION_TYPE = 'basic';
 const authenticationUtils = new AuthenticationUtils();
-const baseUrl = Cypress.config().launch.base_url;
+const baseUrl = Cypress.config().launch.baseUrl;
 
 export class LaunchApi {
   cypressEnv = Cypress.env('launch');

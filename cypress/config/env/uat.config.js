@@ -22,28 +22,28 @@ module.exports = defineConfig(
       },
       specPattern: 'cypress/tests/**/*.{js,jsx,ts,tsx}',
       mockLoanService: {
-        base_url: 'https://repay-mock-loan-service.herokuapp.com/api/v1'
+        baseUrl: 'https://repay-mock-loan-service.herokuapp.com/api/v1'
       },
       lift: {
-        base_url: 'https://lift-uat.secureconduit.net'
+        baseUrl: 'https://lift-uat.secureconduit.net'
       },
       hesc: {
-        base_url: 'https://hesc-uat.herokuapp.com/api/v1/agent'
+        baseUrl: 'https://hesc-uat.herokuapp.com/api/v1/agent'
       },
       launch: {
-        base_url: 'https://uat-launchservicing.secureconduit.net/api'
+        baseUrl: 'https://uat-launchservicing.secureconduit.net/api'
       },
       selene: {
-        base_url: 'https://selene-qa-1771372db722.herokuapp.com/'
+        baseUrl: 'https://selene-uat-a8c52f39f977.herokuapp.com'
       },
       serviceMac: {
-        base_url: 'https://repay-servicemac-uat-2376079e9ee5.herokuapp.com/api/v1'
+        baseUrl: 'https://repay-servicemac-uat-2376079e9ee5.herokuapp.com/api/v1'
       },
       usBank: {
-        base_url: 'https://usbank-uat.secureconduit.net/ivr/v1'
+        baseUrl: 'https://usbank-uat.secureconduit.net/ivr/v1'
       },
       vhda: {
-        base_url: 'https://repay-msp-uat.herokuapp.com/api/v1'
+        baseUrl: 'https://repay-msp-uat.herokuapp.com/api/v1'
       }
     }
   });

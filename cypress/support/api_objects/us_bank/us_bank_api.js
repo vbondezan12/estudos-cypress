@@ -4,7 +4,7 @@ import { AuthenticationUtils } from '../../utils/authentication_utils';
 const AUTHENTICATION_TYPE = 'basic';
 
 const authenticationUtils = new AuthenticationUtils();
-const baseUrl = Cypress.config().usBank.base_url;
+const baseUrl = Cypress.config().usBank.baseUrl;
 
 export class UsBankApi {
   cypressEnv = Cypress.env('usBank');

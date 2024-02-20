@@ -3,7 +3,7 @@ import { AuthenticationUtils } from '../../utils/authentication_utils';
 
 const AUTHENTICATION_TYPE = 'bearer';
 const authenticationUtils = new AuthenticationUtils();
-const baseUrl = Cypress.config().vhda.base_url;
+const baseUrl = Cypress.config().vhda.baseUrl;
 
 export class VhdaApi {
   cypressEnv = Cypress.env('vhda');

@@ -6,7 +6,7 @@ describe('API Tests: ServiceMac', function () {
 
   it('Post Account Holder [200]: post valid account holder', () => {
 
-    const loanNumber = serviceMacApi.cypressEnv.loan_number;
+    const loanNumber = serviceMacApi.cypressEnv.loanNumber;
     let payload = serviceMacApi.payloadGenerator.generateData(loanNumber);
 
     serviceMacApi.postAccountHolder(payload).then((response) => {
@@ -28,14 +28,14 @@ describe('API Tests: ServiceMac', function () {
   it('Post Account Holder [422]: Loan Number field mandatory', () => {
     const account = faker.number.int({ min: 10000000000, max: 99999999999 });
     const payload = serviceMacApi.payloadGenerator.generateData(account);
-    delete payload.data.attributes.loan_number;
+    delete payload.data.attributes.loanNumber;
 
     serviceMacApi.postAccountHolder(payload).then((response) => {
       expect(response.status).to.eq(422);
       expect(response.body).to.have.property('errors');
       expect(response.body.errors).to.have.property('loan_number');
-      expect(response.body.errors.loan_number).to.be.an('array');
-      expect(response.body.errors.loan_number).to.have.length(1);
+      expect(response.body.errors.loanNumber).to.be.an('array');
+      expect(response.body.errors.loanNumber).to.have.length(1);
       expect(response.body.errors.loan_number[0]).to.equal('can\'t be blank');
     });
   });

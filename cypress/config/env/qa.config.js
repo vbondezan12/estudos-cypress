@@ -22,28 +22,28 @@ module.exports = defineConfig(
       },
       specPattern: 'cypress/tests/**/*.{js,jsx,ts,tsx}',
       mockLoanService: {
-        base_url: 'https://repay-mock-loan-service.herokuapp.com/api/v1'
+        baseUrl: 'https://repay-mock-loan-service.herokuapp.com/api/v1'
       },
       lift: {
-        base_url: 'https://lift-qa.herokuapp.com'
+        baseUrl: 'https://lift-qa.herokuapp.com'
       },
       hesc: {
-        base_url: 'TODO'
+        baseUrl: 'TODO'
       },
       launch: {
-        base_url: 'TODO'
+        baseUrl: 'TODO'
       },
       selene: {
-        base_url: 'https://selene-qa-1771372db722.herokuapp.com'
+        baseUrl: 'https://selene-qa-1771372db722.herokuapp.com'
       },
       serviceMac: {
-        base_url: 'TODO'
+        baseUrl: 'TODO'
       },
       usBank: {
-        base_url: 'TODO'
+        baseUrl: 'TODO'
       },
       vhda: {
-        base_url: 'https://msp-qa.herokuapp.com'
+        baseUrl: 'https://msp-qa.herokuapp.com'
       }
     }
   });

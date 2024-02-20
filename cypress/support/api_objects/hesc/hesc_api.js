@@ -3,7 +3,7 @@ import { AuthenticationUtils } from '../../utils/authentication_utils';
 const AUTHENTICATION_TYPE = 'basic';
 
 const authenticationUtils = new AuthenticationUtils();
-const baseUrl = Cypress.config().hesc.base_url;
+const baseUrl = Cypress.config().hesc.baseUrl;
 
 /**
  * HTTPS operations for HESC API
