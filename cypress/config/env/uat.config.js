@@ -34,7 +34,7 @@ module.exports = defineConfig(
         baseUrl: 'https://uat-launchservicing.secureconduit.net/api'
       },
       selene: {
-        baseUrl: 'https://selene-uat-a8c52f39f977.herokuapp.com'
+        baseUrl: 'https://selene-uat-a8c52f39f977.herokuapp.com/api/v1'
       },
       serviceMac: {
         baseUrl: 'https://repay-servicemac-uat-2376079e9ee5.herokuapp.com/api/v1'
