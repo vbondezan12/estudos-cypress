@@ -8,7 +8,7 @@ describe('API Tests: ServiceMac', function () {
 
   // this scenario can fail if faker creates the same amounts
   it('Post Loan Payment with Account [200]: post valid Payment', () => {
-    let payload = serviceMacApi.payloadGenerator.generateData();
+    let payload = serviceMacApi.payloadGenerator.generateData('payment');
 
     serviceMacApi.postLoanPaymentAccount(payload).then((response) => {
       expect(response.status).to.eq(201);
@@ -18,7 +18,7 @@ describe('API Tests: ServiceMac', function () {
   });
 
   it('Post Loan Payment with Account [422]: post invalid Payment', () => {
-    let payload = serviceMacApi.payloadGenerator.generateData();
+    let payload = serviceMacApi.payloadGenerator.generateData('payment');
     payload.data.attributes.pay_account.account_number = faker.number.int({ min: 10000000000, max: 99999999999 })
       .toString();
     payload.data.attributes.pay_account.routing_number = faker.number.int({ min: 10000000000, max: 99999999999 })
@@ -33,7 +33,7 @@ describe('API Tests: ServiceMac', function () {
 
   // this scenario can fail if faker creates the same amounts
   it('Post Loan Payment with Account [422]: post duplicated payment', () => {
-    let payload = serviceMacApi.payloadGenerator.generateData();
+    let payload = serviceMacApi.payloadGenerator.generateData('payment');
     const MAX_ATTEMPTS = 2;
 
     for (let numberOfExecutions = 0; numberOfExecutions < MAX_ATTEMPTS; numberOfExecutions++) {
@@ -51,7 +51,7 @@ describe('API Tests: ServiceMac', function () {
   });
 
   it('Post Loan Payment with Account [422]: invalid total_amount_due', () => {
-    let payload = serviceMacApi.payloadGenerator.generateData();
+    let payload = serviceMacApi.payloadGenerator.generateData('payment');
     const totalAmount = payload.data.attributes.total_amount_due;
     delete payload.data.attributes.total_amount_due;
     serviceMacApi.postLoanPaymentAccount(payload).then((response) => {
