@@ -12,7 +12,7 @@
 
 1. Clone the project from [GitHub project](https://github.com/repaygithub/ventanex-qe-cypress.git)
 2. Run `npm install` command
-3. Follow instructions to set up an [environment file](#environments)
+3. Follow instructions to set up an [environment file](#environments-setup)
 4. Run `npm run cypress:open` command to launch cypress with default configurations
     - Select E2E
     - Select browser of choice

@@ -6,25 +6,28 @@ describe('API Tests: Selene ABA Number', function () {
 
   it('Get ABA number [200]: verify valid aba number', () => {
     const abaNumber = seleneApi.cypressEnv.aba_number;
-    const abaAuthorization = seleneApi.cypressEnv.aba_authorization;
-    seleneApi.getValidateAba(abaNumber, abaAuthorization).then(response => {
+
+    seleneApi.getValidateAba(abaNumber).then((response) => {
       expect(response.status).to.eq(200);
-      cy.wrap(Cypress.$(response.body))
-        .then(xml => xml.filter('aba').find('aba').text())
-        .should('eq', '111000614');
-      cy.wrap(Cypress.$(response.body))
-        .then(xml => xml.filter('aba').find('name').text())
-        .should('eq', 'JPMORGAN CHASE BANK, NA');
+
+      seleneApi.xmlParser.parseString(response.body, (error, xml) => {
+        expect(error).to.be.null;
+        expect(xml.aba.aba).to.eq(abaNumber);
+        expect(xml.aba.name).to.eq('JPMORGAN CHASE BANK, NA');
+      });
     });
   });
 
   it('Get ABA number [404]: verify invalid aba number', () => {
     const invalidAbaNumber = faker.number.int({ min: 10000000000, max: 99999999999 });
+
     seleneApi.getValidateAba(invalidAbaNumber).then(response => {
-      cy.wrap(Cypress.$(response.body))
-        .then(xml => xml.filter('aba').find('error').text())
-        .should('eq', 'ABA is not a valid');
       expect(response.status).to.eq(200);
+
+      seleneApi.xmlParser.parseString(response.body, (error, xml) => {
+        expect(error).to.be.null;
+        expect(xml.aba.error).to.eq('ABA is not a valid');
+      });
     });
   });
 });

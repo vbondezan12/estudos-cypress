@@ -26,14 +26,13 @@
     "cypress": "^13.2.0",
     "cypress-mochawesome-reporter": "^3.8.1",
     "dotenv": "^16.4.4",
-    "fast-xml-parser": "^4.3.4",
-    "moment": "^2.29.4"
+    "moment": "^2.29.4",
+    "xml2js": "^0.6.2"
   },
   "devDependencies": {
     "@stylistic/eslint-plugin": "^1.6.2",
     "@stylistic/eslint-plugin-js": "^1.6.2",
     "eslint": "^8.56.0",
-    "eslint-config-google": "^0.14.0",
     "eslint-plugin-cypress": "^2.15.1"
   }
 }

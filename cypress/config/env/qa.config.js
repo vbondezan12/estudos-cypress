@@ -34,7 +34,7 @@ module.exports = defineConfig(
         baseUrl: 'TODO'
       },
       selene: {
-        baseUrl: 'https://selene-qa-1771372db722.herokuapp.com'
+        baseUrl: 'https://selene-qa-1771372db722.herokuapp.com/api/v1'
       },
       serviceMac: {
         baseUrl: 'TODO'

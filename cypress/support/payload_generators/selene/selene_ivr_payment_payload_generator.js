@@ -45,4 +45,22 @@ export class SelenePayloadGenerator {
 
     return jsonData;
   }
+
+  /**
+   * Generates a payload for looking up a loan.
+   *
+   * @param {Number} loanNumber - The loan number
+   * @param {Number} ssn - The last 4 digits of the SSN
+   * @param {Number} zip - The 5-digit zip code
+   * @return {{loan: {zip: Number, loan_number: Number, ssn: Number}}} The payload
+   */
+  generateLoanLookupPayload(loanNumber, ssn, zip) {
+    return {
+      loan: {
+        loan_number: loanNumber,
+        ssn: ssn,
+        zip: zip
+      }
+    };
+  }
 }

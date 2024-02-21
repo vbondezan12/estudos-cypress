@@ -7,14 +7,14 @@ module.exports = defineConfig(
     video: false,
     retries: 0,
     reporterOptions: {
-      charts: false,
+      charts: true,
       embeddedScreenshots: false,
       inlineAssets: true,
-      saveAllAttempts: true,
+      saveAllAttempts: false,
       ignoreVideos: true,
       videoOnFailOnly: true,
       quiet: false,
-      debug: true
+      debug: false
     },
     e2e: {
       setupNodeEvents(on) {
@@ -34,7 +34,7 @@ module.exports = defineConfig(
         baseUrl: 'TODO'
       },
       selene: {
-        baseUrl: 'https://selene-qa-1771372db722.herokuapp.com'
+        baseUrl: 'https://selene-qa-1771372db722.herokuapp.com/api/v1'
       },
       serviceMac: {
         baseUrl: 'TODO'

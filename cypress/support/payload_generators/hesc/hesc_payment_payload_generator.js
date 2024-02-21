@@ -3,12 +3,11 @@ const { faker } = require('@faker-js/faker');
 export class HescPaymentPayloadGenerator {
 
   generateData(accountNumber, routingNumber) {
-    let jsonData = {
+    return {
       data: {
         type: 'pay_account', attributes: this.generateAttributes(accountNumber, routingNumber)
       }
     };
-    return jsonData;
   }
 
   generateAttributes(accountNumber, routingNumber) {
