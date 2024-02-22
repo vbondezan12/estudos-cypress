@@ -84,6 +84,7 @@ export class ServiceMacAccountHolderPayloadGenerator {
 
     return attributes;
   }
+
   generatePaymentIdAttributes() {
     let attributes = {
       payment_amount: faker.number.int({ min: 1, max: 100 }),
@@ -97,12 +98,11 @@ export class ServiceMacAccountHolderPayloadGenerator {
       pay_account_id: null,
       total_amount_due: null,
       browser_type: "Chrome",
-      ip_address: "40.70.72.189"
+      ip_address: faker.internet.ipv4(),
     };
 
     attributes.total_amount_due = attributes.payment_amount + attributes.transaction_fee + attributes.apply_towards_principal;
     return attributes;
-
   }
 
 }

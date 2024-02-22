@@ -9,7 +9,6 @@ describe('API Tests: ServiceMac', function () {
     const loanNumber = serviceMacApi.cypressEnv.loan_number;
     let payload = serviceMacApi.payloadGenerator.generateData('account_holder', loanNumber);
 
-
     serviceMacApi.postAccountHolder(payload).then((response) => {
       expect(response.status).to.eq(201);
       expect(response.body.data.id).to.eq(serviceMacApi.cypressEnv.account);
