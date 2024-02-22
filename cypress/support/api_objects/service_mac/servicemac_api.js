@@ -14,7 +14,7 @@ export class ServiceMacApi extends AuthenticationUtils {
   getAccountLookup(account) {
     return cy.request({
       method: 'GET',
-      url: `${ baseUrl }/bodys/${ account }/accounts`,
+      url: `${ baseUrl }/account_holders/${ account }/accounts`,
       failOnStatusCode: false,
       headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
     });
@@ -23,7 +23,7 @@ export class ServiceMacApi extends AuthenticationUtils {
   getAccountHolder(queryParameters = {}) {
     return cy.request({
       method: 'GET',
-      url: `${ baseUrl }/bodys`,
+      url: `${ baseUrl }/account_holders`,
       failOnStatusCode: false,
       qs: queryParameters,
       headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
@@ -33,7 +33,7 @@ export class ServiceMacApi extends AuthenticationUtils {
   getPayments(account) {
     return cy.request({
       method: 'GET',
-      url: `${ baseUrl }/bodys/${ account }/payments`,
+      url: `${ baseUrl }/account_holders/${ account }/payments`,
       failOnStatusCode: false,
       headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
     });
@@ -42,7 +42,7 @@ export class ServiceMacApi extends AuthenticationUtils {
   getPaymentsTracking(account, tracking) {
     return cy.request({
       method: 'GET',
-      url: `${ baseUrl }/bodys/${ account }/payments/${ tracking }`,
+      url: `${ baseUrl }/account_holders/${ account }/payments/${ tracking }`,
       failOnStatusCode: false,
       headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
     });
@@ -51,7 +51,7 @@ export class ServiceMacApi extends AuthenticationUtils {
   getPayAccounts(account) {
     return cy.request({
       method: 'GET',
-      url: `${ baseUrl }/bodys/${ account }/pay_accounts`,
+      url: `${ baseUrl }/account_holders/${ account }/pay_accounts`,
       failOnStatusCode: false,
       headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
     });
@@ -70,7 +70,7 @@ export class ServiceMacApi extends AuthenticationUtils {
   postAccountHolder(body) {
     return cy.request({
       method: 'POST',
-      url: `${ baseUrl }/bodys/`,
+      url: `${ baseUrl }/account_holders/`,
       body: body,
       failOnStatusCode: false,
       headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
@@ -80,7 +80,7 @@ export class ServiceMacApi extends AuthenticationUtils {
   postLoanPaymentAccount(body) {
     return cy.request({
       method: 'POST',
-      url: `${ baseUrl }/bodys/${ this.cypressEnv.account }/payments/with_pay_account`,
+      url: `${ baseUrl }/account_holders/${ this.cypressEnv.account }/payments/with_pay_account`,
       body: body,
       failOnStatusCode: false,
       headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
@@ -90,7 +90,7 @@ export class ServiceMacApi extends AuthenticationUtils {
   postLoanPaymentPayAccountId(body) {
     return cy.request({
       method: 'POST',
-      url: `${ baseUrl }/bodys/${ this.cypressEnv.account }/payments`,
+      url: `${ baseUrl }/account_holders/${ this.cypressEnv.account }/payments`,
       body: body,
       failOnStatusCode: false,
       headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)

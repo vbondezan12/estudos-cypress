@@ -8,7 +8,8 @@ describe('API Tests: ServiceMac', function () {
 
   // this scenario can fail if faker creates the same amounts
   it('Post Loan Payment with Account [200]: post valid Payment', () => {
-    let payload = serviceMacApi.payloadGenerator.generateData();
+    let payload = serviceMacApi.payloadGenerator.generateData('paymentId');
+    payload.data.id = serviceMacApi.cypressEnv.account;
     payload.data.attributes.pay_account_id = serviceMacApi.cypressEnv.account_id;
 
     serviceMacApi.postLoanPaymentPayAccountId(payload).then((response) => {
@@ -19,7 +20,8 @@ describe('API Tests: ServiceMac', function () {
   });
 
   it('Post Loan Payment with Account [422]: post invalid Payment', () => {
-    let payload = serviceMacApi.payloadGenerator.generateData();
+    let payload = serviceMacApi.payloadGenerator.generateData('paymentId');
+    payload.data.id = serviceMacApi.cypressEnv.account;
     payload.data.attributes.pay_account_id = serviceMacApi.cypressEnv.account_id;
     payload.data.attributes.late_fees_paid = faker.number.int({ min: 10000000000, max: 99999999999 }).toString();
 
@@ -32,7 +34,8 @@ describe('API Tests: ServiceMac', function () {
 
   // this scenario can fail if faker creates the same amounts
   it('Post Loan Payment with Account [422]: post duplicated payment', () => {
-    let payload = serviceMacApi.payloadGenerator.generateData();
+    let payload = serviceMacApi.payloadGenerator.generateData('paymentId');
+    payload.data.id = serviceMacApi.cypressEnv.account;
     payload.data.attributes.pay_account_id = serviceMacApi.cypressEnv.account_id;
 
     const MAX_ATTEMPTS = 2;
@@ -52,7 +55,8 @@ describe('API Tests: ServiceMac', function () {
   });
 
   it('Post Loan Payment with Account [422]: invalid total_amount_due', () => {
-    let payload = serviceMacApi.payloadGenerator.generateData();
+    let payload = serviceMacApi.payloadGenerator.generateData('paymentId');
+    payload.data.id = serviceMacApi.cypressEnv.account;
     payload.data.attributes.pay_account_id = serviceMacApi.cypressEnv.account_id;
     const totalAmount = payload.data.attributes.total_amount_due;
     delete payload.data.attributes.total_amount_due;
