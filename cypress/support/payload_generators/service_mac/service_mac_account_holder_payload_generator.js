@@ -7,26 +7,26 @@ const randomDate = moment(`2024-${ randomMonth.toString().padStart(2, '0') }-${ 
 
 export class ServiceMacAccountHolderPayloadGenerator {
 
- generateData(type, loanNumber = null) {
-  let jsonData;
+  generateData(type, loanNumber = null) {
+    let jsonData;
 
-  switch (type) {
-    case 'account_holder':
-      jsonData = {
-        data: {
-          type: 'account_holder',
-          attributes: this.generateAttributes(loanNumber)
-        }
-      };
-      break;
-    case 'payment':
-      jsonData = {
-        data: {
-          type: 'payment',
-          attributes: this.generatePaymentAttributes(loanNumber)
-        }
-      };
-      break;
+    switch (type) {
+      case 'account_holder':
+        jsonData = {
+          data: {
+            type: 'account_holder',
+            attributes: this.generateAttributes(loanNumber)
+          }
+        };
+        break;
+      case 'payment':
+        jsonData = {
+          data: {
+            type: 'payment',
+            attributes: this.generatePaymentAttributes(loanNumber)
+          }
+        };
+        break;
       case 'paymentId':
         jsonData = {
           data: {
@@ -36,10 +36,10 @@ export class ServiceMacAccountHolderPayloadGenerator {
           }
         };
         break;
-  }
+    }
 
-  return jsonData;
-}
+    return jsonData;
+  }
 
   generateAttributes(loanNumber) {
     let attributes = {
@@ -80,11 +80,11 @@ export class ServiceMacAccountHolderPayloadGenerator {
         save_pay_account: true
       }
     };
-  attributes.total_amount_due = attributes.payment_amount + attributes.transaction_fee + attributes.apply_towards_principal;
+    attributes.total_amount_due = attributes.payment_amount + attributes.transaction_fee + attributes.apply_towards_principal;
 
-  return attributes;
+    return attributes;
   }
-  generatePaymentIdAttributes(){
+  generatePaymentIdAttributes() {
     let attributes = {
       payment_amount: faker.number.int({ min: 1, max: 100 }),
       post_date: randomDate,
@@ -98,10 +98,10 @@ export class ServiceMacAccountHolderPayloadGenerator {
       total_amount_due: null,
       browser_type: "Chrome",
       ip_address: "40.70.72.189"
-  };
+    };
 
-  attributes.total_amount_due = attributes.payment_amount + attributes.transaction_fee + attributes.apply_towards_principal;
-  return attributes;
+    attributes.total_amount_due = attributes.payment_amount + attributes.transaction_fee + attributes.apply_towards_principal;
+    return attributes;
 
   }
 
