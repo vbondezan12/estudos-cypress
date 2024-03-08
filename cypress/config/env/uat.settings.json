@@ -1,0 +1,39 @@
+{
+  "environment": "uat",
+  "video": true,
+  "retries": 1,
+  "reporterOptions": {
+    "charts": true,
+    "embeddedScreenshots": true,
+    "inlineAssets": true,
+    "saveAllAttempts": false,
+    "ignoreVideos": false,
+    "videoOnFailOnly": true,
+    "quiet": true,
+    "debug": false
+  },
+  "mockLoanService": {
+    "baseUrl": "https://mock-loan-service-8ccdc31a12a7.herokuapp.com"
+  },
+  "lift": {
+    "baseUrl": "https://lift-uat.secureconduit.net"
+  },
+  "hesc": {
+    "baseUrl": "https://hesc-uat.herokuapp.com/api/v1/agent"
+  },
+  "launch": {
+    "baseUrl": "https://uat-launchservicing.secureconduit.net/api"
+  },
+  "selene": {
+    "baseUrl": "https://selene-uat-a8c52f39f977.herokuapp.com/api/v1"
+  },
+  "serviceMac": {
+    "baseUrl": "https://repay-servicemac-uat-2376079e9ee5.herokuapp.com/api/v1"
+  },
+  "usBank": {
+    "baseUrl": "https://usbank-uat.secureconduit.net/ivr/v1"
+  },
+  "vhda": {
+    "baseUrl": "https://repay-msp-uat.herokuapp.com"
+  }
+}

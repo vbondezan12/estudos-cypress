@@ -1,4 +1,4 @@
-import { VhdaApi } from '../../../../support/api_objects/vhda/vhda';
+import { VhdaApi } from '../../../../support/api_objects/vhda/vhda_api';
 
 const { faker } = require('@faker-js/faker');
 

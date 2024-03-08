@@ -1,0 +1,42 @@
+{
+  "environment": "qa",
+  "video": true,
+  "retries": 1,
+  "reporterOptions": {
+    "charts": true,
+    "embeddedScreenshots": true,
+    "inlineAssets": true,
+    "saveAllAttempts": false,
+    "ignoreVideos": false,
+    "videoOnFailOnly": true,
+    "quiet": true,
+    "debug": false
+  },
+  "mockLoanService": {
+    "baseUrl": "https://mock-loan-service-8ccdc31a12a7.herokuapp.com"
+  },
+  "lift": {
+    "baseUrl": "https://lift-qa.secureconduit.net"
+  },
+  "hesc": {
+    "baseUrl": "https://hesc-qa.secureconduit.net"
+  },
+  "launch": {
+    "baseUrl": "https://launch-qa.secureconduit.net"
+  },
+  "selene": {
+    "baseUrl": "https://selene-qa.secureconduit.net"
+  },
+  "serviceMac": {
+    "baseUrl": "https://servicemac-qa.secureconduit.net"
+  },
+  "usBank": {
+    "baseUrl": "https://us-bank-qa.secureconduit.net"
+  },
+  "usBankErbp": {
+    "baseUrl": "TODO"
+  },
+  "vhda": {
+    "baseUrl": "https://msp-qa.secureconduit.net"
+  }
+}

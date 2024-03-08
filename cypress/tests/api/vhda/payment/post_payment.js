@@ -1,4 +1,4 @@
-import { VhdaApi } from '../../../../support/api_objects/vhda/vhda';
+import { VhdaApi } from '../../../../support/api_objects/vhda/vhda_api';
 describe('vhda: POST payment', function () {
   const vhdaApi = new VhdaApi();
   const credentials = vhdaApi.payloadGenerator.quickPay(

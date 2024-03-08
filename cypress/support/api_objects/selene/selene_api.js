@@ -1,15 +1,13 @@
 import xml2js from 'xml2js';
-import { SelenePayloadGenerator } from '../../payload_generators/selene/selene_ivr_payment_payload_generator';
-import { AuthenticationUtils } from '../../utils/authentication_utils';
+import { AUTHENTICATION_TYPE } from '../../../config/constants';
+import { SelenePayloadGenerator } from '../../payload_generators/selene/selene_payload_generator';
+import { MockLoanServiceApi } from '../mock_loan_service/mock_loan_service_api';
 
-const AUTHENTICATION_TYPE = 'basic';
+const baseUrl = `${ Cypress.config().selene.baseUrl }/api/v1`;
 
-const authenticationUtils = new AuthenticationUtils();
-const baseUrl = Cypress.config().selene.baseUrl;
-
-export default class SeleneApi extends AuthenticationUtils {
-  cypressEnv = Cypress.env('selene');
+export class SeleneApi extends MockLoanServiceApi {
   payloadGenerator = new SelenePayloadGenerator();
+
   xmlParser = new xml2js.Parser({
     explicitArray: false,
     ignoreAttrs: true,
@@ -18,42 +16,40 @@ export default class SeleneApi extends AuthenticationUtils {
     parseBooleans: true
   });
 
+
   /**
-   * Sends a POST request to perform IVR loan number lookup
-   *
-   * @param {JSON} body - the body of the request
-   * @return {Response} the response from the request
+   * POST call to look up a loan
+   * @param body The request body
+   * @returns {Cypress.Chainable<Cypress.Response<any>>}
    */
   postIvrLoanNumberLookup(body) {
     return cy.request({
       method: 'POST',
       url: `${ baseUrl }/ivr/vru_lookup`,
       body: body,
-      failOnStatusCode: false,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
+      failOnStatusCode: false
     });
   }
 
   /**
-   * Sends a POST request to make a payment for the IVR endpoint
-   *
-   * @param {JSON} body - the body of the request
-   * @return {Response} the response from the IVR payment endpoint
+   * POST call to make a payment
+   * @param body The request body
+   * @returns {Cypress.Chainable<Cypress.Response<any>>}
    */
   postIvrPayment(body) {
     return cy.request({
       method: 'POST',
       url: `${ baseUrl }/ivr/vru_payment`,
       body: body,
-      failOnStatusCode: false
+      failOnStatusCode: false,
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BASIC)
     });
   }
 
   /**
-   * Retrieves the validation result for the given ABA number.
-   *
-   * @param {string} abaNumber - The ABA number to validate.
-   * @return {Promise} A Promise that resolves to the validation result.
+   * GET call to validate ABA number
+   * @param abaNumber - The ABA number
+   * @returns {Cypress.Chainable<Cypress.Response<any>>}
    */
   getValidateAba(abaNumber) {
     return cy.request({

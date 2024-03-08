@@ -1,7 +1,10 @@
+import { CLIENT } from '../../../config/constants';
+import { MockLoanServicePayloadGenerator } from '../mock_loan_service/mock_loan_service_payload_generator';
+
 const { faker } = require('@faker-js/faker');
 const moment = require('moment');
 
-export class VhdaPayloadGenerator {
+export class VhdaPayloadGenerator extends MockLoanServicePayloadGenerator {
 
   login(user, pass) {
     let authorization = {
@@ -193,4 +196,12 @@ export class VhdaPayloadGenerator {
     };
   }
 
+  /**
+   * Generate a JSON payload for fetching test credentials
+   * @param loanStatus Status of the loan
+   * @returns {{loan_status: *, environment: *, client_id: *}}
+   */
+  generateTestCredentialsLookupPayload(loanStatus) {
+    return super.generateTestCredentialsLookupPayload(CLIENT.VHDA, loanStatus);
+  }
 }

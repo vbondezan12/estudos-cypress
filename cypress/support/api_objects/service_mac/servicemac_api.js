@@ -1,14 +1,10 @@
-import { ServiceMacAccountHolderPayloadGenerator } from '../../payload_generators/service_mac/service_mac_account_holder_payload_generator';
-import { AuthenticationUtils } from '../../utils/authentication_utils';
+import { AUTHENTICATION_TYPE } from '../../../config/constants';
+import { ServiceMacAccountHolderPayloadGenerator } from '../../payload_generators/service_mac/service_payload_generator';
+import { MockLoanServiceApi } from '../mock_loan_service/mock_loan_service_api';
 
-const AUTHENTICATION_TYPE = 'basic';
+const baseUrl = `${ Cypress.config().serviceMac.baseUrl }/api/v1`;
 
-const authenticationUtils = new AuthenticationUtils();
-const baseUrl = Cypress.config().serviceMac.baseUrl;
-
-export class ServiceMacApi extends AuthenticationUtils {
-  cypressEnv = Cypress.env('serviceMac');
-
+export class ServiceMacApi extends MockLoanServiceApi {
   payloadGenerator = new ServiceMacAccountHolderPayloadGenerator();
 
   getAccountLookup(account) {
@@ -16,7 +12,7 @@ export class ServiceMacApi extends AuthenticationUtils {
       method: 'GET',
       url: `${ baseUrl }/account_holders/${ account }/accounts`,
       failOnStatusCode: false,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BASIC)
     });
   }
 
@@ -26,7 +22,7 @@ export class ServiceMacApi extends AuthenticationUtils {
       url: `${ baseUrl }/account_holders`,
       failOnStatusCode: false,
       qs: queryParameters,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BASIC)
     });
   }
 
@@ -35,7 +31,7 @@ export class ServiceMacApi extends AuthenticationUtils {
       method: 'GET',
       url: `${ baseUrl }/account_holders/${ account }/payments`,
       failOnStatusCode: false,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BASIC)
     });
   }
 
@@ -44,7 +40,7 @@ export class ServiceMacApi extends AuthenticationUtils {
       method: 'GET',
       url: `${ baseUrl }/account_holders/${ account }/payments/${ tracking }`,
       failOnStatusCode: false,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BASIC)
     });
   }
 
@@ -53,7 +49,7 @@ export class ServiceMacApi extends AuthenticationUtils {
       method: 'GET',
       url: `${ baseUrl }/account_holders/${ account }/pay_accounts`,
       failOnStatusCode: false,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BASIC)
     });
   }
 
@@ -63,7 +59,7 @@ export class ServiceMacApi extends AuthenticationUtils {
       url: `${ baseUrl }/payments/get_bank_info`,
       failOnStatusCode: false,
       qs: queryParameters,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BASIC)
     });
   }
 
@@ -73,7 +69,7 @@ export class ServiceMacApi extends AuthenticationUtils {
       url: `${ baseUrl }/account_holders/`,
       body: body,
       failOnStatusCode: false,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BASIC)
     });
   }
 
@@ -83,7 +79,7 @@ export class ServiceMacApi extends AuthenticationUtils {
       url: `${ baseUrl }/account_holders/${ this.cypressEnv.account }/payments/with_pay_account`,
       body: body,
       failOnStatusCode: false,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BASIC)
     });
   }
 
@@ -93,7 +89,7 @@ export class ServiceMacApi extends AuthenticationUtils {
       url: `${ baseUrl }/account_holders/${ this.cypressEnv.account }/payments`,
       body: body,
       failOnStatusCode: false,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BASIC)
     });
   }
 
@@ -103,7 +99,7 @@ export class ServiceMacApi extends AuthenticationUtils {
       url: `${ baseUrl }/tokens`,
       body: body,
       failOnStatusCode: false,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BASIC)
     });
   }
 }

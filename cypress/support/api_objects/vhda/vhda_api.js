@@ -1,28 +1,35 @@
+import { AUTHENTICATION_TYPE } from '../../../config/constants';
 import { VhdaPayloadGenerator } from '../../payload_generators/vhda/vhda_payload_generator';
-import { AuthenticationUtils } from '../../utils/authentication_utils';
+import { MockLoanServiceApi } from '../mock_loan_service/mock_loan_service_api';
 
-const AUTHENTICATION_TYPE = 'bearer';
-const authenticationUtils = new AuthenticationUtils();
-const baseUrl = Cypress.config().vhda.baseUrl;
+const baseUrl = `${ Cypress.config().vhda.baseUrl }/api/v1`;
 
-export class VhdaApi {
-  cypressEnv = Cypress.env('vhda');
-
+export class VhdaApi extends MockLoanServiceApi {
   payloadGenerator = new VhdaPayloadGenerator();
 
   createQuickPayJwt(body) {
     return cy.request({
-      method: 'POST', url: `${ baseUrl }/quick_pay`, failOnStatusCode: false, body: body
+      method: 'POST',
+      url: `${ baseUrl }/quick_pay`,
+      failOnStatusCode: false,
+      body: body
     }).then((response) => {
-      window.sessionStorage.setItem('session_auth_token', response.body.jwt);
+      Cypress.env({
+        bearerToken: response.body.jwt
+      });
     });
   }
 
   createLoginJwt(body) {
     return cy.request({
-      method: 'POST', url: `${ baseUrl }/user_token`, failOnStatusCode: false, body: body
+      method: 'POST',
+      url: `${ baseUrl }/user_token`,
+      failOnStatusCode: false,
+      body: body
     }).then((response) => {
-      window.sessionStorage.setItem('session_auth_token', response.body.jwt);
+      Cypress.env({
+        bearerToken: response.body.jwt
+      });
     });
   }
 
@@ -31,8 +38,7 @@ export class VhdaApi {
       method: 'POST',
       url: `${ baseUrl }/multifactor`,
       failOnStatusCode: false,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE,
-        authenticationUtils.getAuthToken(jwt)),
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BEARER),
       body: body
     });
   }
@@ -42,7 +48,7 @@ export class VhdaApi {
       method: 'GET',
       url: `${ baseUrl }/multifactor/resend`,
       failOnStatusCode: false,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt))
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BEARER)
     });
   }
 
@@ -51,8 +57,7 @@ export class VhdaApi {
       method: 'POST',
       url: `${ baseUrl }/quick_pay`,
       failOnStatusCode: false,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE,
-        authenticationUtils.getAuthToken(jwt)),
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BEARER),
       body: body
     });
   }
@@ -62,8 +67,7 @@ export class VhdaApi {
       method: 'POST',
       url: `${ baseUrl }/users`,
       failOnStatusCode: false,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE,
-        authenticationUtils.getAuthToken(jwt)),
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BEARER),
       body: body
     });
   }
@@ -73,8 +77,7 @@ export class VhdaApi {
       method: 'POST',
       url: `${ baseUrl }/users/send_recovery_email`,
       failOnStatusCode: false,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE,
-        authenticationUtils.getAuthToken(jwt)),
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BEARER),
       body: body
     });
   }
@@ -84,7 +87,7 @@ export class VhdaApi {
       method: 'GET',
       url: `${ baseUrl }/accounts`,
       failOnStatusCode: false,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt))
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BEARER)
     });
   }
 
@@ -93,7 +96,7 @@ export class VhdaApi {
       method: 'GET',
       url: `${ baseUrl }/account_details/${ loanNumber }`,
       failOnStatusCode: false,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt))
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BEARER)
     });
   }
 
@@ -102,8 +105,7 @@ export class VhdaApi {
       method: 'POST',
       url: `${ baseUrl }/account_details`,
       failOnStatusCode: false,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE,
-        authenticationUtils.getAuthToken(jwt)),
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BEARER),
       body: body
     });
   }
@@ -113,7 +115,7 @@ export class VhdaApi {
       method: 'DELETE',
       url: `${ baseUrl }/account_details/${ loanNumber }`,
       failOnStatusCode: false,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt))
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BEARER)
     });
   }
 
@@ -123,7 +125,7 @@ export class VhdaApi {
       method: 'GET',
       url: `${ baseUrl }/documents?document_type=statements`,
       failOnStatusCode: false,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt))
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BEARER)
     });
   }
 
@@ -132,7 +134,7 @@ export class VhdaApi {
       method: 'GET',
       url: `${ baseUrl }/escrow_shortage`,
       failOnStatusCode: false,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt))
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BEARER)
     });
   }
 
@@ -141,7 +143,7 @@ export class VhdaApi {
       method: 'GET',
       url: `${ baseUrl }/notification_preferences`,
       failOnStatusCode: false,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt))
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BEARER)
     });
   }
 
@@ -150,8 +152,7 @@ export class VhdaApi {
       method: 'PATCH',
       url: `${ baseUrl }/notification_preferences`,
       failOnStatusCode: false,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE,
-        authenticationUtils.getAuthToken(jwt)),
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BEARER),
       body: notificationPreferencesPayload
     });
   }
@@ -161,7 +162,7 @@ export class VhdaApi {
       method: 'GET',
       url: `${ baseUrl }/payments`,
       failOnStatusCode: false,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt))
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BEARER)
     });
   }
 
@@ -170,7 +171,7 @@ export class VhdaApi {
       method: 'GET',
       url: `${ baseUrl }/payments/paymentId`,
       failOnStatusCode: false,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt))
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BEARER)
     });
   }
 
@@ -179,7 +180,7 @@ export class VhdaApi {
       method: 'GET',
       url: `${ baseUrl }/payments/msp_other_fees`,
       failOnStatusCode: false,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt))
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BEARER)
     });
   }
 
@@ -188,7 +189,7 @@ export class VhdaApi {
       method: 'PATCH',
       url: `${ baseUrl }/payments/${ paymentId }/void`,
       failOnStatusCode: false,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt))
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BEARER)
     });
   }
 
@@ -197,8 +198,7 @@ export class VhdaApi {
       method: 'POST',
       url: `${ baseUrl }/payments`,
       failOnStatusCode: false,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE,
-        authenticationUtils.getAuthToken(jwt)),
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BEARER),
       body: paymentPayload
     });
   }
@@ -208,8 +208,7 @@ export class VhdaApi {
       method: 'PATCH',
       url: `${ baseUrl }/profiles`,
       failOnStatusCode: false,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE,
-        authenticationUtils.getAuthToken(jwt)),
+      headers: asuper.updateHeaderAuthorization(AUTHENTICATION_TYPE.BEARER),
       body: updatedPasswordPayload
     });
   }
@@ -219,7 +218,7 @@ export class VhdaApi {
       method: 'GET',
       url: `${ baseUrl }/pay_accounts`,
       failOnStatusCode: false,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt))
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BEARER)
     });
   }
 
@@ -228,7 +227,7 @@ export class VhdaApi {
       method: 'PUT',
       url: `${ baseUrl }/pay_accounts/${ payAccountId }/default`,
       failOnStatusCode: false,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt))
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BEARER)
     });
   }
 
@@ -237,7 +236,7 @@ export class VhdaApi {
       method: 'DELETE',
       url: `${ baseUrl }/pay_accounts/${ payAccountId }`,
       failOnStatusCode: false,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt))
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BEARER)
     });
   }
 
@@ -246,8 +245,7 @@ export class VhdaApi {
       method: 'POST',
       url: `${ baseUrl }/bank_accounts`,
       failOnStatusCode: false,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE,
-        authenticationUtils.getAuthToken(jwt)),
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BEARER),
       body: bankAccountPayload
     });
 
@@ -258,8 +256,7 @@ export class VhdaApi {
       method: 'POST',
       url: `${ baseUrl }/card_accounts`,
       failOnStatusCode: false,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE,
-        authenticationUtils.getAuthToken(jwt)),
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BEARER),
       body: cardAccountPayload
     });
   }
@@ -269,7 +266,7 @@ export class VhdaApi {
       method: 'GET',
       url: `${ baseUrl }/recurring_payments`,
       failOnStatusCode: false,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt))
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BEARER)
     });
   }
 
@@ -278,8 +275,7 @@ export class VhdaApi {
       method: 'POST',
       url: `${ baseUrl }/recurring_payments`,
       failOnStatusCode: false,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE,
-        authenticationUtils.getAuthToken(jwt)),
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BEARER),
       body: recurringPaymentPayload
     });
   }
@@ -289,8 +285,7 @@ export class VhdaApi {
       method: 'PATCH',
       url: `${ baseUrl }/recurring_payments/${ recurringPaymentId }`,
       failOnStatusCode: false,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE,
-        authenticationUtils.getAuthToken(jwt)),
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BEARER),
       body: recurringPaymentPayload
     });
   }
@@ -300,7 +295,7 @@ export class VhdaApi {
       method: 'PATCH',
       url: `${ baseUrl }/recurring_payments/${ recurringPaymentId }`,
       failOnStatusCode: false,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, authenticationUtils.getAuthToken(jwt))
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BEARER)
     });
   }
 }

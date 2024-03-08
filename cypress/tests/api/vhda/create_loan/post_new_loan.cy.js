@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { VhdaApi } from '../../../../support/api_objects/vhda/vhda';
+import { VhdaApi } from '../../../../support/api_objects/vhda/vhda_api';
 
 describe('vhda: Create Loan', function () {
   const vhdaApi = new VhdaApi();

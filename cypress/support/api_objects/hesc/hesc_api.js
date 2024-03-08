@@ -1,22 +1,19 @@
-import { AuthenticationUtils } from '../../utils/authentication_utils';
+import { AUTHENTICATION_TYPE } from '../../../config/constants';
+import { MockLoanServiceApi } from '../mock_loan_service/mock_loan_service_api';
 
-const AUTHENTICATION_TYPE = 'basic';
-
-const authenticationUtils = new AuthenticationUtils();
-const baseUrl = Cypress.config().hesc.baseUrl;
+const baseUrl = `${ Cypress.config().hesc.baseUrl }/api/v1/agent`;
 
 /**
  * HTTPS operations for HESC API
  */
-export class HescApi {
-  cypressEnv = Cypress.env('hesc');
+export class HescApi extends MockLoanServiceApi {
 
   getAccountHolders() {
     return cy.request({
       method: 'GET',
       url: `${ baseUrl }/account_holders`,
       failOnStatusCode: false,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BASIC)
     });
   }
 
@@ -25,7 +22,7 @@ export class HescApi {
       method: 'GET',
       url: `${ baseUrl }/account_holders/${ accountHolderId }/payments`,
       failOnStatusCode: false,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BASIC)
     });
   }
 
@@ -34,7 +31,7 @@ export class HescApi {
       method: 'GET',
       url: `${ baseUrl }/account_holders/${ accountHolderId }/pay_accounts`,
       failOnStatusCode: false,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BASIC)
     });
   }
 
@@ -44,7 +41,7 @@ export class HescApi {
       url: `${ baseUrl }/account_holders/${ accountHolderId }/bank_accounts`,
       failOnStatusCode: false,
       body: payload,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BASIC)
     });
   }
 
@@ -54,7 +51,7 @@ export class HescApi {
       url: `${ baseUrl }/account_holders`,
       failOnStatusCode: false,
       body: payload,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BASIC)
     });
   }
 
@@ -64,7 +61,7 @@ export class HescApi {
       url: `${ baseUrl }/account_holders/${ accountHolderId }/cards`,
       failOnStatusCode: false,
       body: payload,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BASIC)
     });
   }
 
@@ -74,7 +71,7 @@ export class HescApi {
       url: `${ baseUrl }/account_holders/${ accountHolderId }/loan_payments`,
       failOnStatusCode: false,
       body: payload,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BASIC)
     });
   }
 
@@ -84,7 +81,7 @@ export class HescApi {
       url: `${ baseUrl }/account_holders/${ accountHolderId }/loan_payments/with_pay_account`,
       failOnStatusCode: false,
       body: payload,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BASIC)
     });
   }
 }

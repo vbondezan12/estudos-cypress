@@ -1,14 +1,10 @@
+import { AUTHENTICATION_TYPE } from '../../../config/constants';
 import { UsbPaymentPayloadGenerator } from '../../payload_generators/us_bank/us_bank_payment_payload_generator';
-import { AuthenticationUtils } from '../../utils/authentication_utils';
+import { MockLoanServiceApi } from '../mock_loan_service/mock_loan_service_api';
 
-const AUTHENTICATION_TYPE = 'basic';
+const baseUrl = `${ Cypress.config().usBank.baseUrl }/ivr/v1`;
 
-const authenticationUtils = new AuthenticationUtils();
-const baseUrl = Cypress.config().usBank.baseUrl;
-
-export class UsBankApi {
-  cypressEnv = Cypress.env('usBank');
-
+export class UsBankApi extends MockLoanServiceApi {
   payloadGenerator = new UsbPaymentPayloadGenerator();
 
   createPayment(body) {
@@ -17,7 +13,7 @@ export class UsBankApi {
       url: `${ baseUrl }/payments`,
       failOnStatusCode: false,
       body: body,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BASIC)
     });
   }
 
@@ -27,7 +23,7 @@ export class UsBankApi {
       url: `${ baseUrl }/payments/get_bank_info`,
       failOnStatusCode: false,
       qs: queryParameters,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BASIC)
     });
   }
 
@@ -37,7 +33,7 @@ export class UsBankApi {
       url: `${ baseUrl }/accounts`,
       failOnStatusCode: false,
       qs: queryParameters,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BASIC)
     });
   }
 
@@ -47,7 +43,7 @@ export class UsBankApi {
       url: `${ baseUrl }/pay_accounts`,
       failOnStatusCode: false,
       qs: queryParameters,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BASIC)
     });
   }
 
@@ -57,7 +53,7 @@ export class UsBankApi {
       url: `${ baseUrl }/payments`,
       failOnStatusCode: false,
       qs: queryParameters,
-      headers: authenticationUtils.updateHeaderAuthorization(AUTHENTICATION_TYPE, this.cypressEnv.authorization)
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BASIC)
     });
   }
 }

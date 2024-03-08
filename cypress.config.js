@@ -1,49 +1,45 @@
 const { defineConfig } = require('cypress');
+const path = require('path');
 
 module.exports = defineConfig(
   {
     projectId: 'lift-cypress-automation',
     reporter: 'cypress-mochawesome-reporter',
-    video: false,
-    retries: 0,
-    reporterOptions: {
-      charts: true,
-      embeddedScreenshots: false,
-      inlineAssets: true,
-      saveAllAttempts: false,
-      ignoreVideos: true,
-      videoOnFailOnly: true,
-      quiet: false,
-      debug: false
-    },
     e2e: {
-      setupNodeEvents(on) {
-        require('cypress-mochawesome-reporter/plugin')(on);
-      },
-      specPattern: 'cypress/tests/**/*.{js,jsx,ts,tsx}',
+      specPattern: 'cypress/tests/**/*.cy.{js,jsx,ts,tsx}',
       mockLoanService: {
         baseUrl: 'https://repay-mock-loan-service.herokuapp.com/api/v1'
       },
-      lift: {
-        baseUrl: 'https://lift-qa.herokuapp.com'
-      },
-      hesc: {
-        baseUrl: 'TODO'
-      },
-      launch: {
-        baseUrl: 'TODO'
-      },
-      selene: {
-        baseUrl: 'https://selene-qa-1771372db722.herokuapp.com/api/v1'
-      },
-      serviceMac: {
-        baseUrl: 'TODO'
-      },
-      usBank: {
-        baseUrl: 'TODO'
-      },
-      vhda: {
-        baseUrl: 'https://msp-qa.herokuapp.com'
+      setupNodeEvents(on, config) {
+        require('cypress-mochawesome-reporter/plugin')(on);
+
+        // Find the environment.settings file related to the current environment
+        const environment = config.env.env || 'qa';
+        const environmentSettingsPath = path.resolve('cypress', 'config', 'env', `${ environment }.settings.json`);
+        const environmentSettings = require(environmentSettingsPath);
+
+        // Find the environment variables from cypress.env.json related to the environment
+        let cypressEnvVariables;
+        switch (environment) {
+        case 'development':
+          cypressEnvVariables = config.env.development;
+          break;
+        case 'uat':
+          cypressEnvVariables = config.env.uat;
+          break;
+        default:
+          cypressEnvVariables = config.env.qa;
+          break;
+        }
+
+        // Merge all the settings into default config
+        config = {
+          ...config,
+          ...environmentSettings,
+          ...cypressEnvVariables
+        };
+
+        return config;
       }
     }
   });

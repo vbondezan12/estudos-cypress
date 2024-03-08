@@ -1,28 +1,32 @@
 import { faker } from '@faker-js/faker';
 import moment from 'moment';
+import { CLIENT } from '../../../config/constants';
+import { MockLoanServicePayloadGenerator } from '../mock_loan_service/mock_loan_service_payload_generator';
 
 const randomMonth = faker.number.int({ min: 1, max: 12 });
 const randomDay = faker.number.int({ min: 1, max: 30 });
 const randomDate = moment(
   `2024-${ randomMonth.toString().padStart(2, '0') }-${ randomDay.toString().padStart(2, '0') }`).format('YYYY-MM-DD');
 
-export class SelenePayloadGenerator {
-  generatePayment() {
+export class SelenePayloadGenerator extends MockLoanServicePayloadGenerator {
+
+
+  generatePayment(loan) {
     let jsonData = {
       payment: {
         payment_amount: `${ `${ faker.number.int({ min: 0, max: 100 }) }` }`,
-        escrow: '0',
-        nsf_fees_paid: '0',
+        escrow: faker.finance.amount(),
+        nsf_fees_paid: faker.finance.amount(),
         escrow_shortage: 'false',
-        other_fees_paid: '0',
-        apply_towards_principal: '0',
-        late_fees_paid: '0',
+        other_fees_paid: faker.finance.amount(),
+        apply_towards_principal: faker.finance.amount(),
+        late_fees_paid: faker.finance.amount(),
         total_amount_due: null,
         payment_array: [],
-        post_date: randomDate,
+        post_date: faker.date.soon(),
         pay_account_id: '',
-        loan_number: '2004984585',
-        ssn: '0762',
+        loan_number: loan.loan_number,
+        ssn: loan.last_4_ssn,
         pay_account: {
           payment_type_id: '1',
           account_number: '844545434',
@@ -37,10 +41,14 @@ export class SelenePayloadGenerator {
       },
       request_key: '9020268'
     };
-    jsonData.payment.total_amount_due = `${ Number(jsonData.payment.payment_amount) + Number(
-      jsonData.payment.escrow) + Number(jsonData.payment.nsf_fees_paid) + Number(
-      jsonData.payment.other_fees_paid) + Number(jsonData.payment.late_fees_paid) + Number(
-      jsonData.payment.apply_towards_principal) }`;
+
+    jsonData.payment.total_amount_due = `${ Number(jsonData.payment.payment_amount) +
+    Number(jsonData.payment.escrow) +
+    Number(jsonData.payment.nsf_fees_paid) +
+    Number(jsonData.payment.other_fees_paid) +
+    Number(jsonData.payment.late_fees_paid) +
+    Number(jsonData.payment.apply_towards_principal) }`;
+
     jsonData.payment.payment_array = [ jsonData.payment.total_amount_due ];
 
     return jsonData;
@@ -62,5 +70,14 @@ export class SelenePayloadGenerator {
         zip: zip
       }
     };
+  }
+
+  /**
+   * Generate a JSON payload for fetching test credentials
+   * @param loanStatus Status of the loan
+   * @returns {{loan_status: *, environment: *, client_id: *}}
+   */
+  generateTestCredentialsLookupPayload(loanStatus) {
+    return super.generateTestCredentialsLookupPayload(CLIENT.SELENE, loanStatus);
   }
 }

@@ -1,9 +1,11 @@
-const baseUrl = Cypress.config().mockLoanService.baseUrl;
+import { AuthenticationUtils } from '../../utils/authentication_utils';
+
+const baseUrl = `${ Cypress.config().mockLoanService.baseUrl }/api/v1`;
 
 /**
  * API for Mock Loan Service
  */
-export class MockLoanServiceApi {
+export class MockLoanServiceApi extends AuthenticationUtils{
 
   /**
    * Retrieves a Selene loan using the provided request body.
@@ -15,7 +17,7 @@ export class MockLoanServiceApi {
     return cy.request({
       method: 'GET',
       url: `${ baseUrl }/selene/lookup`,
-      failOnStatusCode: false,
+      failOnStatusCode: true,
       body: body
     });
   }
@@ -30,7 +32,36 @@ export class MockLoanServiceApi {
     return cy.request({
       method: 'GET',
       url: `${ baseUrl }/msp/lookup`,
-      failOnStatusCode: false,
+      failOnStatusCode: true,
+      body: body
+    });
+  }
+
+  /**
+   * Get an array of Test Loans
+   * @param body The request body
+   * @returns {Cypress.Chainable<Cypress.Response<any>>}
+   */
+  getTestLoans(body) {
+    return cy.request({
+      method: 'GET',
+      url: `${ baseUrl }/test/lookup`,
+      failOnStatusCode: true,
+      body: body
+    });
+  }
+
+  /**
+   * Fetch all Microbilt account with matching message
+   * If no message match, an array of all Microbilt accounts will be returned
+   * @param body The request body
+   * @returns {Cypress.Chainable<Cypress.Response<any>>}
+   */
+  getMicrobiltAccounts(body) {
+    return cy.request({
+      method: 'GET',
+      url: `${ baseUrl }/test/microbilt`,
+      failOnStatusCode: true,
       body: body
     });
   }
