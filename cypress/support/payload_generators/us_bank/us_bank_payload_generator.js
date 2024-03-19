@@ -1,7 +1,24 @@
+import { CLIENT } from '../../../config/constants';
+import { MockLoanServicePayloadGenerator } from '../mock_loan_service/mock_loan_service_payload_generator';
+
 const { faker } = require('@faker-js/faker');
 const moment = require('moment');
 
-export class UsbPaymentPayloadGenerator {
+export class UsBankPayloadGenerator extends MockLoanServicePayloadGenerator {
+
+  generateGetAccountsPayload(clientId, loanNumber) {
+    return {
+      client_id: clientId,
+      loan_number: loanNumber
+    };
+  }
+
+  generateBankInfoPayload(clientId, routingNumber) {
+    return {
+      client_id: clientId,
+      routing_number: routingNumber
+    };
+  }
 
   generateData(clientId, loanNumber) {
     return {
@@ -13,7 +30,7 @@ export class UsbPaymentPayloadGenerator {
   }
 
   generateAttributes(clientId, loanNumber) {
-    let attributes = {
+    return {
       clientId: clientId,
       loanNumber: loanNumber,
       post_date: moment().format('YYYY-MM-DD'),
@@ -45,7 +62,14 @@ export class UsbPaymentPayloadGenerator {
       address1: faker.location.streetAddress(true),
       zip: faker.location.zipCode()
     };
+  }
 
-    return attributes;
+  /**
+   * Generate a JSON payload for fetching test credentials
+   * @param loanStatus Status of the loan
+   * @returns {{loan_status: *, environment: *, client_id: *}}
+   */
+  generateTestCredentialsLookupPayload(loanStatus) {
+    return super.generateTestCredentialsLookupPayload(CLIENT.US_BANK, loanStatus);
   }
 }

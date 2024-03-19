@@ -14,11 +14,11 @@ export class AuthenticationUtils {
     switch (authenticationType) {
     case AUTHENTICATION_TYPE.BASIC:
       this.headers = defaultHeader;
-      this.headers.Authorization = `${ authenticationType } ${ Cypress.env().basicToken }`;
+      this.headers.Authorization = `${ authenticationType } ${ Cypress.config().basicToken }`;
       break;
     case AUTHENTICATION_TYPE.BEARER:
       this.headers = defaultHeader;
-      this.headers.Authorization = `${ authenticationType } ${ Cypress.env().bearerToken }`;
+      this.headers.Authorization = `${ authenticationType } ${ Cypress.config().bearerToken }`;
       break;
     case AUTHENTICATION_TYPE.X_AUTH:
       this.headers = xAuthTokenHeader;
