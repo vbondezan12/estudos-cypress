@@ -23,7 +23,14 @@ export const AUTHENTICATION_TYPE = {
   X_AUTH: 'x-auth'
 };
 
+export const BANK_ACCOUNT_TYPE = {
+  SAVINGS_PERSONAL: 'savings-personal',
+  CHECKING_PERSONAL: 'checking-personal',
+  CHECKING_BUSINESS: 'checking-business',
+  SAVINGS_BUSINESS: 'savings-business'
+};
+
 export const MICROBILT_MESSAGE = {
   VALID: 'valid',
   DRIVERS_LICENSED_REQUIRED: 'Drivers license required'
-};
+}
