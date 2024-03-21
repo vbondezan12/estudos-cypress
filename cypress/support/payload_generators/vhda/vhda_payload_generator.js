@@ -29,11 +29,11 @@ export class VhdaPayloadGenerator extends MockLoanServicePayloadGenerator {
     };
   }
 
-  quickPay(loanNumber, zipCode, SSN) {
+  quickPay(loanNumber, zipCode, ssn) {
     let authorization = {
       loan_number: loanNumber,
       zip: zipCode,
-      ssn: SSN
+      ssn: ssn
     };
 
     return {

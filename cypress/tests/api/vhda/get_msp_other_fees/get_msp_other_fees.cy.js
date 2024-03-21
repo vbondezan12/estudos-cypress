@@ -18,6 +18,7 @@ describe('vhda: GetMSPOtherFees', function () {
     const payload = vhdaApi.payloadGenerator.quickPay(testCredential.loan_number, testCredential.zip_code,
       testCredential.last_4_ssn);
     vhdaApi.createQuickPayJwt(payload);
+
     vhdaApi.getMspOtherFees().then((response) => {
       expect(response.status).to.eq(200);
       expect(response.body).to.not.equal(null);
@@ -28,6 +29,7 @@ describe('vhda: GetMSPOtherFees', function () {
     const Credentials = vhdaApi.payloadGenerator.quickPay(faker.finance.accountNumber(8),
       faker.number.int(5), faker.number.int(4));
     vhdaApi.createQuickPayJwt(Credentials);
+
     vhdaApi.getMspOtherFees().then((response) => {
       expect(response.status).to.eq(401);
     });

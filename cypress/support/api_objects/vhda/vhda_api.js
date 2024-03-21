@@ -14,7 +14,7 @@ export class VhdaApi extends MockLoanServiceApi {
       failOnStatusCode: false,
       body: body
     }).then((response) => {
-      Cypress.env({
+      Cypress.config({
         bearerToken: response.body.jwt
       });
     });
@@ -27,7 +27,7 @@ export class VhdaApi extends MockLoanServiceApi {
       failOnStatusCode: false,
       body: body
     }).then((response) => {
-      Cypress.env({
+      Cypress.config({
         bearerToken: response.body.jwt
       });
     });
