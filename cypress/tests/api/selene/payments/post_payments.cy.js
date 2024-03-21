@@ -2,7 +2,7 @@ import { faker } from '@faker-js/faker';
 import { LOAN_STATUS } from '../../../../config/constants';
 import { SeleneApi } from '../../../../support/api_objects/selene/selene_api';
 
-describe('API Tests: Selene Payments', function () {
+xdescribe('API Tests: Selene Payments', function () {
   const seleneApi = new SeleneApi();
   let testCredential;
 

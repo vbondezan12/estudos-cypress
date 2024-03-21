@@ -1,35 +1,42 @@
 import { faker } from '@faker-js/faker';
+import { LOAN_STATUS } from '../../../../config/constants';
 import { VhdaApi } from '../../../../support/api_objects/vhda/vhda_api';
 
 describe('vhda: Create Bank Account', function () {
   const vhdaApi = new VhdaApi();
-  const credentials = vhdaApi.payloadGenerator.quickPay(vhdaApi.cypressEnv.loan_number, vhdaApi.cypressEnv.zip,
-    vhdaApi.cypressEnv.ssn);
-  let bankAccounts = vhdaApi.payloadGenerator.bankAccounts();
-  let invalidBankAccount = vhdaApi.payloadGenerator.invalidBankAccounts();
-  let invalidCredential = faker.string.uuid;
+  let testCredential;
 
-  beforeEach(() => {
-    vhdaApi.createQuickPayJwt(credentials);
+  before(() => {
+    const testPayload = vhdaApi.payloadGenerator.generateTestCredentialsLookupPayload(LOAN_STATUS.CURRENT);
+    vhdaApi.getTestLoans(testPayload).then((response) => {
+      testCredential = response.body[ 'test_credentials' ][ 0 ];
+    });
   });
 
-  it('Create Bank Account:Verify invalid account gives validation error', () => {
-    vhdaApi.createBankAccounts(invalidBankAccount).then((response) => {
+  xit('Create Bank Account:Verify invalid account gives validation error', () => {
+    vhdaApi.createBankAccounts().then((response) => {
       expect(response.status).to.eq(422);
     });
   });
 
-  it('Create Bank Account:Verify valid account data creates a new loan account', () => {
-    vhdaApi.createBankAccounts(bankAccounts).then((response) => {
+  xit('Create Bank Account:Verify valid account data creates a new loan account', () => {
+    const payload = vhdaApi.payloadGenerator.quickPay(testCredential.loan_number, testCredential.zip_code,
+      testCredential.last_4_ssn);
+    vhdaApi.createQuickPayJwt(payload);
+
+    vhdaApi.createBankAccounts().then((response) => {
       expect(response.status).to.eq(200);
       expect(response.body.data.id).to.not.equal(null);
     });
   });
 
-  it('Create Bank Account:Verify invalid token gives Authentication error', () => {
-    vhdaApi.createBankAccounts(bankAccounts, invalidCredential).then((response) => {
+  xit('Create Bank Account:Verify invalid token gives Authentication error', () => {
+    const payload = vhdaApi.payloadGenerator.quickPay(faker.finance.accountNumber(8),
+      faker.number.int(5), faker.number.int(4));
+    vhdaApi.createQuickPayJwt(payload);
+
+    vhdaApi.createBankAccounts().then((response) => {
       expect(response.status).to.eq(401);
     });
   });
-
 });

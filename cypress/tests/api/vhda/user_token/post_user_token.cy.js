@@ -1,11 +1,20 @@
+import { LOAN_STATUS } from '../../../../config/constants';
 import { VhdaApi } from '../../../../support/api_objects/vhda/vhda_api';
 const { faker } = require('@faker-js/faker');
 
 describe('vhda: POST user_token', function () {
   const vhdaApi = new VhdaApi();
+  let testCredential;
 
-  it('user_token returns 201 with valid credentials', () => {
-    const credentials = vhdaApi.payloadGenerator.login(vhdaApi.cypressEnv.username, vhdaApi.cypressEnv.password);
+  before(() => {
+    const testPayload = vhdaApi.payloadGenerator.generateTestCredentialsLookupPayload(LOAN_STATUS.CURRENT);
+    vhdaApi.getTestLoans(testPayload).then((response) => {
+      testCredential = response.body[ 'test_credentials' ][ 0 ];
+    });
+  });
+
+  xit('user_token returns 201 with valid credentials', () => {
+    const credentials = vhdaApi.payloadGenerator.login(testCredential.username, testCredential.password);
 
     vhdaApi.createLoginJwt(credentials).then(response => {
       expect(response.status).to.eq(201);

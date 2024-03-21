@@ -1,4 +1,5 @@
 import { AUTHENTICATION_TYPE } from '../../../config/constants';
+import { HescPaymentPayloadGenerator } from '../../payload_generators/hesc/hesc_payment_payload_generator';
 import { MockLoanServiceApi } from '../mock_loan_service/mock_loan_service_api';
 
 const baseUrl = `${ Cypress.config().hesc.baseUrl }/api/v1/agent`;
@@ -7,6 +8,8 @@ const baseUrl = `${ Cypress.config().hesc.baseUrl }/api/v1/agent`;
  * HTTPS operations for HESC API
  */
 export class HescApi extends MockLoanServiceApi {
+
+  payloadGenerator = new HescPaymentPayloadGenerator();
 
   getAccountHolders() {
     return cy.request({

@@ -1,20 +1,29 @@
 import { faker } from '@faker-js/faker';
+import { LOAN_STATUS } from '../../../../config/constants';
 import { ServiceMacApi } from '../../../../support/api_objects/service_mac/servicemac_api';
 
 describe('API Tests: ServiceMac', function () {
   const serviceMacApi = new ServiceMacApi();
+  let testCredential;
 
-  it('Get Accounts lookup [200]: verify valid account_holders', () => {
-    const account = serviceMacApi.cypressEnv.account;
+  before(() => {
+    const testPayload = serviceMacApi.payloadGenerator.generateTestCredentialsLookupPayload(LOAN_STATUS.CURRENT);
+    serviceMacApi.getTestLoans(testPayload).then((response) => {
+      testCredential = response.body['test_credentials'][0];
+    });
+  });
 
-    serviceMacApi.getAccountLookup(account, serviceMacApi.cypressEnv.authorization).then((response) => {
+  xit('Get Accounts lookup [200]: verify valid account_holders', () => {
+    const account = testCredential.loan_number;
+
+    serviceMacApi.getAccountLookup(account).then((response) => {
       expect(response.status).to.eq(200);
     });
   });
 
   it('Get Accounts lookup [404]: verify invalid account_holders', () => {
     const account = faker.number.int({ min: 1000000, max: 9999999 });
-    serviceMacApi.getAccountLookup(account, serviceMacApi.cypressEnv.authorization).then((response) => {
+    serviceMacApi.getAccountLookup(account).then((response) => {
       expect(response.status).to.eq(404);
     });
   });

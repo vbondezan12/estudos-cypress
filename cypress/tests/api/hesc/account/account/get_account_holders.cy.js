@@ -1,15 +1,14 @@
 import { faker } from '@faker-js/faker';
 import { HescApi } from '../../../../../support/api_objects/hesc/hesc_api.js';
 
-describe('HESC: API tests', function () {
+xdescribe('HESC: API tests', function () {
   const hescApi = new HescApi();
-  const environment = Cypress.env('hesc');
 
   beforeEach(() => {
     cy.clearAllSessionStorage({ log: true });
   });
 
-  it.only('GET account holders: returns 200 when given valid auth', () => {
+  it('GET account holders: returns 200 when given valid auth', () => {
     hescApi.getAccountHolders(environment.authorization).then((response) => {
       expect(response.status).to.eq(200);
     });

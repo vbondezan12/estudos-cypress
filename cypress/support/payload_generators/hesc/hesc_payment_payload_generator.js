@@ -1,6 +1,8 @@
+import { MockLoanServicePayloadGenerator } from '../mock_loan_service/mock_loan_service_payload_generator';
+
 const { faker } = require('@faker-js/faker');
 
-export class HescPaymentPayloadGenerator {
+export class HescPaymentPayloadGenerator extends MockLoanServicePayloadGenerator {
 
   generateData(accountNumber, routingNumber) {
     return {

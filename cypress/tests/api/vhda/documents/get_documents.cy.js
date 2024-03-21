@@ -18,15 +18,17 @@ describe('vhda: GetDocuments', function () {
     const payload = vhdaApi.payloadGenerator.quickPay(testCredential.loan_number, testCredential.zip_code,
       testCredential.last_4_ssn);
     vhdaApi.createQuickPayJwt(payload);
+
     vhdaApi.getDocuments().then((response) => {
       expect(response.status).to.eq(200);
     });
   });
 
   it('get documents returns 401 with invalid credentials', () => {
-    const Credentials = vhdaApi.payloadGenerator.quickPay(faker.finance.accountNumber(8),
+    const payload = vhdaApi.payloadGenerator.quickPay(faker.finance.accountNumber(8),
       faker.number.int(5), faker.number.int(4));
-    vhdaApi.createQuickPayJwt(Credentials);
+    vhdaApi.createQuickPayJwt(payload);
+
     vhdaApi.getDocuments().then((response) => {
       expect(response.status).to.eq(401);
     });

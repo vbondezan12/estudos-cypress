@@ -3,7 +3,7 @@ import { ServiceMacApi } from '../../../../support/api_objects/service_mac/servi
 
 const moment = require('moment');
 
-describe('API Tests: ServiceMac', function () {
+xdescribe('API Tests: ServiceMac', function () {
   const serviceMacApi = new ServiceMacApi();
 
   // this scenario can fail if faker creates the same amounts

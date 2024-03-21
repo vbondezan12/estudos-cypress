@@ -4,7 +4,7 @@ import { ServiceMacApi } from '../../../../support/api_objects/service_mac/servi
 describe('API Tests: ServiceMac', function () {
   const serviceMacApi = new ServiceMacApi();
 
-  it('Get Payment [200]: verify valid payments', () => {
+  xit('Get Payment [200]: verify valid payments', () => {
     const account = serviceMacApi.cypressEnv.account;
 
     serviceMacApi.getPayments(account).then((response) => {

@@ -26,9 +26,9 @@ describe('vhda: GetMSPOtherFees', function () {
   });
 
   it('get MSP other Fees returns 401 with invalid credentials', () => {
-    const Credentials = vhdaApi.payloadGenerator.quickPay(faker.finance.accountNumber(8),
+    const payload = vhdaApi.payloadGenerator.quickPay(faker.finance.accountNumber(8),
       faker.number.int(5), faker.number.int(4));
-    vhdaApi.createQuickPayJwt(Credentials);
+    vhdaApi.createQuickPayJwt(payload);
 
     vhdaApi.getMspOtherFees().then((response) => {
       expect(response.status).to.eq(401);

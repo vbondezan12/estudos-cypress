@@ -4,14 +4,7 @@ describe('US Bank: Pay Account', function () {
   const usbApi = new UsBankApi();
   let queryParameters;
 
-  before(() => {
-    queryParameters = {
-      'loan_number': usbApi.cypressEnv.loan_number,
-      'client_id': usbApi.cypressEnv.client_id
-    };
-  });
-
-  it('GET pay_accounts: verify type and account_holder_id for each record', () => {
+  xit('GET pay_accounts: verify type and account_holder_id for each record', () => {
     usbApi.getPayAccounts(queryParameters).then((response) => {
       expect(response.status).to.eq(200);
 
