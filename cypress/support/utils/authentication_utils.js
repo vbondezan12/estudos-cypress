@@ -12,18 +12,18 @@ export class AuthenticationUtils {
    */
   updateHeaderAuthorization(authenticationType) {
     switch (authenticationType) {
-    case AUTHENTICATION_TYPE.BASIC:
-      this.headers = defaultHeader;
-      this.headers.Authorization = `${ authenticationType } ${ Cypress.config().basicToken }`;
-      break;
-    case AUTHENTICATION_TYPE.BEARER:
-      this.headers = defaultHeader;
-      this.headers.Authorization = `${ authenticationType } ${ Cypress.config().bearerToken }`;
-      break;
-    case AUTHENTICATION_TYPE.X_AUTH:
-      this.headers = xAuthTokenHeader;
-      this.headers['x-auth-token-headers'] = Cypress.env().xAuthToken;
-      break;
+      case AUTHENTICATION_TYPE.BASIC:
+        this.headers = defaultHeader;
+        this.headers.Authorization = `${ authenticationType } ${ Cypress.config().basicToken }`;
+        break;
+      case AUTHENTICATION_TYPE.BEARER:
+        this.headers = defaultHeader;
+        this.headers.Authorization = `${ authenticationType } ${ Cypress.config().bearerToken }`;
+        break;
+      case AUTHENTICATION_TYPE.X_AUTH:
+        this.headers = xAuthTokenHeader;
+        this.headers[ 'x-auth-token-headers' ] = Cypress.env().xAuthToken;
+        break;
     }
 
     return this.headers;

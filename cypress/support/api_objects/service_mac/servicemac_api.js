@@ -16,12 +16,12 @@ export class ServiceMacApi extends MockLoanServiceApi {
     });
   }
 
-  getAccountHolder(queryParameters = {}) {
+  getAccountHolder(body) {
     return cy.request({
       method: 'GET',
       url: `${ baseUrl }/account_holders`,
       failOnStatusCode: false,
-      qs: queryParameters,
+      body: body,
       headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BASIC)
     });
   }

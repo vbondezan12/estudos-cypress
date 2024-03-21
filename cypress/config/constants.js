@@ -1,6 +1,14 @@
 export const CLIENT = {
+  CENLAR: 365,
+  MORTGAGE_SERVICING_SOLUTIONS: 969,
+  PENN_FEDERAL_SAVINGS_BANK_QL: 554,
+  PENN_FEDERAL_SAVINGS_BANK_QV: 563,
+  PHH: 5127,
+  RUOFF: 3995,
   SELENE: 4595,
+  SERVICE_MAC: 5409,
   US_BANK: 5426,
+  THRIVE: 5748,
   VHDA: 863
 };
 
@@ -15,7 +23,7 @@ export const AUTHENTICATION_TYPE = {
   X_AUTH: 'x-auth'
 };
 
-export const MICROBILT_MESSAGE ={
+export const MICROBILT_MESSAGE = {
   VALID: 'valid',
   DRIVERS_LICENSED_REQUIRED: 'Drivers license required'
-}
+};

@@ -4,7 +4,7 @@ import { ServiceMacApi } from '../../../../support/api_objects/service_mac/servi
 describe('API Tests: ServiceMac', function () {
   const serviceMacApi = new ServiceMacApi();
 
-  it('Post Account Holder [200]: post valid account holder', () => {
+  it('Post Account Holder [200]: post valid account_holders holder', () => {
 
     const loanNumber = serviceMacApi.cypressEnv.loan_number;
     let payload = serviceMacApi.payloadGenerator.generateData('account_holder', loanNumber);
@@ -15,7 +15,7 @@ describe('API Tests: ServiceMac', function () {
     });
   });
 
-  it('Post Account Holder [404]: post invalid account holder', () => {
+  it('Post Account Holder [404]: post invalid account_holders holder', () => {
     const account = faker.number.int({ min: 10000000000, max: 99999999999 });
     const payload = serviceMacApi.payloadGenerator.generateData('account_holder', account);
 

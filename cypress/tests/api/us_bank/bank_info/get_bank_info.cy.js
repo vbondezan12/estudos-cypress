@@ -1,8 +1,6 @@
 import { MICROBILT_MESSAGE } from '../../../../config/constants';
 import { UsBankApi } from '../../../../support/api_objects/us_bank/us_bank_api';
 
-const { faker } = require('@faker-js/faker');
-
 describe('US Bank: Bank Info', function () {
   const usBankApi = new UsBankApi();
   let microbiltAccount;

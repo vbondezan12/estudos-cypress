@@ -5,17 +5,11 @@ import { SeleneApi } from '../../../../support/api_objects/selene/selene_api';
 describe('API Tests: Selene Payments', function () {
   const seleneApi = new SeleneApi();
   let testCredential;
-  let microbiltAccount;
 
   before(() => {
     const testPayload = seleneApi.payloadGenerator.generateTestCredentialsLookupPayload(LOAN_STATUS.CURRENT);
     seleneApi.getTestLoans(testPayload).then((response) => {
       testCredential = response.body['test_credentials'][0];
-    });
-
-    const payload = seleneApi.payloadGenerator.generateMicrobiltPayload('valid');
-    seleneApi.getMicrobiltAccounts(payload).then((response) => {
-      microbiltAccount = response.body[0];
     });
   });
 

@@ -4,7 +4,7 @@ import { ServiceMacApi } from '../../../../support/api_objects/service_mac/servi
 describe('API Tests: ServiceMac', function () {
   const serviceMacApi = new ServiceMacApi();
 
-  it('Get Accounts lookup [200]: verify valid account', () => {
+  it('Get Accounts lookup [200]: verify valid account_holders', () => {
     const account = serviceMacApi.cypressEnv.account;
 
     serviceMacApi.getAccountLookup(account, serviceMacApi.cypressEnv.authorization).then((response) => {
@@ -12,7 +12,7 @@ describe('API Tests: ServiceMac', function () {
     });
   });
 
-  it('Get Accounts lookup [404]: verify invalid account', () => {
+  it('Get Accounts lookup [404]: verify invalid account_holders', () => {
     const account = faker.number.int({ min: 1000000, max: 9999999 });
     serviceMacApi.getAccountLookup(account, serviceMacApi.cypressEnv.authorization).then((response) => {
       expect(response.status).to.eq(404);

@@ -1,27 +1,35 @@
+import { MICROBILT_MESSAGE } from '../../../../config/constants';
 import { ServiceMacApi } from '../../../../support/api_objects/service_mac/servicemac_api';
-import { faker } from '@faker-js/faker';
 
-describe('API Tests: ServiceMac', function () {
+const { faker } = require('@faker-js/faker');
+
+describe('ServiceMac: bank_info', function () {
   const serviceMacApi = new ServiceMacApi();
+  let microbiltAccount;
 
-  it('Get Bank Info [200]: verify valid bank info', () => {
-    const queryParameters = {
-      'routing_number': serviceMacApi.cypressEnv.routing_number
-    };
-    serviceMacApi.getBankInfo(queryParameters).then((response) => {
+  before(() => {
+    const payload = serviceMacApi.payloadGenerator.generateMicrobiltPayload(MICROBILT_MESSAGE.VALID);
+    serviceMacApi.getMicrobiltAccounts(payload).then((response) => {
+      microbiltAccount = response.body[0];
+    });
+  });
+
+  it('Get Bank Info: verify valid bank returns correct data', () => {
+    const payload = serviceMacApi.payloadGenerator.generateBankInfoPayload(microbiltAccount.routing);
+
+    serviceMacApi.getBankInfo(payload).then((response) => {
       expect(response.status).to.eq(200);
-      expect(response.body.bank_name).to.eq('US BANK NA');
+      expect(response.body.bank_name).to.eq('TRUIST BANK');
       expect(response.body.found).to.eq(true);
     });
   });
 
-  it('Get Bank Info [404]: verify invalid bank info', () => {
-    const queryParameters = {
-      'routing_number': faker.number.int({ min: 100000, max: 999999 })
-    };
-    serviceMacApi.getBankInfo(queryParameters).then((response) => {
+  it('Invalid Bank Info: verify invalid bank', () => {
+    const payload = serviceMacApi.payloadGenerator.generateBankInfoPayload(faker.number.int(1));
+
+    serviceMacApi.getBankInfo(payload).then((response) => {
       expect(response.status).to.eq(200);
-      expect(response.body.bank_name).to.eq(null);
+      expect(response.body.bank_name).to.be.null;
       expect(response.body.found).to.eq(false);
     });
   });

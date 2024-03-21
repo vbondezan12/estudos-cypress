@@ -33,7 +33,7 @@ export class VhdaApi extends MockLoanServiceApi {
     });
   }
 
-  multifactor(body, jwt) {
+  multifactor(body) {
     return cy.request({
       method: 'POST',
       url: `${ baseUrl }/multifactor`,
@@ -43,7 +43,7 @@ export class VhdaApi extends MockLoanServiceApi {
     });
   }
 
-  resendMultifactor(jwt) {
+  resendMultifactor() {
     return cy.request({
       method: 'GET',
       url: `${ baseUrl }/multifactor/resend`,
@@ -52,7 +52,7 @@ export class VhdaApi extends MockLoanServiceApi {
     });
   }
 
-  quickPay(body, jwt) {
+  quickPay(body) {
     return cy.request({
       method: 'POST',
       url: `${ baseUrl }/quick_pay`,
@@ -62,7 +62,7 @@ export class VhdaApi extends MockLoanServiceApi {
     });
   }
 
-  register(body, jwt) {
+  register(body) {
     return cy.request({
       method: 'POST',
       url: `${ baseUrl }/users`,
@@ -72,7 +72,7 @@ export class VhdaApi extends MockLoanServiceApi {
     });
   }
 
-  resendRecoveryEmail(body, jwt) {
+  resendRecoveryEmail(body) {
     return cy.request({
       method: 'POST',
       url: `${ baseUrl }/users/send_recovery_email`,
@@ -82,7 +82,7 @@ export class VhdaApi extends MockLoanServiceApi {
     });
   }
 
-  getAccounts(jwt) {
+  getAccounts() {
     return cy.request({
       method: 'GET',
       url: `${ baseUrl }/accounts`,
@@ -91,7 +91,7 @@ export class VhdaApi extends MockLoanServiceApi {
     });
   }
 
-  switchLoan(loanNumber, jwt) {
+  switchLoan(loanNumber) {
     return cy.request({
       method: 'GET',
       url: `${ baseUrl }/account_details/${ loanNumber }`,
@@ -100,7 +100,7 @@ export class VhdaApi extends MockLoanServiceApi {
     });
   }
 
-  newLoan(body, jwt) {
+  newLoan(body) {
     return cy.request({
       method: 'POST',
       url: `${ baseUrl }/account_details`,
@@ -110,7 +110,7 @@ export class VhdaApi extends MockLoanServiceApi {
     });
   }
 
-  deleteLoan(loanNumber, jwt) {
+  deleteLoan(loanNumber) {
     return cy.request({
       method: 'DELETE',
       url: `${ baseUrl }/account_details/${ loanNumber }`,
@@ -119,7 +119,7 @@ export class VhdaApi extends MockLoanServiceApi {
     });
   }
 
-  getDocuments(jwt) {
+  getDocuments() {
     // ToDo: Are there other document types? Are there other query parameters for this?
     return cy.request({
       method: 'GET',
@@ -129,7 +129,7 @@ export class VhdaApi extends MockLoanServiceApi {
     });
   }
 
-  getEscrowShortage(jwt) {
+  getEscrowShortage() {
     return cy.request({
       method: 'GET',
       url: `${ baseUrl }/escrow_shortage`,
@@ -138,7 +138,7 @@ export class VhdaApi extends MockLoanServiceApi {
     });
   }
 
-  getNotificationPreferences(jwt) {
+  getNotificationPreferences() {
     return cy.request({
       method: 'GET',
       url: `${ baseUrl }/notification_preferences`,
@@ -147,7 +147,7 @@ export class VhdaApi extends MockLoanServiceApi {
     });
   }
 
-  updateNotificationPreferences(notificationPreferencesPayload, jwt) {
+  updateNotificationPreferences(notificationPreferencesPayload) {
     return cy.request({
       method: 'PATCH',
       url: `${ baseUrl }/notification_preferences`,
@@ -157,7 +157,7 @@ export class VhdaApi extends MockLoanServiceApi {
     });
   }
 
-  getPayments(jwt) {
+  getPayments() {
     return cy.request({
       method: 'GET',
       url: `${ baseUrl }/payments`,
@@ -166,16 +166,16 @@ export class VhdaApi extends MockLoanServiceApi {
     });
   }
 
-  getPayment(paymentId, jwt) {
+  getPayment(paymentId) {
     return cy.request({
       method: 'GET',
-      url: `${ baseUrl }/payments/paymentId`,
+      url: `${ baseUrl }/payments/${ paymentId }`,
       failOnStatusCode: false,
       headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BEARER)
     });
   }
 
-  getMspOtherFees(jwt) {
+  getMspOtherFees() {
     return cy.request({
       method: 'GET',
       url: `${ baseUrl }/payments/msp_other_fees`,
@@ -184,7 +184,7 @@ export class VhdaApi extends MockLoanServiceApi {
     });
   }
 
-  voidPayment(paymentId, jwt) {
+  voidPayment(paymentId) {
     return cy.request({
       method: 'PATCH',
       url: `${ baseUrl }/payments/${ paymentId }/void`,
@@ -193,7 +193,7 @@ export class VhdaApi extends MockLoanServiceApi {
     });
   }
 
-  createPayment(paymentPayload, jwt) {
+  createPayment(paymentPayload) {
     return cy.request({
       method: 'POST',
       url: `${ baseUrl }/payments`,
@@ -203,17 +203,17 @@ export class VhdaApi extends MockLoanServiceApi {
     });
   }
 
-  updatePassword(updatedPasswordPayload, jwt) {
+  updatePassword(updatedPasswordPayload) {
     return cy.request({
       method: 'PATCH',
       url: `${ baseUrl }/profiles`,
       failOnStatusCode: false,
-      headers: asuper.updateHeaderAuthorization(AUTHENTICATION_TYPE.BEARER),
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BEARER),
       body: updatedPasswordPayload
     });
   }
 
-  getPayAccounts(jwt) {
+  getPayAccounts() {
     return cy.request({
       method: 'GET',
       url: `${ baseUrl }/pay_accounts`,
@@ -222,7 +222,7 @@ export class VhdaApi extends MockLoanServiceApi {
     });
   }
 
-  setDefaultPayAccount(payAccountId, jwt) {
+  setDefaultPayAccount(payAccountId) {
     return cy.request({
       method: 'PUT',
       url: `${ baseUrl }/pay_accounts/${ payAccountId }/default`,
@@ -231,7 +231,7 @@ export class VhdaApi extends MockLoanServiceApi {
     });
   }
 
-  deletePayAccount(payAccountId, jwt) {
+  deletePayAccount(payAccountId) {
     return cy.request({
       method: 'DELETE',
       url: `${ baseUrl }/pay_accounts/${ payAccountId }`,
@@ -240,7 +240,7 @@ export class VhdaApi extends MockLoanServiceApi {
     });
   }
 
-  createBankAccounts(bankAccountPayload, jwt) {
+  createBankAccounts(bankAccountPayload) {
     return cy.request({
       method: 'POST',
       url: `${ baseUrl }/bank_accounts`,
@@ -251,7 +251,7 @@ export class VhdaApi extends MockLoanServiceApi {
 
   }
 
-  createCardAccounts(cardAccountPayload, jwt) {
+  createCardAccounts(cardAccountPayload) {
     return cy.request({
       method: 'POST',
       url: `${ baseUrl }/card_accounts`,
@@ -261,7 +261,7 @@ export class VhdaApi extends MockLoanServiceApi {
     });
   }
 
-  getRecurringPayments(jwt) {
+  getRecurringPayments() {
     return cy.request({
       method: 'GET',
       url: `${ baseUrl }/recurring_payments`,
@@ -270,7 +270,7 @@ export class VhdaApi extends MockLoanServiceApi {
     });
   }
 
-  createRecurringPayment(recurringPaymentPayload, jwt) {
+  createRecurringPayment(recurringPaymentPayload) {
     return cy.request({
       method: 'POST',
       url: `${ baseUrl }/recurring_payments`,
@@ -280,7 +280,7 @@ export class VhdaApi extends MockLoanServiceApi {
     });
   }
 
-  updateRecurringPayment(recurringPaymentPayload, recurringPaymentId, jwt) {
+  updateRecurringPayment(recurringPaymentPayload, recurringPaymentId) {
     return cy.request({
       method: 'PATCH',
       url: `${ baseUrl }/recurring_payments/${ recurringPaymentId }`,
@@ -290,7 +290,7 @@ export class VhdaApi extends MockLoanServiceApi {
     });
   }
 
-  deleteRecurringPayment(recurringPaymentId, jwt) {
+  deleteRecurringPayment(recurringPaymentId) {
     return cy.request({
       method: 'PATCH',
       url: `${ baseUrl }/recurring_payments/${ recurringPaymentId }`,

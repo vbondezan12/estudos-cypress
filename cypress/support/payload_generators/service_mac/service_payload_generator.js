@@ -1,11 +1,16 @@
+import { CLIENT } from '../../../config/constants';
+import { MockLoanServicePayloadGenerator } from '../mock_loan_service/mock_loan_service_payload_generator';
+
 const { faker } = require('@faker-js/faker');
 const moment = require('moment');
 
 const randomMonth = faker.number.int({ min: 1, max: 12 });
 const randomDay = faker.number.int({ min: 1, max: 30 });
-const randomDate = moment(`2024-${ randomMonth.toString().padStart(2, '0') }-${ randomDay.toString().padStart(2, '0') }`).format('YYYY-MM-DD');
+const randomDate = moment(
+  `2024-${ randomMonth.toString().padStart(2, '0') }-${ randomDay.toString().padStart(2, '0') }`)
+  .format('YYYY-MM-DD');
 
-export class ServiceMacAccountHolderPayloadGenerator {
+export class ServiceMacAccountHolderPayloadGenerator extends MockLoanServicePayloadGenerator {
 
   generateData(type, loanNumber = null) {
     let jsonData;
@@ -72,11 +77,11 @@ export class ServiceMacAccountHolderPayloadGenerator {
       apply_towards_principal: faker.number.int({ min: 1, max: 100 }),
       total_amount_due: null,
       pay_account: {
-        pay_account_type: "BankAccount",
-        account_number: "4003830171874018",
-        routing_number: "021000021",
-        name: "Kenzie J Tep",
-        account_type: "checking",
+        pay_account_type: 'BankAccount',
+        account_number: '4003830171874018',
+        routing_number: '021000021',
+        name: 'Kenzie J Tep',
+        account_type: 'checking',
         save_pay_account: true
       }
     };
@@ -97,12 +102,27 @@ export class ServiceMacAccountHolderPayloadGenerator {
       apply_towards_principal: faker.number.int({ min: 1, max: 100 }),
       pay_account_id: null,
       total_amount_due: null,
-      browser_type: "Chrome",
-      ip_address: faker.internet.ipv4(),
+      browser_type: 'Chrome',
+      ip_address: faker.internet.ipv4()
     };
 
     attributes.total_amount_due = attributes.payment_amount + attributes.transaction_fee + attributes.apply_towards_principal;
     return attributes;
   }
 
+  generateBankInfoPayload(routingNumber) {
+    return {
+      routing_number: routingNumber
+    };
+  }
+
+  generateAccountHoldersPayload(loanNumber) {
+    return {
+      loan_number: loanNumber
+    };
+  }
+
+  generateTestCredentialsLookupPayload(loanStatus) {
+    return super.generateTestCredentialsLookupPayload(CLIENT.SERVICE_MAC, loanStatus);
+  }
 }

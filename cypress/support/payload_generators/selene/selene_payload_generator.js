@@ -1,12 +1,6 @@
 import { faker } from '@faker-js/faker';
-import moment from 'moment';
 import { CLIENT } from '../../../config/constants';
 import { MockLoanServicePayloadGenerator } from '../mock_loan_service/mock_loan_service_payload_generator';
-
-const randomMonth = faker.number.int({ min: 1, max: 12 });
-const randomDay = faker.number.int({ min: 1, max: 30 });
-const randomDate = moment(
-  `2024-${ randomMonth.toString().padStart(2, '0') }-${ randomDay.toString().padStart(2, '0') }`).format('YYYY-MM-DD');
 
 export class SelenePayloadGenerator extends MockLoanServicePayloadGenerator {
 
