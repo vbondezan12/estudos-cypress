@@ -1,21 +1,22 @@
-import { VhdaApi } from '../../../../support/api_objects/vhda/vhda_api';
 import { LOAN_STATUS } from '../../../../config/constants';
+import { VhdaApi } from '../../../../support/api_objects/vhda/vhda_api';
 
 const { faker } = require('@faker-js/faker');
 
 describe('vhda: GetMSPOtherFees', function () {
   const vhdaApi = new VhdaApi();
-  let Test_Credential;
+  let testCredential;
+
   before(() => {
     const testPayload = vhdaApi.payloadGenerator.generateTestCredentialsLookupPayload(LOAN_STATUS.CURRENT);
     vhdaApi.getTestLoans(testPayload).then((response) => {
-      Test_Credential = response.body['test_credentials'][0];
+      testCredential = response.body[ 'test_credentials' ][ 0 ];
     });
   });
 
   it('get MSP other Fees returns 200 with valid credentials', () => {
-    const payload = vhdaApi.payloadGenerator.quickPay(Test_Credential.loan_number, Test_Credential.zip_code,
-      Test_Credential.last_4_ssn);
+    const payload = vhdaApi.payloadGenerator.quickPay(testCredential.loan_number, testCredential.zip_code,
+      testCredential.last_4_ssn);
     vhdaApi.createQuickPayJwt(payload);
     vhdaApi.getMspOtherFees().then((response) => {
       expect(response.status).to.eq(200);

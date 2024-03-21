@@ -1,5 +1,6 @@
 import { LoginPage } from '../../../../support/page_objects/vhda/quick_pay/login_page';
-//TODO
+
+// TODO
 describe('Quickpay Payment', { tags: [ '@Payment', '@regression' ] }, () => {
   let loginPage;
 
