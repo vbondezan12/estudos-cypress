@@ -14,7 +14,7 @@ describe('Quickpay New Account', { tags: [ '@NewAccount', '@regression' ] }, () 
   let microbiltAccount;
   let routingNumber;
   let accountNumber;
-  let account_name;
+  let accountName;
   let accountNickname;
   const vhdaApi = new VhdaApi();
 
