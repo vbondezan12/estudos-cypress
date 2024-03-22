@@ -13,20 +13,25 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [ 20.x, 21.x ]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Use Node.js ${{ matrix.node-version }}
+
+      - name: Generate cypress.env.json
+        run: |
+          echo '${{ secrets.CYPRESS_ENV_CI }}' > cypress.env.json
+
+      - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 21.x
           cache: 'npm'
-      - name: Install
+
+      - name: Clean install
         run: npm ci
+
       - name: Lint
         run: npm run lint
+
       - name: API QA
         run: npm run api:all:qa
