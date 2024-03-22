@@ -34,3 +34,9 @@ export const MICROBILT_MESSAGE = {
   VALID: 'valid',
   DRIVERS_LICENSED_REQUIRED: 'Drivers license required'
 }
+
+export const LIFT_CREDENTIALS = {
+  USERNAME: 'repayautomation',
+  PASSWORD: 'Password12345!@#$%',
+  CLIENT_ID: '1'
+}
