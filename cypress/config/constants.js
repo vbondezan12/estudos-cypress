@@ -9,7 +9,8 @@ export const CLIENT = {
   SERVICE_MAC: 5409,
   US_BANK: 5426,
   THRIVE: 5748,
-  VHDA: 863
+  VHDA: 863,
+  VENTANEX: 1
 };
 
 export const LOAN_STATUS = {
@@ -34,3 +35,4 @@ export const MICROBILT_MESSAGE = {
   VALID: 'valid',
   DRIVERS_LICENSED_REQUIRED: 'Drivers license required'
 }
+
