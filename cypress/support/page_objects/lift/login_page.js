@@ -1,4 +1,4 @@
-const url = `${Cypress.config().lift.baseUrl}/sessions/login`;
+const url = `${ Cypress.config().lift.baseUrl }/sessions/login`;
 
 export class LoginPage {
   open() {
