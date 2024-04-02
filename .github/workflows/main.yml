@@ -1,0 +1,37 @@
+name: Pre-commit CI
+
+on:
+  push:
+    branches:
+      - main
+      - VEN-*
+  pull_request:
+    branches:
+      - main
+      - VEN-*
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Generate cypress.env.json
+        run: |
+          echo '${{ secrets.CYPRESS_ENV_CI }}' > cypress.env.json
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 21.x
+          cache: 'npm'
+
+      - name: Clean install
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: API QA
+        run: npm run api:all:qa
