@@ -16,6 +16,7 @@ describe('Lift Login', { tags: [ '@Login', '@regression' ] }, () => {
     mockLoanServiceApi.getTestLoans(testPayload).then((response) => {
       testCredential = response.body['test_credentials'][1]
       const test = "teste 123"
+      const test = "teste 1234"
     });
   });
 
