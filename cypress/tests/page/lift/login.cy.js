@@ -12,7 +12,7 @@ describe('Lift Login', { tags: [ '@Login', '@regression' ] }, () => {
   let testCredential;
 
   before(() => {
-    const testPayload = mockLoanServiceApi.payloadGenerator.generateTestCredentialsLookupPayload(CLIENT.LIFT, LOAN_STATUS.CURRENT)
+    const testPayload = mockLoanServiceApi.payloadGenerator.generateTestCredentialsLookupPayload(CLIENT.VENTANEX, LOAN_STATUS.CURRENT)
     mockLoanServiceApi.getTestLoans(testPayload).then((response) => {
       testCredential = response.body['test_credentials'][1]
     });
@@ -21,7 +21,7 @@ describe('Lift Login', { tags: [ '@Login', '@regression' ] }, () => {
   it('should login successfully with valid credentials', { tags: '@smoke' }, function () {
     const username = testCredential.username;
     const password = testCredential.password;
-    const clientId = CLIENT.LIFT;
+    const clientId = CLIENT.VENTANEX;
 
     loginPage.open()
     loginPage.login(username, password, clientId);
@@ -32,7 +32,7 @@ describe('Lift Login', { tags: [ '@Login', '@regression' ] }, () => {
   it('should present toast message from invalid credentials', { tags: '@smoke' }, function () {
     const username = faker.internet.userName();
     const password = faker.internet.password();
-    const clientId = CLIENT.LIFT;
+    const clientId = CLIENT.VENTANEX;
 
     loginPage.open()
     loginPage.login(username, password, clientId);
