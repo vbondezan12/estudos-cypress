@@ -9,7 +9,8 @@ export const CLIENT = {
   SERVICE_MAC: 5409,
   US_BANK: 5426,
   THRIVE: 5748,
-  VHDA: 863
+  VHDA: 863,
+  LIFT: 1
 };
 
 export const LOAN_STATUS = {
@@ -35,8 +36,3 @@ export const MICROBILT_MESSAGE = {
   DRIVERS_LICENSED_REQUIRED: 'Drivers license required'
 }
 
-export const LIFT_CREDENTIALS = {
-  USERNAME: 'repayautomation',
-  PASSWORD: 'Password12345!@#$%',
-  CLIENT_ID: '1'
-}

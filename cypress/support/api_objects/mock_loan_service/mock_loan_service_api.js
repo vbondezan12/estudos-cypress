@@ -1,4 +1,5 @@
 import { AuthenticationUtils } from '../../utils/authentication_utils';
+import { MockLoanServicePayloadGenerator } from '../../payload_generators/mock_loan_service/mock_loan_service_payload_generator';
 
 const baseUrl = `${ Cypress.config().mockLoanService.baseUrl }/api/v1`;
 
@@ -6,6 +7,7 @@ const baseUrl = `${ Cypress.config().mockLoanService.baseUrl }/api/v1`;
  * API for Mock Loan Service
  */
 export class MockLoanServiceApi extends AuthenticationUtils{
+  payloadGenerator = new MockLoanServicePayloadGenerator()
 
   /**
    * Retrieves a Selene loan using the provided request body.

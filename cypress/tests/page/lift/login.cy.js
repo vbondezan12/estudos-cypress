@@ -1,16 +1,27 @@
 import { faker } from '@faker-js/faker';
-import { LIFT_CREDENTIALS } from '../../../config/constants';
 import { LoginPage } from '../../../support/page_objects/lift/login_page';
+import { MockLoanServiceApi } from '../../../support/api_objects/mock_loan_service/mock_loan_service_api';
+import { CLIENT } from '../../../config/constants';
+import { LOAN_STATUS } from '../../../config/constants';
 
 
 describe('Lift Login', { tags: [ '@Login', '@regression' ] }, () => {
 
   const loginPage = new LoginPage();
+  const mockLoanServiceApi = new MockLoanServiceApi();
+  let testCredential;
+
+  before(() => {
+    const testPayload = mockLoanServiceApi.payloadGenerator.generateTestCredentialsLookupPayload(CLIENT.LIFT, LOAN_STATUS.CURRENT)
+    mockLoanServiceApi.getTestLoans(testPayload).then((response) => {
+      testCredential = response.body['test_credentials'][1]
+    });
+  });
 
   it('should login successfully with valid credentials', { tags: '@smoke' }, function () {
-    const username = LIFT_CREDENTIALS.USERNAME;
-    const password = LIFT_CREDENTIALS.PASSWORD;
-    const clientId = LIFT_CREDENTIALS.CLIENT_ID;
+    const username = testCredential.username;
+    const password = testCredential.password;
+    const clientId = CLIENT.LIFT;
 
     loginPage.open()
     loginPage.login(username, password, clientId);
@@ -21,7 +32,7 @@ describe('Lift Login', { tags: [ '@Login', '@regression' ] }, () => {
   it('should present toast message from invalid credentials', { tags: '@smoke' }, function () {
     const username = faker.internet.userName();
     const password = faker.internet.password();
-    const clientId = LIFT_CREDENTIALS.CLIENT_ID;
+    const clientId = CLIENT.LIFT;
 
     loginPage.open()
     loginPage.login(username, password, clientId);
