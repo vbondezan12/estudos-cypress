@@ -9,7 +9,7 @@ xdescribe('API Tests: Selene Payments', function () {
   before(() => {
     const testPayload = seleneApi.payloadGenerator.generateTestCredentialsLookupPayload(LOAN_STATUS.CURRENT);
     seleneApi.getTestLoans(testPayload).then((response) => {
-      testCredential = response.body['test_credentials'][0];
+      testCredential = response.body[0];
     });
   });
 

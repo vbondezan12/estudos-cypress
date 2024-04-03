@@ -11,7 +11,7 @@ xdescribe('US Bank: Accounts', function () {
   before(() => {
     const testPayload = usBankApi.payloadGenerator.generateTestCredentialsLookupPayload(LOAN_STATUS.CURRENT);
     usBankApi.getTestLoans(testPayload).then((response) => {
-      testCredential = response.body['test_credentials'][0];
+      testCredential = response.body[0];
     });
   });
 
