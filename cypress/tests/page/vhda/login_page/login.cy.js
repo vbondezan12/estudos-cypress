@@ -1,0 +1,1 @@
+import {LoginPage} from '../../../../support/page_objects/vhda/login/login_page'
