@@ -1,5 +1,5 @@
 import xml2js from 'xml2js';
-import { AUTHENTICATION_TYPE } from '../../../config/constants';
+import { AUTHENTICATION_TYPE, CLIENT } from '../../../config/constants';
 import { SelenePayloadGenerator } from '../../payload_generators/selene/selene_payload_generator';
 import { MockLoanServiceApi } from '../mock_loan_service/mock_loan_service_api';
 
@@ -57,5 +57,9 @@ export class SeleneApi extends MockLoanServiceApi {
       url: `${ baseUrl }/ivr/validate/${ abaNumber }`,
       failOnStatusCode: false
     });
+  }
+
+  getTestLoans(loanStatus) {
+    return super.getTestLoans(CLIENT.SELENE, loanStatus);
   }
 }

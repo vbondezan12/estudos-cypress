@@ -7,8 +7,7 @@ describe('API Tests: ServiceMac', function () {
   let testCredential;
 
   before(() => {
-    const testPayload = serviceMacApi.payloadGenerator.generateTestCredentialsLookupPayload(LOAN_STATUS.CURRENT);
-    serviceMacApi.getTestLoans(testPayload).then((response) => {
+    serviceMacApi.getTestLoans(LOAN_STATUS.CURRENT).then((response) => {
       testCredential = response.body[0];
     });
   });

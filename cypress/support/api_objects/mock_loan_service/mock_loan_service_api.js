@@ -1,13 +1,13 @@
-import { AuthenticationUtils } from '../../utils/authentication_utils';
 import { MockLoanServicePayloadGenerator } from '../../payload_generators/mock_loan_service/mock_loan_service_payload_generator';
+import { AuthenticationUtils } from '../../utils/authentication_utils';
 
 const baseUrl = `${ Cypress.config().mockLoanService.baseUrl }/api/v1`;
+const payloadGenerator = new MockLoanServicePayloadGenerator();
 
 /**
  * API for Mock Loan Service
  */
-export class MockLoanServiceApi extends AuthenticationUtils{
-  payloadGenerator = new MockLoanServicePayloadGenerator()
+export class MockLoanServiceApi extends AuthenticationUtils {
 
   /**
    * Retrieves a Selene loan using the provided request body.
@@ -39,17 +39,12 @@ export class MockLoanServiceApi extends AuthenticationUtils{
     });
   }
 
-  /**
-   * Get an array of Test Loans
-   * @param body The request body
-   * @returns {Cypress.Chainable<Cypress.Response<any>>}
-   */
-  getTestLoans(body) {
+  getTestLoans(clientId, loanStatus) {
     return cy.request({
       method: 'GET',
       url: `${ baseUrl }/test/lookup`,
       failOnStatusCode: true,
-      body: body
+      body: payloadGenerator.generateTestCredentialsLookupPayload(clientId, loanStatus)
     });
   }
 
@@ -63,6 +58,15 @@ export class MockLoanServiceApi extends AuthenticationUtils{
     return cy.request({
       method: 'GET',
       url: `${ baseUrl }/test/microbilt`,
+      failOnStatusCode: true,
+      body: body
+    });
+  }
+
+  getVhdaLastMfaCode(body) {
+    return cy.request({
+      method: 'GET',
+      url: `${ baseUrl }/test/mfa`,
       failOnStatusCode: true,
       body: body
     });

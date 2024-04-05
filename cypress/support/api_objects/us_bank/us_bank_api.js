@@ -56,4 +56,8 @@ export class UsBankApi extends MockLoanServiceApi {
       headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BASIC)
     });
   }
+
+  getTestLoans(clientId, loanStatus) {
+    return super.getTestLoans(Client.US_BANK, loanStatus);
+  }
 }

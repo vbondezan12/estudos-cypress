@@ -9,8 +9,7 @@ xdescribe('US Bank: Accounts', function () {
   let testCredential;
 
   before(() => {
-    const testPayload = usBankApi.payloadGenerator.generateTestCredentialsLookupPayload(LOAN_STATUS.CURRENT);
-    usBankApi.getTestLoans(testPayload).then((response) => {
+    usBankApi.getTestLoans(LOAN_STATUS.CURRENT).then((response) => {
       testCredential = response.body[0];
     });
   });

@@ -6,8 +6,7 @@ describe('API Tests: Selene loan lookup', function () {
   let testCredential;
 
   before(() => {
-    const testPayload = seleneApi.payloadGenerator.generateTestCredentialsLookupPayload(LOAN_STATUS.CURRENT);
-    seleneApi.getTestLoans(testPayload).then((response) => {
+    seleneApi.getTestLoans(LOAN_STATUS.CURRENT).then((response) => {
       testCredential = response.body[0];
     });
   });

@@ -7,8 +7,7 @@ describe('vhda: POST user_token', function () {
   let testCredential;
 
   before(() => {
-    const testPayload = vhdaApi.payloadGenerator.generateTestCredentialsLookupPayload(LOAN_STATUS.CURRENT);
-    vhdaApi.getTestLoans(testPayload).then((response) => {
+    vhdaApi.getTestLoans(LOAN_STATUS.CURRENT).then((response) => {
       testCredential = response.body[0];
     });
   });

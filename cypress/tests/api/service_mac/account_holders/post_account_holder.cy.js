@@ -1,13 +1,19 @@
 import { faker } from '@faker-js/faker';
+import { LOAN_STATUS } from '../../../../config/constants';
 import { ServiceMacApi } from '../../../../support/api_objects/service_mac/servicemac_api';
 
 describe('API Tests: ServiceMac', function () {
   const serviceMacApi = new ServiceMacApi();
+  let testCredential;
+
+  before(() => {
+    serviceMacApi.getTestLoans(LOAN_STATUS.CURRENT).then((response) => {
+      testCredential = response.body[0];
+    });
+  });
 
   xit('Post Account Holder [200]: post valid account_holders holder', () => {
-
-    const loanNumber = serviceMacApi.cypressEnv.loan_number;
-    let payload = serviceMacApi.payloadGenerator.generateData('account_holder', loanNumber);
+    let payload = serviceMacApi.payloadGenerator.generateData('account_holder', testCredential.loan_number);
 
     serviceMacApi.postAccountHolder(payload).then((response) => {
       expect(response.status).to.eq(201);

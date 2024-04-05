@@ -1,4 +1,4 @@
-import { AUTHENTICATION_TYPE } from '../../../config/constants';
+import { AUTHENTICATION_TYPE, CLIENT } from '../../../config/constants';
 import { VhdaPayloadGenerator } from '../../payload_generators/vhda/vhda_payload_generator';
 import { MockLoanServiceApi } from '../mock_loan_service/mock_loan_service_api';
 
@@ -297,5 +297,9 @@ export class VhdaApi extends MockLoanServiceApi {
       failOnStatusCode: false,
       headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BEARER)
     });
+  }
+
+  getTestLoans(clientId, loanStatus) {
+    return super.getTestLoans(CLIENT.VHDA, loanStatus);
   }
 }
