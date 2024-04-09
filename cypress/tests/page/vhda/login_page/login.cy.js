@@ -8,6 +8,7 @@ describe('Login Tests', { tags: [ '@Login', '@regression' ] }, () => {
     let loginPage = new LoginPage();
     const mockLoanServiceApi = new MockLoanServiceApi();
     let testCredential;
+    let testMfaCode;
 
     before(() => {
         const testPayload = mockLoanServiceApi.payloadGenerator.generateTestCredentialsLookupPayload(CLIENT.VHDA, LOAN_STATUS.CURRENT)
@@ -17,8 +18,8 @@ describe('Login Tests', { tags: [ '@Login', '@regression' ] }, () => {
             cy.log(JSON.stringify(testCredential))  
           });
     })
-      
 
+      
     //Teste 1
     it('Login with valid credentials (Happy Path)', { tags: '@smoke' }, function () {
 
@@ -36,8 +37,23 @@ describe('Login Tests', { tags: [ '@Login', '@regression' ] }, () => {
         //Test validation
         cy.url().should('contains', `${ Cypress.config().vhda.baseUrl }/multifactor/new`);
       });
+
+      //MFA Page
+      
+      before(() => {
+        const testPayloadMfa = mockLoanServiceApi.payloadGenerator.generateMFAPayload("repay.lift.automation@gmail.com")
+        mockLoanServiceApi.getTestLoans(testPayloadMfa).then((response) => {
+            testMfaCode = expect(response.status).to.eq(200); 
+            expect(response.body.data.length).to.eq(0);
+            mfaCode = response.body
+          });
+    })
     
 })
+
+
+
+
 
 
 

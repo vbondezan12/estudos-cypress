@@ -12,11 +12,12 @@ describe('Lift Login', { tags: [ '@Login', '@regression' ] }, () => {
   let testCredential;
 
   before(() => {
-    const testPayload = mockLoanServiceApi.payloadGenerator.generateTestCredentialsLookupPayload(CLIENT.VENTANEX, LOAN_STATUS.CURRENT)
+    const testPayload = mockLoanServiceApi.payloadGenerator.generateVhdaMfaPayload("repay.lift.automation@gmail.com")
     mockLoanServiceApi.getTestLoans(testPayload).then((response) => {
       testCredential = response.body['test_credentials'][1]
     });
   });
+
 
   it('should login successfully with valid credentials', { tags: '@smoke' }, function () {
     const username = testCredential.username;
@@ -28,6 +29,7 @@ describe('Lift Login', { tags: [ '@Login', '@regression' ] }, () => {
 
     cy.url().should('contains', `${ Cypress.config().lift.baseUrl }/home`);
   });
+  
 
   it('should present toast message from invalid credentials', { tags: '@smoke' }, function () {
     const username = faker.internet.userName();

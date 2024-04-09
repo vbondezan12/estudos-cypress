@@ -30,6 +30,7 @@ export class MockLoanServiceApi extends AuthenticationUtils{
    * @param {JSON} body - a JSON object containing the loan number
    * @return {Response} the response from the loan retrieval request
    */
+  
   getMspLoan(body) {
     return cy.request({
       method: 'GET',
@@ -63,6 +64,19 @@ export class MockLoanServiceApi extends AuthenticationUtils{
     return cy.request({
       method: 'GET',
       url: `${ baseUrl }/test/microbilt`,
+      failOnStatusCode: true,
+      body: body
+    });
+  }
+
+  /**
+  * @param {JSON} body 
+  * @return {Response} 
+  */
+  getMfaCode(body) {
+    return cy.request({
+      method: 'GET',
+      url: `${ baseUrl }/test/mfa`,
       failOnStatusCode: true,
       body: body
     });
