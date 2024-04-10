@@ -1,5 +1,4 @@
 const url = `${ Cypress.config().vhda.baseUrl }/login`;
-const urlMultifactorPage = `${ Cypress.config().vhda.baseUrl }/multifactor/new`;
 
 export class LoginPage{
 
@@ -43,7 +42,6 @@ export class LoginPage{
       this.clickLoginButton();
       this.openMultifactorPage
       this.enterMFACode(mfa)
-      this.clickAuthenticateButton();
     }
 
      openPage(){
@@ -68,10 +66,6 @@ export class LoginPage{
 
      enterMFACode(mfaCode){
       this.multifactorToken.type(mfaCode)
-     }
-
-     clickAuthenticateButton(){
-      this.authenticateButton.click();
      }
 
     }
