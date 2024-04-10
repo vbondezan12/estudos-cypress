@@ -9,6 +9,7 @@ describe('Login Tests', { tags: [ '@Login', '@regression' ] }, () => {
     const mockLoanServiceApi = new MockLoanServiceApi();
     let testCredential;
     let testMfaCode;
+    let mfaCode;
 
     before(() => {
         const testPayload = mockLoanServiceApi.payloadGenerator.generateTestCredentialsLookupPayload(CLIENT.VHDA, LOAN_STATUS.CURRENT)
@@ -20,7 +21,8 @@ describe('Login Tests', { tags: [ '@Login', '@regression' ] }, () => {
     })
 
       
-    //Teste 1
+    //------Tests Login Page---------
+
     it('Login with valid credentials (Happy Path)', { tags: '@smoke' }, function () {
 
         //Necessary variables do execute the test
@@ -37,39 +39,51 @@ describe('Login Tests', { tags: [ '@Login', '@regression' ] }, () => {
         //Test validation
         cy.url().should('contains', `${ Cypress.config().vhda.baseUrl }/multifactor/new`);
 
-        const email = "repay.lift.automation@gmail.com"
-        const payloadMfa = mockLoanServiceApi.payloadGenerator.generateMFAPayload(email)
-        //cy.log(JSON.stringify(payloadMfa)) 
+        
+        //-------Tests MFA Page-------
 
+        //time necessary to mfa code update in endpoint (API)
+        cy.wait(50000)
+        
+        // Get MFA code from API
+        const email = "priscillaufpa@gmail.com"
+        const payloadMfa = mockLoanServiceApi.payloadGenerator.generateMFAPayload(email)
         mockLoanServiceApi.getMfaCode(payloadMfa).then((response) => {
+            mfaCode = response.body
+            cy.log(mfaCode);
             expect(response.status).to.eq(200); 
-            //expect(response.body.data.length).to.eq(0);
-            const mfaCode = response.body
-            cy.log(mfaCode)
+
+       //Test execution
+        loginPage.enterMFACode(mfaCode);
+        loginPage.clickAuthenticateButton();
+
+         //Test validation
+         cy.url().should('contains', `${ Cypress.config().vhda.baseUrl }`);
 
       });
-
-     
-    //   before(() => {
-    //     const email = "repay.lift.automation@gmail.com"
-    //     const payloadMfa = mockLoanServiceApi.payloadGenerator.generateMFAPayload(email)
-    //     //cy.log(JSON.stringify(payloadMfa)) 
-
-    //     mockLoanServiceApi.getMfaCode(payloadMfa).then((response) => {
-    //         expect(response.status).to.eq(200); 
-    //         expect(response.body.data.length).to.eq(0);
-    //         mfaCode = response.body
-    //       });
-    // })
     
 })
 
+      //-------Tests MFA Page-------
+
+     // it('Authenticate with valid MFA Code (Happy Path)', { tags: '@smoke' }, function () {
+
+        //Necessary variables do execute the test
+       // const multifactorToken = mfaCode;
+        //cy.log(multifactorToken);
+        
+        //Test execution  
+       // loginPage.openMultifactorPage();
+        //loginPage.enterMFACode(multifactorToken);  
+        //loginPage.clickAuthenticateButton();
+        
+        //Test validation
+        //cy.url().should('contains', 'https://msp-qa-17383b0a51c3.herokuapp.com/');
+      //});
 
 
 
-
-
-
+  })
 
 
 //describe('Login Tests', { tags: [ '@Login', '@regression' ] }, () => {
@@ -93,4 +107,3 @@ describe('Login Tests', { tags: [ '@Login', '@regression' ] }, () => {
 //        cy.url().should('contains', `${ Cypress.config().vhda.baseUrl }/multifactor/new`);
 //      });
     
-})
