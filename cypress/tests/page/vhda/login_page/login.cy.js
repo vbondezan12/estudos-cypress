@@ -36,18 +36,31 @@ describe('Login Tests', { tags: [ '@Login', '@regression' ] }, () => {
         
         //Test validation
         cy.url().should('contains', `${ Cypress.config().vhda.baseUrl }/multifactor/new`);
+
+        const email = "repay.lift.automation@gmail.com"
+        const payloadMfa = mockLoanServiceApi.payloadGenerator.generateMFAPayload(email)
+        //cy.log(JSON.stringify(payloadMfa)) 
+
+        mockLoanServiceApi.getMfaCode(payloadMfa).then((response) => {
+            expect(response.status).to.eq(200); 
+            //expect(response.body.data.length).to.eq(0);
+            const mfaCode = response.body
+            cy.log(mfaCode)
+
       });
 
-      //MFA Page
-      
-      before(() => {
-        const testPayloadMfa = mockLoanServiceApi.payloadGenerator.generateMFAPayload("repay.lift.automation@gmail.com")
-        mockLoanServiceApi.getTestLoans(testPayloadMfa).then((response) => {
-            testMfaCode = expect(response.status).to.eq(200); 
-            expect(response.body.data.length).to.eq(0);
-            mfaCode = response.body
-          });
-    })
+     
+    //   before(() => {
+    //     const email = "repay.lift.automation@gmail.com"
+    //     const payloadMfa = mockLoanServiceApi.payloadGenerator.generateMFAPayload(email)
+    //     //cy.log(JSON.stringify(payloadMfa)) 
+
+    //     mockLoanServiceApi.getMfaCode(payloadMfa).then((response) => {
+    //         expect(response.status).to.eq(200); 
+    //         expect(response.body.data.length).to.eq(0);
+    //         mfaCode = response.body
+    //       });
+    // })
     
 })
 
@@ -80,4 +93,4 @@ describe('Login Tests', { tags: [ '@Login', '@regression' ] }, () => {
 //        cy.url().should('contains', `${ Cypress.config().vhda.baseUrl }/multifactor/new`);
 //      });
     
-//})
+})
