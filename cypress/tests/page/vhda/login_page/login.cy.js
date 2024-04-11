@@ -44,7 +44,7 @@ describe('Login Tests', { tags: [ '@Login', '@regression' ] }, () => {
         //-------Tests of MFA Page-------
 
         //time necessary to wait the endpoint (API) update the mfa code, then the code can take the updated mfa code
-        cy.wait(50000)
+        cy.wait(10000)
         
         // Get MFA code from API, that is, endpoint 'Test Credential/VHDA Last MFA Token'
         const email = "priscillaufpa@gmail.com" // email used to do login 
@@ -62,11 +62,36 @@ describe('Login Tests', { tags: [ '@Login', '@regression' ] }, () => {
          //Test validation
          cy.url().should('contains', `${ Cypress.config().vhda.baseUrl }`);
 
-      });
-    
+      });    
 })
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+
+    //Unhappy Path
+    it('Login with invalid credentials (Unhappy Path)', { tags: '@smoke' }, function () {
+        const userName = cy.faker(); //generate fake value for userName
+        const password = cy.faker(); //generate fake value for userName
+        
+    //Test execution
+    loginPage.openPage();
+    loginPage.enterUserName(userName);
+    loginPage.enterPassword(password);   
+    loginPage.clickLoginButton();
+        
+    //Test validation
+    cy.url().should('contains', `${ Cypress.config().vhda.baseUrl }/multifactor/new`);
+
+});
+    
 
   })
+
+
+
+
+
+
+
+
 
 
 //describe('Login Tests', { tags: [ '@Login', '@regression' ] }, () => {
