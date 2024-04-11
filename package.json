@@ -21,16 +21,18 @@
     "pre-commit:uat": "npm run lint && npm run api:all:uat"
   },
   "dependencies": {
-    "@faker-js/faker": "^8.0.2",
     "cypress": "^13.2.0",
     "cypress-mochawesome-reporter": "^3.8.1",
     "moment": "^2.29.4",
     "xml2js": "^0.6.2"
   },
   "devDependencies": {
+    "@faker-js/faker": "^8.4.1",
     "@stylistic/eslint-plugin": "^1.6.2",
     "@stylistic/eslint-plugin-js": "^1.6.2",
     "eslint": "^8.56.0",
-    "eslint-plugin-cypress": "^2.15.1"
+    "eslint-plugin-cypress": "^2.15.1",
+    "faker": "^5.5.3",
+    "Faker": "^0.7.2"
   }
 }

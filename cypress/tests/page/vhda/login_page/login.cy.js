@@ -1,8 +1,10 @@
+import { faker } from '@faker-js/faker';
 import { LoginPage } from '../../../../support/page_objects/vhda/login/login_page';
 import { CLIENT } from '../../../../config/constants';
 import { MockLoanServiceApi } from '../../../../support/api_objects/mock_loan_service/mock_loan_service_api';
 import { LOAN_STATUS } from '../../../../config/constants';
-import { faker } from '@faker-js/faker';
+
+
 
 describe('Login Tests', { tags: [ '@Login', '@regression' ] }, () => {
     //Variables
@@ -68,18 +70,20 @@ describe('Login Tests', { tags: [ '@Login', '@regression' ] }, () => {
 
     //Unhappy Path
     it('Login with invalid credentials (Unhappy Path)', { tags: '@smoke' }, function () {
-        const userName = cy.faker(); //generate fake value for userName
-        const password = cy.faker(); //generate fake value for userName
+        let username = faker.internet.userName(); //generate fake value for userName
+        let password = faker.internet.password(); //generate fake value for userName
         
     //Test execution
     loginPage.openPage();
-    loginPage.enterUserName(userName);
+    loginPage.enterUserName(username);
     loginPage.enterPassword(password);   
     loginPage.clickLoginButton();
         
     //Test validation
-    loginPage.toastMessage.should('be.visible');
-    cy.url().should('contains', `${ Cypress.config().vhda.baseUrl }/multifactor/new`);
+    cy.url().should('contains', `${ Cypress.config().vhda.baseUrl}/login`);
+    loginPage.toastMessage
+    .should('be.visible')
+    .should('have.text', 'Invalid username and/or password');
 
 });
     
