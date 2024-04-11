@@ -68,6 +68,10 @@ export class LoginPage{
       this.multifactorToken.type(mfaCode)
      }
 
+     clickAuthenticateButton(){
+      this.authenticateButton.click();
+     }
+
     }
 
 

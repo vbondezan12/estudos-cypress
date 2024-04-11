@@ -47,10 +47,10 @@ export class MockLoanServiceApi extends AuthenticationUtils{
    */
   getTestLoans(body) {
     return cy.request({
-      method: 'GET',
-      url: `${ baseUrl }/test/lookup`,
+      method: 'GET', 
+      url: `${ baseUrl }/test/lookup`, 
       failOnStatusCode: true,
-      body: body
+      body: body 
     });
   }
 
@@ -69,16 +69,13 @@ export class MockLoanServiceApi extends AuthenticationUtils{
     });
   }
 
-  /**
-  * @param {JSON} body 
-  * @return {Response} 
-  */
+//Method that run the endpoint do generate the MFA code. Code used to login in VHDA webpay in qa enviroment
   getMfaCode(body) {
     return cy.request({
-      method: 'GET',
-      url: `${ baseUrl }/test/mfa`,
-      failOnStatusCode: true,
-      body: body
+      method: 'GET', // this variable save the type of method/endpoint we need use
+      url: `${ baseUrl }/test/mfa`, //this variable save the url/lik of endpoint that we need run
+      failOnStatusCode: true, // Don't allow that bad response pass into then
+      body: body // this variable save the json that we enter in the Body field at API (Postman)
     });
   }
 }
