@@ -12,8 +12,7 @@ describe('Lift Login', { tags: [ '@Login', '@regression' ] }, () => {
   let testCredential;
 
   before(() => {
-    const testPayload = mockLoanServiceApi.payloadGenerator.generateTestCredentialsLookupPayload(CLIENT.VENTANEX, LOAN_STATUS.CURRENT)
-    mockLoanServiceApi.getTestLoans(testPayload).then((response) => {
+    mockLoanServiceApi.getTestLoans(CLIENT.VENTANEX, LOAN_STATUS.CURRENT).then((response) => {
       testCredential = response.body[1]
     });
   });
