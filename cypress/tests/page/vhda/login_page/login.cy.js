@@ -78,6 +78,7 @@ describe('Login Tests', { tags: [ '@Login', '@regression' ] }, () => {
     loginPage.clickLoginButton();
         
     //Test validation
+    loginPage.toastMessage.should('be.visible');
     cy.url().should('contains', `${ Cypress.config().vhda.baseUrl }/multifactor/new`);
 
 });
@@ -89,29 +90,4 @@ describe('Login Tests', { tags: [ '@Login', '@regression' ] }, () => {
 
 
 
-
-
-
-
-
-//describe('Login Tests', { tags: [ '@Login', '@regression' ] }, () => {
-//   let loginPage = new LoginPage();
-
-    //Teste 1
-
-//   it('Login with valid credentials (Happy Path)', { tags: '@smoke' }, function () {
-
-//        //Necessary variables do execute the test
-//        const userName = 'PriscillaRepay';
-//        const password = 'Repay123Repay123@'; 
-        
-        //Test execution
-//        loginPage.openPage();   
-//        loginPage.enterUserName(userName);
-//        loginPage.enterPassword(password);   
-//        loginPage.clickLoginButton();
-        
-        //Test validation
-//        cy.url().should('contains', `${ Cypress.config().vhda.baseUrl }/multifactor/new`);
-//      });
     
