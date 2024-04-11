@@ -35,6 +35,10 @@ export class LoginPage{
         return cy.get('.btn');
       }
 
+    get toastMessageMfaPage() {
+        return cy.get('.toast-message');
+      }
+
     login(userName,password,mfa){
       this.open();
       enterUserName(userName);
