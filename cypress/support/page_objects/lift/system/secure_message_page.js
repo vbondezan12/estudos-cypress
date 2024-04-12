@@ -1,7 +1,7 @@
 const url = `${Cypress.config().lift.baseUrl}/system/secure_messages`;
 
 
-export class MessageCenter {
+export class SecureMessageCenter {
 
     get loanNumber() {
         return cy.get('#loan_number')        

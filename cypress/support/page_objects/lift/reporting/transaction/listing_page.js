@@ -1,8 +1,9 @@
+import { faker } from "@faker-js/faker";
 const url = `${ Cypress.config().lift.baseUrl }/reports/transaction_listing`;
 
-export class ReportsPage {
+export class TransactionListing {
 
-  open() {
+  openReportsListing() {
     cy.visit(url);
   }
 
@@ -26,6 +27,10 @@ export class ReportsPage {
     return cy.get('form');
   }
 
+  get transactionListed() {
+    return cy.get('.footable-even > :nth-child(2)')
+  }
+
   clickReportingSection() {
     this.reportingSection.click();
   }
@@ -45,7 +50,7 @@ export class ReportsPage {
   }
 
   setListingStartDate() {
-    this.listingStartDate.type(`${ faker.date.recent({ days: 5}).toLocaleDateString('en-US') }`);
+    this.listingStartDate.type(`${ faker.date.recent({ days: 40}).toLocaleDateString('en-US') }`);
   }
 
   clickSearchButton() {

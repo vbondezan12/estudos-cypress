@@ -1,15 +1,15 @@
-import { LoginPage } from '../../../support/page_objects/lift/login_page';
-import { HomePage } from '../../../support/page_objects/lift/home_page';
-import { ReportsPage } from '../../../support/page_objects/lift/reports_page';
-import { MockLoanServiceApi } from '../../../support/api_objects/mock_loan_service/mock_loan_service_api';
-import { CLIENT } from '../../../config/constants';
-import { LOAN_STATUS } from '../../../config/constants';
+import { LoginPage } from '../../../../../support/page_objects/lift/login/login_page';
+import { HomePage } from '../../../../../support/page_objects/lift/home/home_page';
+import { TransactionListing } from '../../../../../support/page_objects/lift/reporting/transaction/listing_page';
+import { MockLoanServiceApi } from '../../../../../support/api_objects/mock_loan_service/mock_loan_service_api';
+import { CLIENT } from '../../../../../config/constants';
+import { LOAN_STATUS } from '../../../../../config/constants';
 
 describe('Lift Home', { tags: [ '@Home', '@regression' ] }, () => {
     const loginPage = new LoginPage();
     const mockLoanServiceApi = new MockLoanServiceApi();
     const homePage = new HomePage();
-    const reportsPage = new ReportsPage();
+    const transactionListing = new TransactionListing();
   
     let testCredential;
   
@@ -24,16 +24,18 @@ describe('Lift Home', { tags: [ '@Home', '@regression' ] }, () => {
 
     it('should go the listing option on the side menu and search', { tags: '@smoke' }, function () {
         homePage.clickEndtourButton()
-        homePage.clientSelectionForm()
+        homePage.clickClientSelectionForm()
         homePage.clientSelection(CLIENT.VHDA)
-        reportsPage.openReports()
-        reportsPage.setListingStartDate()
-        reportsPage.clickSearchButton()
-        
+        transactionListing.openReportsListing()
+        transactionListing.setListingStartDate()
+        transactionListing.clickSearchButton()        
     
         cy.url().should('contains', `${ Cypress.config().lift.baseUrl }/reports/transaction_listing`);
         homePage.clientSelectionForm
           .should('contains.text', ' 863 Virginia Housing ')    
+          transactionListing.transactionListed
+          .should('not.be.empty')
+          .should('be.visible')
       });
 })
   

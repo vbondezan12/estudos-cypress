@@ -1,6 +1,6 @@
 const url = `${Cypress.config().lift.baseUrl}/home`;
 const urlReports = `${Cypress.config().lift.baseUrl}/reports/transaction_listing`;
-import { CLIENT } from '../../../config/constants';
+import { CLIENT } from '../../../../config/constants';
 
 
 export class HomePage {
