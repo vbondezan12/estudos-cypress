@@ -302,4 +302,8 @@ export class VhdaApi extends MockLoanServiceApi {
   getTestLoans(clientId, loanStatus) {
     return super.getTestLoans(CLIENT.VHDA, loanStatus);
   }
+
+  getLastMfaCode(clientId, email) {
+    return super.getLastMfaCode(CLIENT.VHDA, email);
+  }
 }
