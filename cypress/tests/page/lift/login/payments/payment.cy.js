@@ -4,12 +4,14 @@ import { HomePage } from '../../../../../support/page_objects/lift/home/home_pag
 import { MockLoanServiceApi } from '../../../../../support/api_objects/mock_loan_service/mock_loan_service_api';
 import { CLIENT } from '../../../../../config/constants';
 import { LOAN_STATUS } from '../../../../../config/constants';
+import { MfaPage } from '../../../../../support/page_objects/lift/login/mfa_page';
 
 describe('Lift Payment', { tags: [ '@Home', '@regression' ] }, () => {
   const loginPage = new LoginPage();
   const mockLoanServiceApi = new MockLoanServiceApi();  
   const paymentPage = new OneTimePaymentPage();
   const homePage = new HomePage();
+  const mfaPage = new MfaPage()
 
   let testCredential;
 
@@ -18,6 +20,10 @@ describe('Lift Payment', { tags: [ '@Home', '@regression' ] }, () => {
       testCredential = response.body[1]
       loginPage.open()
       loginPage.login(testCredential.username, testCredential.password, CLIENT.VENTANEX);
+      loginPage.getMfaCode(testCredential.email).then((response) => {
+        mfaPage.enterMfaInput(response.body)
+        mfaPage.clickMfaConfirmButton()
+      });
       cy.url().should('contains', `${ Cypress.config().lift.baseUrl }/home`);
       homePage.clickEndtourButton()
       homePage.clickClientSelectionForm()

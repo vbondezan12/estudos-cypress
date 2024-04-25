@@ -68,7 +68,7 @@ describe('Lift Login', { tags: [ '@Login', '@regression' ] }, () => {
       .should('have.text', 'Invalid Token');
   });
 
-  it.only('should resend a mfa token and login successfully', { tags: '@smoke' }, function () {
+  it('should resend a mfa token and login successfully', { tags: '@smoke' }, function () {
     const username = testCredential.username;
     const password = testCredential.password;
     const clientId = CLIENT.VENTANEX;
