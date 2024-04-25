@@ -25,21 +25,23 @@ describe('Lift Payment', { tags: [ '@Home', '@regression' ] }, () => {
     });
   });
 
-  // it('should create a one time payment successfully', { tags: '@smoke' }, function () {
-  //   paymentPage.openOneTimeDebitPayment()
-  //   paymentPage.inputCustomerReferenceNumber('130369')
-  //   paymentPage.clickCustomerReferenceNumberButton()
-  //   paymentPage.selectCustomerButton()
-  //   paymentPage.inputPaymentAmount()
-  //   paymentPage.clickNextButton()
-  //   paymentPage.addingNewCard()
-  //   paymentPage.clickFinishButton()
-  //   paymentPage.clickPostThisPaymentButton()
+  it('should create a one time payment successfully', { tags: '@smoke' }, function () {
+    paymentPage.openOneTimeDebitPayment()
+    paymentPage.inputCustomerReferenceNumber('130369')
+    paymentPage.clickCustomerReferenceNumberButton()
+    paymentPage.selectCustomerButton()
+    paymentPage.inputPaymentAmount()
+    paymentPage.clickNextButton()
+    // paymentPage.paymentStep2
+    paymentPage.clickPaymentMethod()
+    paymentPage.addingNewCard()
+    paymentPage.clickFinishButton()
+    paymentPage.clickPostThisPaymentButton()
 
-  //   cy.url().should('contains', `${ Cypress.config().lift.baseUrl }/payments/new/onetime_debit`);
-  //   homePage.clientSelectionForm
-  //     .should('contains.text', ' 863 Virginia Housing ')    
-  // });
+    cy.url().should('contains', `${ Cypress.config().lift.baseUrl }/payments/new/onetime_debit`);
+    homePage.clientSelectionForm
+      .should('contains.text', ' 863 Virginia Housing ')    
+  });
 
   it('should create a one time payment successfully', { tags: '@smoke' }, function () {
     paymentPage.openOneTimeDebitPayment()
@@ -49,6 +51,7 @@ describe('Lift Payment', { tags: [ '@Home', '@regression' ] }, () => {
     paymentPage.inputPaymentAmount()
     paymentPage.clickNextButton()
     paymentPage.selectAvailablePaymentAccount()
+    paymentPage.nameOnPaymentAccount
     paymentPage.clickFinishButton()
     paymentPage.clickPostThisPaymentButton()
 

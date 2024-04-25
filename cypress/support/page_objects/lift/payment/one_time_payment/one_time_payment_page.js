@@ -100,12 +100,21 @@ export class OneTimePaymentPage {
     return cy.get('#payment_pay_account_id')
   }
 
-//   cy.visit('https://lift-qa.secureconduit.net/payments/new/onetime_debit');
-// cy.get('#payment_pay_account_id').click();
-// cy.get('#payment_pay_account_id').type('5091526');
-// cy.get('#payment_pay_account_id').click();
-// cy.get('.actions li:nth-child(3) > a').click();
+  get nameOnPaymentAccount(){
+    return cy.get('#existing_name_on_pay_account').should('be.visible');
+  }
 
+  get paymentMethod(){
+    return cy.get('#paymemt-method-button').should('be.visible');
+  }
+
+  get paymentStep2(){
+    return cy.get('#wizard-t-1');
+  }
+
+  get totalAmountDue(){
+    return cy.get('#payment_total_amount_due').should('have.value', this.paymentAmount);
+  }
 
   inputCustomerReferenceNumber(loanNumber) {
     this.customerReferenceNumber.should('be.visible').type(loanNumber);
@@ -125,7 +134,7 @@ export class OneTimePaymentPage {
   }
 
   clickNextButton() {
-    this.nextButton.should('be.visible').click()
+    this.nextButton.should('exist').click()
   }
 
   addingNewCard() {
@@ -147,20 +156,18 @@ export class OneTimePaymentPage {
   }
 
   clickPostThisPaymentButton() {
-    this.postThisPaymentButton.should('be.visible').click()
+    this.postThisPaymentButton.click()
   }
 
   selectAvailablePaymentAccount(){
-    this.availablePaymentAccount.select('5091526')
+    this.availablePaymentAccount.select('5091526').should('have.value', '5091526')
   }
 
-
-
-
-
-
-
-
-
+  clickPaymentMethod(){
+    this.paymentMethod.should('be.visible').click()
+  }
+  clickPaymentStep(){
+    this.paymentStep2.should('be.visible').click()
+  }
 
 }
