@@ -24,4 +24,11 @@ export class MockLoanServicePayloadGenerator {
       message: message
     };
   }
+
+  generateMfaPayload(clientId, email) {
+    return {
+      client_id: clientId,
+      email: email
+    };
+  }
 }

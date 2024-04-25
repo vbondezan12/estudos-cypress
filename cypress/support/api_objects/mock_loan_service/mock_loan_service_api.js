@@ -63,12 +63,12 @@ export class MockLoanServiceApi extends AuthenticationUtils {
     });
   }
 
-  getVhdaLastMfaCode(body) {
+  getLastMfaCode(clientId, email) {
     return cy.request({
       method: 'GET',
       url: `${ baseUrl }/test/mfa`,
       failOnStatusCode: true,
-      body: body
+      body: payloadGenerator.generateMfaPayload(clientId, email)
     });
   }
 }
