@@ -1,9 +1,10 @@
-import { CLIENT } from '../../../config/constants';
-import { MockLoanServiceApi } from '../../api_objects/mock_loan_service/mock_loan_service_api';
+import { CLIENT } from '../../../../config/constants';
+import { MockLoanServiceApi } from '../../../api_objects/mock_loan_service/mock_loan_service_api';
+
 
 const url = `${ Cypress.config().lift.baseUrl }/sessions/login`;
 
-export class LoginPage extends MockLoanServiceApi{
+export class LoginPage extends MockLoanServiceApi {
   open() {
     cy.visit(url);
   }
