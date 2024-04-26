@@ -18,5 +18,5 @@ export class SecureMessageCenter {
   get unreadMessage() {
     cy.get('.unread_row:nth-child(1) > td:nth-child(1)');
   }
-  
+
 }
