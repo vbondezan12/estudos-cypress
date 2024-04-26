@@ -8,7 +8,7 @@ import { MfaPage } from '../../../../../support/page_objects/lift/login/mfa_page
 
 describe('Lift Payment', { tags: [ '@Home', '@regression' ] }, () => {
   const loginPage = new LoginPage();
-  const mockLoanServiceApi = new MockLoanServiceApi();  
+  const mockLoanServiceApi = new MockLoanServiceApi();
   const paymentPage = new OneTimePaymentPage();
   const homePage = new HomePage();
   const mfaPage = new MfaPage()
@@ -31,31 +31,50 @@ describe('Lift Payment', { tags: [ '@Home', '@regression' ] }, () => {
     });
   });
 
-  it('should create a one time payment successfully', { tags: '@smoke' }, function () {
+  it('should create a one time payment adding card information successfully', { tags: '@smoke' }, function () {
     paymentPage.openOneTimeDebitPayment()
     paymentPage.inputCustomerReferenceNumber('130369')
     paymentPage.clickCustomerReferenceNumberButton()
     paymentPage.selectCustomerButton()
+    paymentPage.inputEffectiveDate()
     paymentPage.inputPaymentAmount()
+    // Hard wait needed for payment amount save
+    // eslint-disable-next-line
+    cy.wait(1000)
     paymentPage.clickNextButton()
-    // paymentPage.paymentStep2
+    // Hard wait needed to change from one page to the other
+    // eslint-disable-next-line
+    cy.wait(3000)
     paymentPage.clickPaymentMethod()
     paymentPage.addingNewCard()
     paymentPage.clickFinishButton()
     paymentPage.clickPostThisPaymentButton()
 
+
     cy.url().should('contains', `${ Cypress.config().lift.baseUrl }/payments/new/onetime_debit`);
     homePage.clientSelectionForm
-      .should('contains.text', ' 863 Virginia Housing ')    
+      .should('contains.text', ' 863 Virginia Housing ')
+    paymentPage.transactionSuccessMessage
+      .should('have.text', 'Thank You')
+    paymentPage.thankYouTittle
+      .should('have.text', 'The information detailed below has been successfully submitted for processing.')
+
   });
 
-  it('should create a one time payment successfully', { tags: '@smoke' }, function () {
+  it.only('should create a one time payment successfully with saved card', { tags: '@smoke' }, function () {
     paymentPage.openOneTimeDebitPayment()
     paymentPage.inputCustomerReferenceNumber('130369')
     paymentPage.clickCustomerReferenceNumberButton()
     paymentPage.selectCustomerButton()
+    paymentPage.inputEffectiveDate()
     paymentPage.inputPaymentAmount()
+    // Hard wait needed for payment amount save
+    // eslint-disable-next-line
+    cy.wait(1000)
     paymentPage.clickNextButton()
+    // Hard wait needed to change from one page to the other
+    // eslint-disable-next-line
+    cy.wait(3000)
     paymentPage.selectAvailablePaymentAccount()
     paymentPage.nameOnPaymentAccount
     paymentPage.clickFinishButton()
@@ -63,7 +82,7 @@ describe('Lift Payment', { tags: [ '@Home', '@regression' ] }, () => {
 
     cy.url().should('contains', `${ Cypress.config().lift.baseUrl }/payments/new/onetime_debit`);
     homePage.clientSelectionForm
-      .should('contains.text', ' 863 Virginia Housing ')    
+      .should('contains.text', ' 863 Virginia Housing ')
   });
 
 

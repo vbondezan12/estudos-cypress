@@ -3,33 +3,37 @@ const url = `${ Cypress.config().lift.baseUrl }/sessions/mfa`
 
 export class MfaPage {
 
-    get mfaInput() {
-        return cy.get('#mfa_token');
-    }
+  open(){
+    cy.visit(url)
+  }
 
-    get mfaConfirmButton() {
-        return cy.get('#mfa_form');
-    }
+  get mfaInput() {
+    return cy.get('#mfa_token');
+  }
 
-    get mfaToastMessage() {
-        return cy.get('.toast-message');
-    }
+  get mfaConfirmButton() {
+    return cy.get('#mfa_form');
+  }
 
-    get mfaResendToken() {
-        return cy.get(':nth-child(7) > a');
-    }
+  get mfaToastMessage() {
+    return cy.get('.toast-message');
+  }
 
-    enterMfaInput(mfaCode) {
-        this.mfaInput.type(`${mfaCode}`)
-    }
+  get mfaResendToken() {
+    return cy.get(':nth-child(7) > a');
+  }
 
-    clickMfaConfirmButton() {
-        this.mfaConfirmButton.submit()
-    }
+  enterMfaInput(mfaCode) {
+    this.mfaInput.type(`${ mfaCode }`)
+  }
 
-    clickMfaResendToken() {
-        this.mfaResendToken.click()
-    }
+  clickMfaConfirmButton() {
+    this.mfaConfirmButton.submit()
+  }
+
+  clickMfaResendToken() {
+    this.mfaResendToken.click()
+  }
 
 
 }

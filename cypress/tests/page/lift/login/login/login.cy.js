@@ -28,7 +28,6 @@ describe('Lift Login', { tags: [ '@Login', '@regression' ] }, () => {
 
     loginPage.open()
     loginPage.login(username, password, clientId);
-    cy.wait(1000)
     loginPage.getMfaCode(testCredential.email).then((response) => {
       expect(response.status).to.eq(200)
       mfaPage.enterMfaInput(response.body)
@@ -59,7 +58,7 @@ describe('Lift Login', { tags: [ '@Login', '@regression' ] }, () => {
 
     loginPage.open()
     loginPage.login(username, password, clientId);
-    mfaPage.enterMfaInput(faker.number.int({min: 100000, max: 999999 }))
+    mfaPage.enterMfaInput(faker.number.int({ min: 100000, max: 999999 }))
     mfaPage.clickMfaConfirmButton()
 
     cy.url().should('contains', `${ Cypress.config().lift.baseUrl }/sessions/mfa`);
@@ -76,19 +75,18 @@ describe('Lift Login', { tags: [ '@Login', '@regression' ] }, () => {
 
     loginPage.open()
     loginPage.login(username, password, clientId);
-    cy.wait(500)
     for (let i = 0; i < 2; i++) {
-        loginPage.getMfaCode(testCredential.email).then((response) => {          
-          if (i === 0){
-            response1 = response.body
-            mfaPage.clickMfaResendToken()
-          } else {
-            response2 = response.body
-            mfaPage.enterMfaInput(response2)
-            mfaPage.clickMfaConfirmButton()
-            expect(response1).not.to.equal(response2);
-          }
-      });      
+      loginPage.getMfaCode(testCredential.email).then((response) => {
+        if (i === 0){
+          response1 = response.body
+          mfaPage.clickMfaResendToken()
+        } else {
+          response2 = response.body
+          mfaPage.enterMfaInput(response2)
+          mfaPage.clickMfaConfirmButton()
+          expect(response1).not.to.equal(response2);
+        }
+      });
     }
     cy.url().should('contains', `${ Cypress.config().lift.baseUrl }/home`);
   });

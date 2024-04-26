@@ -50,13 +50,11 @@ export class TransactionListing {
   }
 
   setListingStartDate() {
-    this.listingStartDate.type(`${ faker.date.recent({ days: 100}).toLocaleDateString('en-US') }`);
+    this.listingStartDate.type(`${ faker.date.recent({ days: 100 }).toLocaleDateString('en-US') }`);
   }
 
   clickSearchButton() {
     this.searchButton.click();
   }
-
-
 
 }

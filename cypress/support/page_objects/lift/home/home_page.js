@@ -1,5 +1,5 @@
-const url = `${Cypress.config().lift.baseUrl}/home`;
-const urlReports = `${Cypress.config().lift.baseUrl}/reports/transaction_listing`;
+const url = `${ Cypress.config().lift.baseUrl }/home`;
+const urlReports = `${ Cypress.config().lift.baseUrl }/reports/transaction_listing`;
 import { CLIENT } from '../../../../config/constants';
 
 
@@ -40,7 +40,7 @@ export class HomePage {
       case CLIENT.VENTANEX:
         return cy.get('.client-select:nth-child(3652) > a').click();
         break
-      break
+        break
     }
   }
 }

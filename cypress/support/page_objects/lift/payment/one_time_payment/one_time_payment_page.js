@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-const oneTimePaymentUrl = `${Cypress.config().lift.baseUrl}/payments/new/onetime_debit`
+const oneTimePaymentUrl = `${ Cypress.config().lift.baseUrl }/payments/new/onetime_debit`
 
 export class OneTimePaymentPage {
 
@@ -31,24 +31,25 @@ export class OneTimePaymentPage {
     return cy.get('#account_holder_select_9018194').should('be.visible');
   }
 
-  get paymentAmount() { 
-    return cy.get('#payment_amount').clear();
+  get paymentAmount() {
+    return cy.get('#payment_amount');
   }
 
   get nextButton() {
-    return cy.get('[aria-hidden="false"] > a');
+    return cy.get('[aria-hidden="false"] > a')
+      .should('have.text', 'Next')
+      .should('exist');
   }
 
   get efectiveDate() {
     return cy.get('#payment_effective_date').clear();
-
   }
 
-  get cardNumber(){
+  get cardNumber() {
     return cy.get('#payment_pay_account_attributes_account_number');
   }
 
-  get expirationMonth(){
+  get expirationMonth() {
     return cy.get('#payment_pay_account_attributes_expiration_month');
   }
 
@@ -96,24 +97,38 @@ export class OneTimePaymentPage {
     return cy.get('.add_payment')
   }
 
-  get availablePaymentAccount(){
+  get availablePaymentAccount() {
     return cy.get('#payment_pay_account_id')
   }
 
-  get nameOnPaymentAccount(){
+  get nameOnPaymentAccount() {
     return cy.get('#existing_name_on_pay_account').should('be.visible');
   }
 
-  get paymentMethod(){
+  get paymentMethod() {
     return cy.get('#paymemt-method-button').should('be.visible');
   }
 
-  get paymentStep2(){
+  get paymentStep2() {
     return cy.get('#wizard-t-1');
   }
 
-  get totalAmountDue(){
-    return cy.get('#payment_total_amount_due').should('have.value', this.paymentAmount);
+  get totalAmountDue() {
+    return cy.get('#payment_total_amount_due');
+  }
+
+  get printButton() {
+    return cy.get('.row > :nth-child(2) > .btn')
+      .should('be.visible')
+      .should('exist')
+  }
+
+  get thankYouTittle() {
+    return cy.get('#recap .modal-title');
+  }
+
+  get transactionSuccessMessage() {
+    return cy.get('.text-center:nth-child(1) > p');
   }
 
   inputCustomerReferenceNumber(loanNumber) {
@@ -129,12 +144,19 @@ export class OneTimePaymentPage {
     this.customerSelectionButton.click();
   }
 
+  inputEffectiveDate() {
+    this.efectiveDate.type(`${ faker.date.future({ days: faker.finance.amount({ min: 1, max: 30 }) }).toLocaleDateString('en-US') }`)
+  }
+
   inputPaymentAmount() {
-    this.paymentAmount.type(`${ faker.finance.amount({ min: 1, max: 100 }) }`)
+    const randonAmount = faker.finance.amount({ min: 1, max: 100 })
+    this.paymentAmount.clear()
+    this.paymentAmount.type(randonAmount)
+    this.totalAmountDue.should('have.value', randonAmount)
   }
 
   clickNextButton() {
-    this.nextButton.should('exist').click()
+    this.nextButton.click()
   }
 
   addingNewCard() {
@@ -145,10 +167,10 @@ export class OneTimePaymentPage {
     this.cardFirstName.type(`${ faker.person.firstName() }`);
     this.cardLastName.type(`${ faker.person.lastName() }`);
     this.streetName1.type(`${ faker.location.street() }`);
-    this.streetName2.type(`${ faker.location.street()}`);
-    this.cityName.type(`${ faker.location.city()}`);
-    this.stateName.select(`${ faker.location.state()}`);
-    this.zipCode.type(`${ faker.number.int({min: 11111, max: 99999})}`);
+    this.streetName2.type(`${ faker.location.street() }`);
+    this.cityName.type(`${ faker.location.city() }`);
+    this.stateName.select(`${ faker.location.state() }`);
+    this.zipCode.type(`${ faker.number.int({ min: 11111, max: 99999 }) }`);
   }
 
   clickFinishButton() {
@@ -159,15 +181,20 @@ export class OneTimePaymentPage {
     this.postThisPaymentButton.click()
   }
 
-  selectAvailablePaymentAccount(){
+  selectAvailablePaymentAccount() {
     this.availablePaymentAccount.select('5091526').should('have.value', '5091526')
   }
 
-  clickPaymentMethod(){
+  clickPaymentMethod() {
     this.paymentMethod.should('be.visible').click()
   }
-  clickPaymentStep(){
+
+  clickPaymentStep() {
     this.paymentStep2.should('be.visible').click()
+  }
+
+  clickPrintButton() {
+    this.printButton.click()
   }
 
 }
