@@ -2,81 +2,81 @@ const url = `${ Cypress.config().vhda.baseUrl }/login`;
 
 export class LoginPage{
 
-    open() {
-        return cy.visit(url);
-      }
-    secondOpen() {
-        return cy.visit(urlMultifactorPage);
-      }
-    get userNameInput() {
-        return cy.get('#user_username');
-      }   
-    get passwordInput() {
-        return cy.get('#user_password');
-      } 
-      
-    get loginButton() {
-        return cy.get('.btn');
-      } 
+  open() {
+    return cy.visit(url);
+  }
+  secondOpen() {
+    return cy.visit(urlMultifactorPage);
+  }
+  get userNameInput() {
+    return cy.get('#user_username');
+  }
+  get passwordInput() {
+    return cy.get('#user_password');
+  }
 
-    get toastMessage() {
-        return cy.get('.toast-message');
-      }
+  get loginButton() {
+    return cy.get('.btn');
+  }
 
-    get errorMessage() {
-        return cy.get('.card-body');
-      }
+  get toastMessage() {
+    return cy.get('.toast-message');
+  }
 
-    get multifactorToken() {
-        return cy.get('#multifactor_token_token');
-      }  
-      
-    get authenticateButton() {
-        return cy.get('.btn');
-      }
+  get errorMessage() {
+    return cy.get('.card-body');
+  }
 
-    get toastMessageMfaPage() {
-        return cy.get('.toast-message');
-      }
+  get multifactorToken() {
+    return cy.get('#multifactor_token_token');
+  }
 
-    login(userName,password,mfa){
-      this.open();
-      enterUserName(userName);
-      enterPssword(password);
-      this.clickLoginButton();
-      this.openMultifactorPage
-      this.enterMFACode(mfa)
-    }
+  get authenticateButton() {
+    return cy.get('.btn');
+  }
 
-     openPage(){
-        this.open();
-      }
+  get toastMessageMfaPage() {
+    return cy.get('.toast-message');
+  }
 
-     enterUserName(userName){
-      this.userNameInput.type(userName)
-     }
-  
-     enterPassword(password){
-      this.passwordInput.type(password)
-     }
-  
-     clickLoginButton(){
-      this.loginButton.click();
-     }
+  login(userName, password, mfa){
+    this.open();
+    enterUserName(userName);
+    enterPssword(password);
+    this.clickLoginButton();
+    this.openMultifactorPage
+    this.enterMFACode(mfa)
+  }
 
-     openMultifactorPage(){
-      this.secondOpen();
-    }
+  openPage(){
+    this.open();
+  }
 
-     enterMFACode(mfaCode){
-      this.multifactorToken.type(mfaCode)
-     }
+  enterUserName(userName){
+    this.userNameInput.type(userName)
+  }
 
-     clickAuthenticateButton(){
-      this.authenticateButton.click();
-     }
+  enterPassword(password){
+    this.passwordInput.type(password)
+  }
 
-    }
+  clickLoginButton(){
+    this.loginButton.click();
+  }
+
+  openMultifactorPage(){
+    this.secondOpen();
+  }
+
+  enterMFACode(mfaCode){
+    this.multifactorToken.type(mfaCode)
+  }
+
+  clickAuthenticateButton(){
+    this.authenticateButton.click();
+  }
+
+}
 
 
 

@@ -18,21 +18,20 @@
     "cypress:open:uat": "npm run cypress:open -- --env env=uat",
     "lint": "npx eslint \"cypress/**\"",
     "pre-commit": "npm run lint && npm run api:all:qa",
-    "pre-commit:uat": "npm run lint && npm run api:all:uat"
+    "pre-commit:uat": "npm run lint && npm run api:all:uat",
+    "page:vhda:qa": "cypress run --spec cypress/tests/page/vhda/login_page/*.cy.js -- --env env=qa"
   },
   "dependencies": {
+    "@faker-js/faker": "^8.4.1",
     "cypress": "^13.2.0",
     "cypress-mochawesome-reporter": "^3.8.1",
     "moment": "^2.29.4",
     "xml2js": "^0.6.2"
   },
   "devDependencies": {
-    "@faker-js/faker": "^8.4.1",
     "@stylistic/eslint-plugin": "^1.6.2",
     "@stylistic/eslint-plugin-js": "^1.6.2",
     "eslint": "^8.56.0",
-    "eslint-plugin-cypress": "^2.15.1",
-    "faker": "^5.5.3",
-    "Faker": "^0.7.2"
+    "eslint-plugin-cypress": "^2.15.1"
   }
 }

@@ -2,7 +2,6 @@ import { faker } from '@faker-js/faker';
 import { LoginPage } from '../../../support/page_objects/lift/login_page';
 import { MockLoanServiceApi } from '../../../support/api_objects/mock_loan_service/mock_loan_service_api';
 import { CLIENT } from '../../../config/constants';
-import { LOAN_STATUS } from '../../../config/constants';
 
 
 describe('Lift Login', { tags: [ '@Login', '@regression' ] }, () => {
@@ -29,7 +28,7 @@ describe('Lift Login', { tags: [ '@Login', '@regression' ] }, () => {
 
     cy.url().should('contains', `${ Cypress.config().lift.baseUrl }/home`);
   });
-  
+
 
   it('should present toast message from invalid credentials', { tags: '@smoke' }, function () {
     const username = faker.internet.userName();
