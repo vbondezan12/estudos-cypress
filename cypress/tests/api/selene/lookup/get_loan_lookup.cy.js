@@ -1,4 +1,4 @@
-import { LOAN_STATUS } from '../../../../config/constants';
+import { CLIENT, LOAN_STATUS } from '../../../../config/constants';
 import { SeleneApi } from '../../../../support/api_objects/selene/selene_api';
 
 describe('API Tests: Selene loan lookup', function () {
@@ -6,7 +6,7 @@ describe('API Tests: Selene loan lookup', function () {
   let testCredential;
 
   before(() => {
-    seleneApi.getTestLoans(LOAN_STATUS.CURRENT).then((response) => {
+    seleneApi.getTestLoans(CLIENT.SELENE, LOAN_STATUS.CURRENT).then((response) => {
       testCredential = response.body[0];
     });
   });
