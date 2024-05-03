@@ -1,13 +1,19 @@
 import { faker } from '@faker-js/faker';
+import { LOAN_STATUS } from '../../../../config/constants';
 import { ServiceMacApi } from '../../../../support/api_objects/service_mac/servicemac_api';
 
 describe('API Tests: ServiceMac', function () {
   const serviceMacApi = new ServiceMacApi();
+  let testCredential;
+
+  before(() => {
+    serviceMacApi.getTestLoans(LOAN_STATUS.CURRENT).then((response) => {
+      testCredential = response.body[0];
+    });
+  });
 
   xit('Post Account Holder [200]: post valid account_holders holder', () => {
-
-    const loanNumber = serviceMacApi.cypressEnv.loan_number;
-    let payload = serviceMacApi.payloadGenerator.generateData('account_holder', loanNumber);
+    let payload = serviceMacApi.payloadGenerator.generateData('account_holder', testCredential.loan_number);
 
     serviceMacApi.postAccountHolder(payload).then((response) => {
       expect(response.status).to.eq(201);
@@ -36,7 +42,7 @@ describe('API Tests: ServiceMac', function () {
       expect(response.body.errors).to.have.property('loan_number');
       expect(response.body.errors.loan_number).to.be.an('array');
       expect(response.body.errors.loan_number).to.have.length(1);
-      expect(response.body.errors.loan_number[ 0 ]).to.equal('can\'t be blank');
+      expect(response.body.errors.loan_number[0]).to.equal('can\'t be blank');
     });
   });
 
@@ -52,7 +58,7 @@ describe('API Tests: ServiceMac', function () {
       expect(response.body.errors).to.have.property('ssn');
       expect(response.body.errors.ssn).to.be.an('array');
       expect(response.body.errors.ssn).to.have.length(1);
-      expect(response.body.errors.ssn[ 0 ]).to.equal('can\'t be blank');
+      expect(response.body.errors.ssn[0]).to.equal('can\'t be blank');
     });
   });
 
@@ -68,7 +74,7 @@ describe('API Tests: ServiceMac', function () {
       expect(response.body.errors).to.have.property('name');
       expect(response.body.errors.name).to.be.an('array');
       expect(response.body.errors.name).to.have.length(1);
-      expect(response.body.errors.name[ 0 ]).to.equal('can\'t be blank');
+      expect(response.body.errors.name[0]).to.equal('can\'t be blank');
     });
   });
 
@@ -90,9 +96,9 @@ describe('API Tests: ServiceMac', function () {
       expect(response.body.errors.name).to.have.length(1);
       expect(response.body.errors.loan_number).to.have.length(1);
       expect(response.body.errors.ssn).to.have.length(1);
-      expect(response.body.errors.name[ 0 ]).to.equal('can\'t be blank');
-      expect(response.body.errors.loan_number[ 0 ]).to.equal('can\'t be blank');
-      expect(response.body.errors.ssn[ 0 ]).to.equal('can\'t be blank');
+      expect(response.body.errors.name[0]).to.equal('can\'t be blank');
+      expect(response.body.errors.loan_number[0]).to.equal('can\'t be blank');
+      expect(response.body.errors.ssn[0]).to.equal('can\'t be blank');
     });
   });
 });

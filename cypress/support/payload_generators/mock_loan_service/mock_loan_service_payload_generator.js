@@ -25,14 +25,10 @@ export class MockLoanServicePayloadGenerator {
     };
   }
 
-  /**
-   * @param email 
-   * @returns {{email}}
-   */
-  generateMFAPayload(email) {
+  generateMfaPayload(clientId, email) {
     return {
+      client_id: clientId,
       email: email
     };
   }
-
 }

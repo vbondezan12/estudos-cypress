@@ -13,7 +13,7 @@ describe('Quickpay Login', { tags: [ '@Login', '@regression' ] }, () => {
     loginPage = new LoginPage();
     const testPayload = vhdaApi.payloadGenerator.generateTestCredentialsLookupPayload(LOAN_STATUS.CURRENT);
     vhdaApi.getTestLoans(testPayload).then((response) => {
-      testCredential = response.body['test_credentials'][0];
+      testCredential = response.body[0];
     });
   });
 

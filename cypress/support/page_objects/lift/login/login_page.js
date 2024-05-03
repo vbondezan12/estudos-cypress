@@ -1,6 +1,10 @@
+import { CLIENT } from '../../../../config/constants';
+import { MockLoanServiceApi } from '../../../api_objects/mock_loan_service/mock_loan_service_api';
+
+
 const url = `${ Cypress.config().lift.baseUrl }/sessions/login`;
 
-export class LoginPage {
+export class LoginPage extends MockLoanServiceApi {
   open() {
     cy.visit(url);
   }
@@ -50,5 +54,9 @@ export class LoginPage {
     this.enterPassword(password);
     this.enterClientId(clientId);
     this.clickLogin();
+  }
+
+  getMfaCode(email) {
+    return this.getLastMfaCode(CLIENT.VENTANEX, email);
   }
 }

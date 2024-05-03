@@ -33,7 +33,7 @@ describe('Quickpay New Account', { tags: [ '@NewAccount', '@regression' ] }, () 
   beforeEach(() => {
     const testPayload = vhdaApi.payloadGenerator.generateTestCredentialsLookupPayload(LOAN_STATUS.CURRENT);
     vhdaApi.getTestLoans(testPayload).then((response) => {
-      testCredential = response.body['test_credentials'][0];
+      testCredential = response.body[0];
       const loanNumber = testCredential.loan_number;
       const zipCode = testCredential.zip_code;
       const ssn = testCredential.last_4_ssn;

@@ -10,7 +10,7 @@ const randomDate = moment(
   `2024-${ randomMonth.toString().padStart(2, '0') }-${ randomDay.toString().padStart(2, '0') }`)
   .format('YYYY-MM-DD');
 
-export class ServiceMacAccountHolderPayloadGenerator extends MockLoanServicePayloadGenerator {
+export class ServiceMacPayloadGenerator extends MockLoanServicePayloadGenerator {
 
   generateData(type, loanNumber = null) {
     let jsonData;

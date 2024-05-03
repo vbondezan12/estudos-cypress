@@ -8,9 +8,8 @@ describe('vhda: GET payment', function () {
   let testCredential;
 
   before(() => {
-    const testPayload = vhdaApi.payloadGenerator.generateTestCredentialsLookupPayload(LOAN_STATUS.CURRENT);
-    vhdaApi.getTestLoans(testPayload).then((response) => {
-      testCredential = response.body[ 'test_credentials' ][ 0 ];
+    vhdaApi.getTestLoans(LOAN_STATUS.CURRENT).then((response) => {
+      testCredential = response.body[0];
     });
   });
 
