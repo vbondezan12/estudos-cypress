@@ -76,6 +76,13 @@ export class VhdaPayloadGenerator extends MockLoanServicePayloadGenerator {
     };
   }
 
+  switchLoan(loanNumber) {
+    let loan = {
+      loan_number:loanNumber
+    }
+    return loan;
+  }
+
   bankAccounts() {
     return {
       routing_number: '011000028',
