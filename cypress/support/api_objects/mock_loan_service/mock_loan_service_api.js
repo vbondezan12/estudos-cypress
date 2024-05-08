@@ -30,7 +30,6 @@ export class MockLoanServiceApi extends AuthenticationUtils {
    * @param {JSON} body - a JSON object containing the loan number
    * @return {Response} the response from the loan retrieval request
    */
-
   getMspLoan(body) {
     return cy.request({
       method: 'GET',
@@ -64,12 +63,11 @@ export class MockLoanServiceApi extends AuthenticationUtils {
     });
   }
 
-  // Method that run the endpoint do generate the MFA code. Code used to login in VHDA webpay in qa enviroment
   getLastMfaCode(clientId, email) {
     return cy.request({
-      method: 'GET', // this variable save the type of method/endpoint we need use
-      url: `${ baseUrl }/test/mfa`, // this variable save the url/lik of endpoint that we need run
-      failOnStatusCode: true, // Don't allow that bad response pass into then
+      method: 'GET',
+      url: `${ baseUrl }/test/mfa`,
+      failOnStatusCode: true,
       body: payloadGenerator.generateMfaPayload(clientId, email)
     });
   }
