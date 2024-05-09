@@ -17,7 +17,7 @@
     "cypress:open:qa": "npm run cypress:open -- --env env=qa",
     "cypress:open:uat": "npm run cypress:open -- --env env=uat",
     "lint": "npx eslint \"cypress/**\"",
-    "pre-commit": "npm run lint && npm run api:all:qa",
+    "pre-commit": "npm run lint && npm run api:all:qa && npm run ui:all:qa",
     "pre-commit:uat": "npm run lint && npm run api:all:uat",
     "ui:all": "cypress run --spec cypress/tests/page/**/*.cy.js",
     "ui:all:qa": "npm run ui:all -- --env env=qa",
