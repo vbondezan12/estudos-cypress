@@ -1,6 +1,8 @@
+import { VhdaApi } from '../../../api_objects/vhda/vhda_api';
+
 const url = `${ Cypress.config().vhda.baseUrl }/quick_pay/new`;
 
-export class LoginPage {
+export class QuickPayLoginPage extends VhdaApi {
   get quickPayButton() {
     return cy.get('#login');
   }
@@ -26,7 +28,7 @@ export class LoginPage {
   }
 
   get ssnErrorMessage() {
-    return cy.get('.parsley-ssn')
+    return cy.get('.parsley-ssn');
   }
 
   open() {

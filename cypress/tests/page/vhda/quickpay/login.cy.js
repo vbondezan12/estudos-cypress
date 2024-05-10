@@ -1,19 +1,19 @@
-import { LoginPage } from '../../../../support/page_objects/vhda/quick_pay/login_page';
+import { faker } from '@faker-js/faker';
 import { LOAN_STATUS } from '../../../../config/constants';
 import { VhdaApi } from '../../../../support/api_objects/vhda/vhda_api';
-import { faker } from '@faker-js/faker';
+import { QuickPayLoginPage } from '../../../../support/page_objects/vhda/quick_pay/quick_pay_login_page';
 
 describe('Quickpay Login', { tags: [ '@Login', '@regression' ] }, () => {
   const baseUrl = Cypress.config().vhda.baseUrl;
-  let loginPage;
+  let quickPay;
   let testCredential;
   const vhdaApi = new VhdaApi();
 
   before(() => {
-    loginPage = new LoginPage();
+    quickPay = new QuickPayLoginPage();
     const testPayload = vhdaApi.payloadGenerator.generateTestCredentialsLookupPayload(LOAN_STATUS.CURRENT);
     vhdaApi.getTestLoans(testPayload).then((response) => {
-      testCredential = response.body[0];
+      testCredential = response.body[ 0 ];
     });
   });
 
@@ -22,7 +22,7 @@ describe('Quickpay Login', { tags: [ '@Login', '@regression' ] }, () => {
     const zipCode = testCredential.zip_code;
     const ssn = testCredential.last_4_ssn;
 
-    loginPage.login(loanNumber, zipCode, ssn);
+    quickPay.login(loanNumber, zipCode, ssn);
 
     cy.url().should('contains', `${ Cypress.config().vhda.baseUrl }/payments/new`);
   });
@@ -32,10 +32,10 @@ describe('Quickpay Login', { tags: [ '@Login', '@regression' ] }, () => {
     const zipCode = faker.number.int({ min: 1, max: 9 });
     const ssn = faker.number.int({ min: 1000, max: 9999 });
 
-    loginPage.login(loanNumber, zipCode, ssn);
+    quickPay.login(loanNumber, zipCode, ssn);
 
     cy.url().should('contains', `${ baseUrl }/quick_pay/new`);
-    loginPage.toastMessage
+    quickPay.toastMessage
       .should('be.visible')
       .should('have.text', 'Invalid loan number, zip, or ssn');
   });
@@ -45,10 +45,10 @@ describe('Quickpay Login', { tags: [ '@Login', '@regression' ] }, () => {
     const zipCode = faker.number.int({ min: 1, max: 9 });
     const ssn = faker.number.int({ min: 1, max: 9 });
 
-    loginPage.login(loanNumber, zipCode, ssn);
+    quickPay.login(loanNumber, zipCode, ssn);
 
     cy.url().should('contains', `${ baseUrl }/quick_pay/new`);
-    loginPage.ssnErrorMessage
+    quickPay.ssnErrorMessage
       .should('be.visible')
       .should('have.text', 'Must be 4 characters');
   });
@@ -58,12 +58,12 @@ describe('Quickpay Login', { tags: [ '@Login', '@regression' ] }, () => {
     const zipCode = faker.number.int({ min: 1, max: 9 });
     const ssn = faker.number.int({ min: 1, max: 9 });
 
-    loginPage.login(loanNumber, zipCode, ssn);
+    quickPay.login(loanNumber, zipCode, ssn);
 
     cy.url().should('contains', `${ baseUrl }/quick_pay/new`);
-    loginPage.goToLoginLink.should('have.text', 'Go to Login');
+    quickPay.goToLoginLink.should('have.text', 'Go to Login');
 
-    loginPage.goToLoginLink.click();
+    quickPay.goToLoginLink.click();
     cy.url().should('contains', `${ baseUrl }/login`);
   });
 });
