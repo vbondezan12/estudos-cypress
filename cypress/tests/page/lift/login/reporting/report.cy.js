@@ -6,7 +6,7 @@ import { CLIENT } from '../../../../../config/constants';
 import { LOAN_STATUS } from '../../../../../config/constants';
 import { MfaPage } from '../../../../../support/page_objects/lift/login/mfa_page';
 
-describe('Lift Home', { tags: [ '@Home', '@regression' ] }, () => {
+describe('Lift Reporting', { tags: [ '@Home', '@regression' ] }, () => {
   const loginPage = new LoginPage();
   const mockLoanServiceApi = new MockLoanServiceApi();
   const homePage = new HomePage();
@@ -25,15 +25,15 @@ describe('Lift Home', { tags: [ '@Home', '@regression' ] }, () => {
         mfaPage.clickMfaConfirmButton()
       });
       cy.url().should('contains', `${ Cypress.config().lift.baseUrl }/home`);
+      homePage.clickEndtourButton()
+      homePage.clickClientSelectionForm()
+      homePage.clientSelection(CLIENT.VHDA)
     });
   });
 
-  it('should go the listing option on the side menu and search', { tags: '@smoke' }, function () {
-    homePage.clickEndtourButton()
-    homePage.clickClientSelectionForm()
-    homePage.clientSelection(CLIENT.VHDA)
+  it('should go the listing option by visiting the URL and list a transaction successfuly ', { tags: '@smoke' }, function () {
     transactionListing.openReportsListing()
-    transactionListing.setListingStartDate()
+    transactionListing.setListingStartDate('01/01/2024')
     transactionListing.clickSearchButton()
 
     cy.url().should('contains', `${ Cypress.config().lift.baseUrl }/reports/transaction_listing`);
@@ -42,5 +42,130 @@ describe('Lift Home', { tags: [ '@Home', '@regression' ] }, () => {
     transactionListing.transactionListed
       .should('not.be.empty')
       .should('be.visible')
+  });
+
+  it('should go the listing option by visiting the URL and not list a transaction successfuly', { tags: '@smoke' }, function () {
+    transactionListing.openReportsListing()
+    transactionListing.setListingStartDate('05/02/2024')
+    transactionListing.setListingEndDate('05/02/2024')
+    transactionListing.clickSearchButton()
+
+    cy.url().should('contains', `${ Cypress.config().lift.baseUrl }/reports/transaction_listing`);
+    homePage.clientSelectionForm
+      .should('contains.text', ' 863 Virginia Housing ')
+    transactionListing.totalAmountreported
+      .should('be.empty')
+  });
+
+  it('should list transation with [Pending Presentment] Status', { tags: '@smoke' }, function () {
+    transactionListing.openReportsListing()
+    transactionListing.setListingStartDate('04/01/2024')
+    transactionListing.setListingEndDate('05/02/2024')
+    transactionListing.selectStatusDropdownButton('Pending Presentment')
+    transactionListing.clickSearchButton()
+
+    cy.url().should('contains', `${ Cypress.config().lift.baseUrl }/reports/transaction_listing`);
+    homePage.clientSelectionForm
+      .should('contains.text', ' 863 Virginia Housing ')
+    transactionListing.transactionListed
+      .should('not.be.empty')
+      .should('be.visible')
+    transactionListing.pendingPresentmentTransactionStatus
+      .should('not.be.empty')
+      .should('contains.text', 'Pending Presentment')
+  });
+
+  it('should list transation with [Authorized - Sent For Deposit] Status', { tags: '@smoke' }, function () {
+    transactionListing.openReportsListing()
+    transactionListing.setListingStartDate('04/01/2024')
+    transactionListing.setListingEndDate('05/02/2024')
+    transactionListing.selectStatusDropdownButton('Authorized - Sent for Deposit')
+    transactionListing.clickSearchButton()
+
+    cy.url().should('contains', `${ Cypress.config().lift.baseUrl }/reports/transaction_listing`);
+    homePage.clientSelectionForm
+      .should('contains.text', ' 863 Virginia Housing ')
+    transactionListing.transactionListed
+      .should('not.be.empty')
+      .should('be.visible')
+    transactionListing.authorizedTransactionStatus
+      .should('not.be.empty')
+      .should('contains.text', 'Authorized - Sent for Deposit')
+  });
+
+  it('should list transation with [Card Declined] Status', { tags: '@smoke' }, function () {
+    transactionListing.openReportsListing()
+    transactionListing.setListingStartDate('04/01/2024')
+    transactionListing.setListingEndDate('05/02/2024')
+    transactionListing.selectStatusDropdownButton('Card Declined')
+    transactionListing.clickSearchButton()
+
+    cy.url().should('contains', `${ Cypress.config().lift.baseUrl }/reports/transaction_listing`);
+    homePage.clientSelectionForm
+      .should('contains.text', ' 863 Virginia Housing ')
+    transactionListing.transactionListed
+      .should('not.be.empty')
+      .should('be.visible')
+    transactionListing.cardDeclinedTransactionStatus
+      .should('not.be.empty')
+      .should('contains.text', 'Card Declined')
+  });
+
+  it('should list transation with [Card Refunded] Status', { tags: '@smoke' }, function () {
+    transactionListing.openReportsListing()
+    transactionListing.setListingStartDate('04/01/2024')
+    transactionListing.setListingEndDate('05/02/2024')
+    transactionListing.selectStatusDropdownButton('Card Refunded')
+    transactionListing.clickSearchButton()
+
+    cy.url().should('contains', `${ Cypress.config().lift.baseUrl }/reports/transaction_listing`);
+    homePage.clientSelectionForm
+      .should('contains.text', ' 863 Virginia Housing ')
+    transactionListing.transactionListed
+      .should('not.be.empty')
+      .should('be.visible')
+    transactionListing.cardRefundedTransactionStatus
+      .should('not.be.empty')
+      .should('contains.text', 'Card Refunded')
+  });
+
+  it('should list transation using Advance Options', { tags: '@smoke' }, function () {
+    transactionListing.openReportsListing()
+    transactionListing.setListingStartDate('04/01/2024')
+    transactionListing.setListingEndDate('05/02/2024')
+    transactionListing.clickAdvanceOptionsButton()
+    transactionListing.setListingAmount()
+    transactionListing.clickSearchButton()
+
+    cy.url().should('contains', `${ Cypress.config().lift.baseUrl }/reports/transaction_listing`);
+    homePage.clientSelectionForm
+      .should('contains.text', ' 863 Virginia Housing ')
+    transactionListing.transactionListed
+      .should('not.be.empty')
+      .should('be.visible')
+    transactionListing.totalAmountreported
+      .should('not.be.empty')
+      .should('contains.text', '$40.00')
+  });
+
+  it('should list transation and validate the details of one transaction', { tags: '@smoke' }, function () {
+    transactionListing.openReportsListing()
+    transactionListing.setListingStartDate('04/01/2024')
+    transactionListing.setListingEndDate('05/02/2024')
+    transactionListing.clickAdvanceOptionsButton()
+    transactionListing.setListingAmount()
+    transactionListing.clickSearchButton()
+    transactionListing.clickTransactionDetails()
+
+    cy.url().should('contains', `${ Cypress.config().lift.baseUrl }/reports/transaction_listing`);
+    homePage.clientSelectionForm
+      .should('contains.text', ' 863 Virginia Housing ')
+    transactionListing.transactionListed
+      .should('not.be.empty')
+      .should('be.visible')
+    transactionListing.clientReferenceNumber
+      .should('not.be.empty')
+      .should('be.visible')
+      .should('contains.text', '130369')
   });
 })

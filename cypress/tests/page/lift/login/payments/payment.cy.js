@@ -61,7 +61,7 @@ describe('Lift Payment', { tags: [ '@Home', '@regression' ] }, () => {
 
   });
 
-  it.only('should create a one time payment successfully with saved card', { tags: '@smoke' }, function () {
+  it('should create a one time payment successfully with saved card', { tags: '@smoke' }, function () {
     paymentPage.openOneTimeDebitPayment()
     paymentPage.inputCustomerReferenceNumber('130369')
     paymentPage.clickCustomerReferenceNumberButton()

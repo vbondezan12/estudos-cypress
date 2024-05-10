@@ -20,6 +20,7 @@
     "lint:fix": "npm run lint -- --fix",
     "pre-commit": "npm run lint && npm run api:all:qa && npm run ui:all:qa",
     "pre-commit:uat": "npm run lint && npm run api:all:uat",
+    "pre-commit:ui": "npm run lint && npm run ui:all",
     "ui:all": "cypress run --spec cypress/tests/page/**/*.cy.js",
     "ui:all:qa": "npm run ui:all -- --env env=qa",
     "ui:all:uat": "npm run ui:all -- --env env=uat",

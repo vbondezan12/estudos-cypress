@@ -1,4 +1,4 @@
-import { faker } from "@faker-js/faker";
+
 const url = `${ Cypress.config().lift.baseUrl }/reports/transaction_listing`;
 
 export class TransactionListing {
@@ -23,12 +23,56 @@ export class TransactionListing {
     return cy.get('#transaction_listing_start_date').clear();
   }
 
+  get listingEndDate() {
+    return cy.get('#transaction_listing_end_date').clear();
+  }
+
   get searchButton() {
-    return cy.get('form');
+    return cy.get('.pull-right > .btn-primary');
   }
 
   get transactionListed() {
     return cy.get('.footable-even > :nth-child(2)')
+  }
+
+  get statusDropdownButton() {
+    return cy.get('#transaction_listing_status');
+  }
+
+  get pendingPresentmentTransactionStatus() {
+    return cy.get('#status_100452579');
+  }
+
+  get authorizedTransactionStatus() {
+    return cy.get('#status_100452580')
+  }
+
+  get cardDeclinedTransactionStatus() {
+    return cy.get('#status_100452564')
+  }
+
+  get cardRefundedTransactionStatus() {
+    return cy.get('#status_100452573')
+  }
+
+  get totalAmountreported() {
+    return cy.get('tfoot > tr > :nth-child(2)')
+  }
+
+  get advanceOptionsButton() {
+    return cy.get('.text-center > .btn-outline-primary')
+  }
+
+  get transactionListingAmount () {
+    return cy.get('#transaction_listing_amount')
+  }
+
+  get transactionDetails() {
+    return cy.get('#tracking_100452577')
+  }
+
+  get clientReferenceNumber() {
+    return cy.get('tbody > :nth-child(9) > :nth-child(2)')
   }
 
   clickReportingSection() {
@@ -49,12 +93,32 @@ export class TransactionListing {
     this.clickListingOption()
   }
 
-  setListingStartDate() {
-    this.listingStartDate.type(`${ faker.date.recent({ days: 100 }).toLocaleDateString('en-US') }`);
+  setListingStartDate(startDate) {
+    this.listingStartDate.type(startDate).type('{esc}');
+  }
+
+  setListingEndDate(endDate) {
+    this.listingEndDate.type(endDate).type('{esc}');
   }
 
   clickSearchButton() {
     this.searchButton.click();
+  }
+
+  selectStatusDropdownButton(option){
+    this.statusDropdownButton.select(option)
+  }
+
+  clickAdvanceOptionsButton() {
+    this.advanceOptionsButton.click()
+  }
+
+  setListingAmount() {
+    this.transactionListingAmount.type('10.00')
+  }
+
+  clickTransactionDetails() {
+    this.transactionDetails.click()
   }
 
 }

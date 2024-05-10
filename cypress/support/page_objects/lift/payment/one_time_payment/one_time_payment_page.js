@@ -151,7 +151,7 @@ export class OneTimePaymentPage {
   inputPaymentAmount() {
     const randonAmount = faker.finance.amount({ min: 1, max: 100 })
     this.paymentAmount.clear()
-    this.paymentAmount.type(randonAmount)
+    this.paymentAmount.type(randonAmount).type('{enter}')
     this.totalAmountDue.should('have.value', randonAmount)
   }
 
