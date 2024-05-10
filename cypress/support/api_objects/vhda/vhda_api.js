@@ -129,6 +129,16 @@ export class VhdaApi extends MockLoanServiceApi {
     });
   }
 
+  getDocument() {
+    // ToDo: Are there other document types? Are there other query parameters for this?
+    return cy.request({
+      method: 'GET',
+      url: `${ baseUrl }/documents/`,
+      failOnStatusCode: false,
+      headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BEARER)
+    });
+  }
+
   getEscrowShortage() {
     return cy.request({
       method: 'GET',
