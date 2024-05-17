@@ -1,16 +1,22 @@
 {
   "environment": "qa",
   "video": true,
-  "retries": 1,
+  "retries": 0,
   "reporterOptions": {
-    "charts": true,
-    "embeddedScreenshots": true,
-    "inlineAssets": true,
-    "saveAllAttempts": false,
-    "ignoreVideos": false,
-    "videoOnFailOnly": true,
-    "quiet": true,
-    "debug": false
+    "reporterEnabled": "cypress-mochawesome-reporter, mocha-junit-reporter",
+    "mochaJunitReporterReporterOptions": {
+      "mochaFile": "cypress/reports/xml/results-[hash].xml"
+    },
+    "cypressMochawesomeReporterReporterOptions": {
+      "charts": true,
+      "embeddedScreenshots": true,
+      "inlineAssets": true,
+      "saveAllAttempts": false,
+      "ignoreVideos": false,
+      "videoOnFailOnly": true,
+      "quiet": true,
+      "debug": false
+    }
   },
   "mockLoanService": {
     "baseUrl": "https://mock-loan-service-8ccdc31a12a7.herokuapp.com"

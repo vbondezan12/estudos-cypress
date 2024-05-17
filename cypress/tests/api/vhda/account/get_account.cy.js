@@ -9,28 +9,30 @@ describe('vhda: GET accounts', function () {
 
   before(() => {
     vhdaApi.getTestLoans(LOAN_STATUS.CURRENT).then((response) => {
-      testCredential = response.body[0];
+      testCredential = response.body[ 0 ];
     });
   });
 
   it('GET accounts returns 200 with valid jwt', () => {
     const payload = vhdaApi.payloadGenerator.quickPay(testCredential.loan_number, testCredential.zip_code,
       testCredential.last_4_ssn);
-    vhdaApi.createQuickPayJwt(payload);
 
-    vhdaApi.getAccounts().then((response) => {
-      expect(response.status).to.eq(200);
-      expect(response.body.data.attributes).to.exist;
+    vhdaApi.createQuickPayJwt(payload).then(() => {
+      vhdaApi.getAccounts().then((response) => {
+        expect(response.status).to.eq(200);
+        expect(response.body.data.attributes).to.exist;
+      });
     });
   });
 
   it('GET accounts returns 401 with invalid jwt', () => {
     const payload = vhdaApi.payloadGenerator.quickPay(faker.finance.accountNumber(8),
       faker.number.int(5), faker.number.int(4));
-    vhdaApi.createQuickPayJwt(payload);
 
-    vhdaApi.getAccounts().then((response) => {
-      expect(response.status).to.eq(401);
+    vhdaApi.createQuickPayJwt(payload).then(() => {
+      vhdaApi.getAccounts().then((response) => {
+        expect(response.status).to.eq(401);
+      });
     });
   });
 });

@@ -1,7 +1,7 @@
 {
   "environment": "uat",
   "video": true,
-  "retries": 1,
+  "retries": 0,
   "reporterOptions": {
     "charts": true,
     "embeddedScreenshots": true,

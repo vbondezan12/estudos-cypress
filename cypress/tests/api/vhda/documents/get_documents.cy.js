@@ -9,27 +9,29 @@ describe('vhda: GetDocuments', function () {
 
   before(() => {
     vhdaApi.getTestLoans(LOAN_STATUS.CURRENT).then((response) => {
-      testCredential = response.body[0];
+      testCredential = response.body[ 0 ];
     });
   });
 
   it('get documents returns 200 with valid credentials', () => {
     const payload = vhdaApi.payloadGenerator.quickPay(testCredential.loan_number, testCredential.zip_code,
       testCredential.last_4_ssn);
-    vhdaApi.createQuickPayJwt(payload);
 
-    vhdaApi.getDocuments().then((response) => {
-      expect(response.status).to.eq(200);
+    vhdaApi.createQuickPayJwt(payload).then(() => {
+      vhdaApi.getDocuments().then((response) => {
+        expect(response.status).to.eq(200);
+      });
     });
   });
 
   it('get documents returns 401 with invalid credentials', () => {
     const payload = vhdaApi.payloadGenerator.quickPay(faker.finance.accountNumber(8),
       faker.number.int(5), faker.number.int(4));
-    vhdaApi.createQuickPayJwt(payload);
 
-    vhdaApi.getDocuments().then((response) => {
-      expect(response.status).to.eq(401);
+    vhdaApi.createQuickPayJwt(payload).then(() => {
+      vhdaApi.getDocuments().then((response) => {
+        expect(response.status).to.eq(401);
+      });
     });
   });
 });

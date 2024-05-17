@@ -4,12 +4,9 @@ const path = require('path');
 module.exports = defineConfig(
   {
     projectId: 'lift-cypress-automation',
-    reporter: 'cypress-mochawesome-reporter',
+    reporter: 'cypress-multi-reporters',
     e2e: {
       specPattern: 'cypress/tests/**/*.cy.{js,jsx,ts,tsx}',
-      mockLoanService: {
-        baseUrl: 'https://repay-mock-loan-service.herokuapp.com/api/v1'
-      },
       setupNodeEvents(on, config) {
         require('cypress-mochawesome-reporter/plugin')(on);
 

@@ -16,23 +16,26 @@ describe('vhda: GetSwitchLoan', function () {
   it('get Switch Loan returns 200 with valid credentials', () => {
     const payload = vhdaApi.payloadGenerator.quickPay(testCredential.loan_number, testCredential.zip_code,
       testCredential.last_4_ssn);
-    const loanNumber = vhdaApi.payloadGenerator.switchLoan(testCredential.loan_number);
-    vhdaApi.createQuickPayJwt(payload);
 
-    vhdaApi.switchLoan(loanNumber).then((response) => {
-      expect(response.status).to.eq(200);
-      expect(response.body).to.not.equal(null);
+    const loanNumber = vhdaApi.payloadGenerator.switchLoan(testCredential.loan_number);
+
+    vhdaApi.createQuickPayJwt(payload).then(() => {
+      vhdaApi.switchLoan(loanNumber).then((response) => {
+        expect(response.status).to.eq(200);
+        expect(response.body).to.not.equal(null);
+      });
     });
   });
 
   it('get Switch Loan returns 401 with invalid credentials', () => {
     const payload = vhdaApi.payloadGenerator.quickPay(faker.finance.accountNumber(8),
       faker.number.int(5), faker.number.int(4));
-    vhdaApi.createQuickPayJwt(payload);
-    const loanNumber = vhdaApi.payloadGenerator.switchLoan(testCredential.loan_number);
+    vhdaApi.createQuickPayJwt(payload).then(() => {
+      const loanNumber = vhdaApi.payloadGenerator.switchLoan(testCredential.loan_number);
 
-    vhdaApi.switchLoan(loanNumber).then((response) => {
-      expect(response.status).to.eq(401);
-    });
+      vhdaApi.switchLoan(loanNumber).then((response) => {
+        expect(response.status).to.eq(401);
+      });
+    })
   });
 });
