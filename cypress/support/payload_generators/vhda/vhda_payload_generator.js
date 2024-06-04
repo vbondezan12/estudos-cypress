@@ -67,11 +67,11 @@ export class VhdaPayloadGenerator extends MockLoanServicePayloadGenerator {
     };
   }
 
-  newLoan(loanNumber, zipCode, SSN) {
+  newLoan(loanNumber, zipCode, ssn) {
     return {
       loan_number: loanNumber,
       zip: zipCode,
-      ssn: SSN,
+      ssn: ssn,
       nickname: faker.internet.displayName()
     };
   }
@@ -184,7 +184,7 @@ export class VhdaPayloadGenerator extends MockLoanServicePayloadGenerator {
       pay_1_of_2: 'false',
       // ToDo: What values can this be?
       payment_type: 1,
-      // ToDd: Can this be a bank account or a card account?
+      // ToDd: Can this be a bank account_holders or a card account_holders?
       pay_account: this.bankAccounts()
     };
   }

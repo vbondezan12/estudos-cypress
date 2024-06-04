@@ -1,16 +1,13 @@
 const url = `${ Cypress.config().vhda.baseUrl }/payments/new`;
 import { faker } from '@faker-js/faker';
+import { VhdaBase } from '../vhda_base';
 
-export class PaymentPage {
-  open() {
-    return cy.visit(url);
-  }
-
+export class PaymentPage extends VhdaBase {
   get newPayAccountButton() {
     return cy.get('.text-center > .btn');
   }
 
-  // Bank account
+  // Bank account_holders
   get routingNumberInput() {
     return cy.get('#payment_pay_account_routing_number');
   }
@@ -43,11 +40,11 @@ export class PaymentPage {
     return cy.get('.float-right');
   }
 
-  // bank account errors
-
   get routingNumberErrorMessage() {
     return cy.get('.parsley-routing');
   }
+
+  // bank account_holders errors
 
   get accountNumberErrorMessage() {
     return cy.get('.parsley-microbilt');
@@ -57,11 +54,11 @@ export class PaymentPage {
     return cy.get('.parsley-fullName');
   }
 
-  // Debit card
-
   get debitCardButton() {
     return cy.get('[data-type="debit"]');
   }
+
+  // Debit card
 
   get cardNameInput() {
     return cy.get('#payment_pay_account_card_name');
@@ -99,11 +96,11 @@ export class PaymentPage {
     return cy.get('#payment_pay_account_zip');
   }
 
-  // debit card errors
-
   get cardNameErrorMessage() {
     return cy.get('#parsley-id-72');
   }
+
+  // debit card errors
 
   get cardNumberErrorMessage() {
     return cy.get('#parsley-id-74');
@@ -123,6 +120,10 @@ export class PaymentPage {
 
   get cardZipCodeErrorMessage() {
     return cy.get('#parsley-id-90');
+  }
+
+  open() {
+    return cy.visit(url);
   }
 
   addNewBankAccount(routingNumber, accountNumber, accountName, accountNickname, accountType = null) {

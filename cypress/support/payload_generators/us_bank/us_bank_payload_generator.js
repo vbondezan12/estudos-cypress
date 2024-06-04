@@ -51,8 +51,8 @@ export class UsBankPayloadGenerator extends MockLoanServicePayloadGenerator {
       payment_type: 'ach',
       // possible values: checking, savings
       checking: 'checking',
-      /* account and routing can be hard-coded since we're not testing microbilt validation which is its own API
-       053200983 / 11101010 are a working combination. We can auto-generate if we want the payment to fail with faked numbers.
+      /* account_holders and routing can be hard-coded since we're not testing microbilt validation which is its own API
+       053200983 / 11101010 are a working combination. We can auto-generate if we want the payments to fail with faked numbers.
        */
       account_number: '053200983',
       routing_number: '11101010',

@@ -1,15 +1,19 @@
 // TODO
-xdescribe('Quickpay Payment', { tags: [ '@Payment', '@regression' ] }, () => {
-  let quickPay;
+describe('VHDA', () => {
+  describe('Quickpay', () => {
+    describe('Payment', () => {
+      let quickPay;
 
-  beforeEach(() => {
-    // TODO use testcredential
-  });
+      beforeEach(() => {
+        // TODO use testcredential
+      });
 
-  it('should create a payment successfully', { tags: '@smoke' }, function () {
-    // TODO use TestCredential credentials
-    quickPay.login(loanNumber, zipCode, ssn);
+      xit('should create a payments successfully', { tags: '@smoke' }, function () {
+        // TODO use TestCredential credentials
+        quickPay.login(loanNumber, zipCode, ssn);
 
-    cy.url().should('contains', `${ Cypress.config().vhda.baseUrl }/payments/new`);
+        cy.url().should('contains', `${ Cypress.config().vhda.baseUrl }/payments/new`);
+      });
+    });
   });
 });

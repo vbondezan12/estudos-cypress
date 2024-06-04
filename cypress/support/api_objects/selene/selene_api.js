@@ -32,7 +32,7 @@ export class SeleneApi extends MockLoanServiceApi {
   }
 
   /**
-   * POST call to make a payment
+   * POST call to make a payments
    * @param body The request body
    * @returns {Cypress.Chainable<Cypress.Response<any>>}
    */

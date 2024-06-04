@@ -22,7 +22,7 @@ export class AuthenticationUtils {
         break;
       case AUTHENTICATION_TYPE.X_AUTH:
         this.headers = xAuthTokenHeader;
-        this.headers[ 'x-auth-token-headers' ] = Cypress.env().xAuthToken;
+        this.headers[ 'x-auth-token-headers' ] = Cypress.config().xAuthToken;
         break;
     }
 

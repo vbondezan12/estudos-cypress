@@ -1,8 +1,8 @@
-import { VhdaApi } from '../../../api_objects/vhda/vhda_api';
+import { VhdaBase } from '../vhda_base';
 
 const url = `${ Cypress.config().vhda.baseUrl }/quick_pay/new`;
 
-export class QuickPayLoginPage extends VhdaApi {
+export class QuickPayLoginPage extends VhdaBase {
   get quickPayButton() {
     return cy.get('#login');
   }

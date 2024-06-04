@@ -49,7 +49,7 @@ export class MockLoanServiceApi extends AuthenticationUtils {
   }
 
   /**
-   * Fetch all Microbilt account with matching message
+   * Fetch all Microbilt account_holders with matching message
    * If no message match, an array of all Microbilt accounts will be returned
    * @param body The request body
    * @returns {Cypress.Chainable<Cypress.Response<any>>}

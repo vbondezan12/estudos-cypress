@@ -72,7 +72,7 @@ export class VhdaApi extends MockLoanServiceApi {
     });
   }
 
-  resendRecoveryEmail(body) {
+  sendRecoveryEmail(body) {
     return cy.request({
       method: 'POST',
       url: `${ baseUrl }/users/send_recovery_email`,
@@ -100,7 +100,7 @@ export class VhdaApi extends MockLoanServiceApi {
     });
   }
 
-  newLoan(body) {
+  createAccountDetails(body) {
     return cy.request({
       method: 'POST',
       url: `${ baseUrl }/account_details`,
@@ -133,7 +133,7 @@ export class VhdaApi extends MockLoanServiceApi {
     // ToDo: Are there other document types? Are there other query parameters for this?
     return cy.request({
       method: 'GET',
-      url: `${ baseUrl }/documents/`,
+      url: `${ baseUrl }/documents`,
       failOnStatusCode: false,
       headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BEARER)
     });
@@ -309,11 +309,11 @@ export class VhdaApi extends MockLoanServiceApi {
     });
   }
 
-  getTestLoans(clientId, loanStatus) {
+  getTestLoans(loanStatus) {
     return super.getTestLoans(CLIENT.VHDA, loanStatus);
   }
 
-  getLastMfaCode(clientId, email) {
+  getLastMfaCode(email) {
     return super.getLastMfaCode(CLIENT.VHDA, email);
   }
 }

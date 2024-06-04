@@ -66,7 +66,7 @@ export class ServiceMacApi extends MockLoanServiceApi {
   postAccountHolder(body) {
     return cy.request({
       method: 'POST',
-      url: `${ baseUrl }/account_holders/`,
+      url: `${ baseUrl }/account_holders`,
       body: body,
       failOnStatusCode: false,
       headers: super.updateHeaderAuthorization(AUTHENTICATION_TYPE.BASIC)

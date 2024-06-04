@@ -1,11 +1,9 @@
 import { faker } from '@faker-js/faker';
-const oneTimePaymentUrl = `${ Cypress.config().lift.baseUrl }/payments/new/onetime_debit`
+import { LiftBase } from '../../lift_base';
 
-export class OneTimePaymentPage {
+const oneTimePaymentUrl = `${ Cypress.config().lift.baseUrl }/payments/new/onetime_debit`;
 
-  openOneTimeDebitPayment() {
-    cy.visit(oneTimePaymentUrl);
-  }
+export class OneTimePaymentPage extends LiftBase {
 
   get customerReferenceNumber() {
     return cy.get('#payment_customer_reference_number');
@@ -54,51 +52,51 @@ export class OneTimePaymentPage {
   }
 
   get expirationYear() {
-    return cy.get('#payment_pay_account_attributes_expiration_year')
+    return cy.get('#payment_pay_account_attributes_expiration_year');
   }
 
   get cardCode() {
-    return cy.get('#payment_pay_account_attributes_credit_card_code')
+    return cy.get('#payment_pay_account_attributes_credit_card_code');
   }
 
   get cardFirstName() {
-    return cy.get('#payment_pay_account_attributes_first_name')
+    return cy.get('#payment_pay_account_attributes_first_name');
   }
 
   get cardLastName() {
-    return cy.get('#payment_pay_account_attributes_last_name')
+    return cy.get('#payment_pay_account_attributes_last_name');
   }
 
   get streetName1() {
-    return cy.get('#payment_pay_account_attributes_street_1')
+    return cy.get('#payment_pay_account_attributes_street_1');
   }
 
   get streetName2() {
-    return cy.get('#payment_pay_account_attributes_street_2')
+    return cy.get('#payment_pay_account_attributes_street_2');
   }
 
   get cityName() {
-    return cy.get('#payment_pay_account_attributes_city')
+    return cy.get('#payment_pay_account_attributes_city');
   }
 
   get stateName() {
-    return cy.get('#payment_pay_account_attributes_state')
+    return cy.get('#payment_pay_account_attributes_state');
   }
 
   get zipCode() {
-    return cy.get('#payment_pay_account_attributes_zip')
+    return cy.get('#payment_pay_account_attributes_zip');
   }
 
   get finishButton() {
-    return cy.get('[aria-hidden="false"] > a')
+    return cy.get('[aria-hidden="false"] > a');
   }
 
   get postThisPaymentButton() {
-    return cy.get('.add_payment')
+    return cy.get('.add_payment');
   }
 
   get availablePaymentAccount() {
-    return cy.get('#payment_pay_account_id')
+    return cy.get('#payment_pay_account_id');
   }
 
   get nameOnPaymentAccount() {
@@ -120,7 +118,7 @@ export class OneTimePaymentPage {
   get printButton() {
     return cy.get('.row > :nth-child(2) > .btn')
       .should('be.visible')
-      .should('exist')
+      .should('exist');
   }
 
   get thankYouTittle() {
@@ -129,6 +127,10 @@ export class OneTimePaymentPage {
 
   get transactionSuccessMessage() {
     return cy.get('.text-center:nth-child(1) > p');
+  }
+
+  openOneTimeDebitPayment() {
+    cy.visit(oneTimePaymentUrl);
   }
 
   inputCustomerReferenceNumber(loanNumber) {
@@ -140,27 +142,28 @@ export class OneTimePaymentPage {
   }
 
   selectCustomerButton() {
-    this.customerNumberValidation
+    this.customerNumberValidation;
     this.customerSelectionButton.click();
   }
 
   inputEffectiveDate() {
-    this.efectiveDate.type(`${ faker.date.future({ days: faker.finance.amount({ min: 1, max: 30 }) }).toLocaleDateString('en-US') }`)
+    this.efectiveDate.type(
+      `${ faker.date.future({ days: faker.finance.amount({ min: 1, max: 30 }) }).toLocaleDateString('en-US') }`);
   }
 
   inputPaymentAmount() {
-    const randonAmount = faker.finance.amount({ min: 1, max: 100 })
-    this.paymentAmount.clear()
-    this.paymentAmount.type(randonAmount).type('{enter}')
-    this.totalAmountDue.should('have.value', randonAmount)
+    const randonAmount = faker.finance.amount({ min: 1, max: 100 });
+    this.paymentAmount.clear();
+    this.paymentAmount.type(randonAmount).type('{enter}');
+    this.totalAmountDue.should('have.value', randonAmount);
   }
 
   clickNextButton() {
-    this.nextButton.click()
+    this.nextButton.click();
   }
 
   addingNewCard() {
-    this.cardNumber.should('be.visible').type('4111111111111111')
+    this.cardNumber.should('be.visible').type('4111111111111111');
     this.expirationMonth.select(`${ faker.number.int({ min: 1, max: 12 }) }`);
     this.expirationYear.select(`${ faker.date.future({ years: 2 }).getFullYear() }`);
     this.cardCode.type(`${ faker.number.int({ min: 1, max: 12 }) }`);
@@ -174,27 +177,27 @@ export class OneTimePaymentPage {
   }
 
   clickFinishButton() {
-    this.finishButton.should('be.visible').click()
+    this.finishButton.should('be.visible').click();
   }
 
   clickPostThisPaymentButton() {
-    this.postThisPaymentButton.click()
+    this.postThisPaymentButton.click();
   }
 
   selectAvailablePaymentAccount() {
-    this.availablePaymentAccount.select('5091526').should('have.value', '5091526')
+    this.availablePaymentAccount.select('5091526').should('have.value', '5091526');
   }
 
   clickPaymentMethod() {
-    this.paymentMethod.should('be.visible').click()
+    this.paymentMethod.should('be.visible').click();
   }
 
   clickPaymentStep() {
-    this.paymentStep2.should('be.visible').click()
+    this.paymentStep2.should('be.visible').click();
   }
 
   clickPrintButton() {
-    this.printButton.click()
+    this.printButton.click();
   }
 
 }

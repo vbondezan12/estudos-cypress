@@ -1,11 +1,8 @@
+import { LiftBase } from '../../lift_base';
 
 const url = `${ Cypress.config().lift.baseUrl }/reports/transaction_listing`;
 
-export class TransactionListing {
-
-  openReportsListing() {
-    cy.visit(url);
-  }
+export class TransactionListing extends LiftBase {
 
   get reportingSection() {
     return cy.get('#side-menu > .parent_nav:nth-child(5) > a');
@@ -32,7 +29,7 @@ export class TransactionListing {
   }
 
   get transactionListed() {
-    return cy.get('.footable-even > :nth-child(2)')
+    return cy.get('.footable-even > :nth-child(2)');
   }
 
   get statusDropdownButton() {
@@ -44,35 +41,39 @@ export class TransactionListing {
   }
 
   get authorizedTransactionStatus() {
-    return cy.get('#status_100452580')
+    return cy.get('#status_100452580');
   }
 
   get cardDeclinedTransactionStatus() {
-    return cy.get('#status_100452564')
+    return cy.get('#status_100452564');
   }
 
   get cardRefundedTransactionStatus() {
-    return cy.get('#status_100452573')
+    return cy.get('#status_100452573');
   }
 
   get totalAmountreported() {
-    return cy.get('tfoot > tr > :nth-child(2)')
+    return cy.get('tfoot > tr > :nth-child(2)');
   }
 
   get advanceOptionsButton() {
-    return cy.get('.text-center > .btn-outline-primary')
+    return cy.get('.text-center > .btn-outline-primary');
   }
 
-  get transactionListingAmount () {
-    return cy.get('#transaction_listing_amount')
+  get transactionListingAmount() {
+    return cy.get('#transaction_listing_amount');
   }
 
   get transactionDetails() {
-    return cy.get('#tracking_100452577')
+    return cy.get('#tracking_100452577');
   }
 
   get clientReferenceNumber() {
-    return cy.get('tbody > :nth-child(9) > :nth-child(2)')
+    return cy.get('tbody > :nth-child(9) > :nth-child(2)');
+  }
+
+  openReportsListing() {
+    cy.visit(url);
   }
 
   clickReportingSection() {
@@ -88,9 +89,9 @@ export class TransactionListing {
   }
 
   accessListing() {
-    this.clickReportingSection()
-    this.clickTransactionSection()
-    this.clickListingOption()
+    this.clickReportingSection();
+    this.clickTransactionSection();
+    this.clickListingOption();
   }
 
   setListingStartDate(startDate) {
@@ -105,20 +106,20 @@ export class TransactionListing {
     this.searchButton.click();
   }
 
-  selectStatusDropdownButton(option){
-    this.statusDropdownButton.select(option)
+  selectStatusDropdownButton(option) {
+    this.statusDropdownButton.select(option);
   }
 
   clickAdvanceOptionsButton() {
-    this.advanceOptionsButton.click()
+    this.advanceOptionsButton.click();
   }
 
   setListingAmount() {
-    this.transactionListingAmount.type('10.00')
+    this.transactionListingAmount.type('10.00');
   }
 
   clickTransactionDetails() {
-    this.transactionDetails.click()
+    this.transactionDetails.click();
   }
 
 }
