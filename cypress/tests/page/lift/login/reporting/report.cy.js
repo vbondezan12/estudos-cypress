@@ -117,7 +117,7 @@ describe('Lift', () => {
         .should('contains.text', 'Card Refunded');
     });
 
-    it('VEN-115594_lift_transaction_listing_should_show_results_from_advanced_options', { tags: '@smoke' },
+    it('VEN-15594_lift_transaction_listing_should_show_results_from_advanced_options', { tags: '@smoke' },
       function () {
         transactionListing.openReportsListing();
         transactionListing.setListingStartDate('04/01/2024');
@@ -137,7 +137,7 @@ describe('Lift', () => {
           .should('contains.text', '$40.00');
       });
 
-    it('VEN-115594_lift_transaction_listing_should_show_details_of_transaction', { tags: '@smoke' },
+    it('VEN-15594_lift_transaction_listing_should_show_details_of_transaction', { tags: '@smoke' },
       function () {
         transactionListing.openReportsListing();
         transactionListing.setListingStartDate('04/01/2024');

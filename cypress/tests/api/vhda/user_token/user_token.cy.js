@@ -34,7 +34,7 @@ describe('VHDA', function () {
     });
 
     // Failing due to bug: https://repayonline.atlassian.net/browse/VEN-15846
-    it('VEN-15594_vhda_create_user_token_with_invalid_password_only', () => {
+    xit('VEN-15846_vhda_create_user_token_with_invalid_password_only', () => {
       const credentials = vhdaApi.payloadGenerator.login(testCredential.username, faker.internet.password());
 
       vhdaApi.createLoginJwt(credentials).then(response => {

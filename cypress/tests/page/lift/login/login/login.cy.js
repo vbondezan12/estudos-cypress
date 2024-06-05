@@ -33,7 +33,7 @@ describe('Lift', () => {
       cy.url().should('contains', `${ Cypress.config().lift.baseUrl }/home`);
     });
 
-    it('VEN-15594VEN-15594_lift_login_with_invalid_credentials', { tags: '@smoke' }, function () {
+    it('VEN-15594_lift_login_with_invalid_credentials', { tags: '@smoke' }, function () {
       const username = faker.internet.userName();
       const password = faker.internet.password();
       const clientId = CLIENT.VENTANEX;
