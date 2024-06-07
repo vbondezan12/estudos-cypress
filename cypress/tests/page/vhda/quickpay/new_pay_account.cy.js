@@ -115,7 +115,7 @@ describe('VHDA', () => {
             .should('have.text', 'First and last name are required');
         });
 
-      describe('Quickpay Debit Pay Account ', () => {
+      describe('Pay Account Debit', () => {
         it('VEN-15594_vhda_quickpay_pay_account_ach_should_create_debit_card_when_added', { tags: '@smoke' },
           function () {
             const cardName = accountName;

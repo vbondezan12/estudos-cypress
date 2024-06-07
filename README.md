@@ -36,10 +36,6 @@ All scripts can be found in `package.json` and can be executed via `npm run <scr
 - `lint`: Executes linting based on eslint rules from `.eslintrc.js`
 - `pre-commit`: Executes linting and all tests in the QA environment
 
-## Environments Setup
-
-> TODO
-
 ## Code styling
 
 - Prefer single quotes `'` over double quotes `"`
@@ -57,3 +53,11 @@ All scripts can be found in `package.json` and can be executed via `npm run <scr
     - Ensure there are no failed tests once linting passes
 4. Open up a pull request
 5. Once approved, select option to **merge and delete remote branch**
+
+
+## Test Naming Convention
+### API
+`VEN-<ticket number>_<client>_<API CALL>_<endpoint>_with_<condition>`
+
+### UI (page)
+`VEN-<ticket number>_<client>_<test path by describe>_should_<expected result>_when_<condition>`
