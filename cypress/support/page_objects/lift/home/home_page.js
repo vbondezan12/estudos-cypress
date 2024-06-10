@@ -20,6 +20,7 @@ export class HomePage extends LiftBase {
     return cy.get('#profile-name').should('be.visible');
   }
 
+  //User elements
   get profileButton() {
     return cy.get(':nth-child(1) > .dropdown-item').contains('Profile')
   }
@@ -32,6 +33,7 @@ export class HomePage extends LiftBase {
     return cy.get(':nth-child(5) > .dropdown-item').should('be.visible');
   }
 
+  //Payment Menu elements
   get paymentsSideMenu() {
     return cy.contains('span', 'Payments').should('be.visible');
   }
@@ -73,7 +75,6 @@ export class HomePage extends LiftBase {
 
   get paymentsRecurringPaymentManage() {
     return cy.get('a[href="/recurring_payments"]').contains('Manage');
-
   }
 
   get paymentsRecurringPaymentCreate() {
@@ -90,6 +91,42 @@ export class HomePage extends LiftBase {
 
   get paymentsReseachMySummary() {
     return cy.get('a[href="/stored_payments/my_summary"]');
+  }
+
+  //Secure Exchange elements
+  get secureExchangeSideMenu () {
+    return cy.get('a[href="#"]').contains('Secure Exchange').should('be.visible')
+  }
+
+  get fileManagement () {
+    return cy.get('a[href="/client_inbound_files"]')
+  }
+
+  get mspLockboxExceptionItems () {
+    return cy.get('a[href="/msp_lockbox_exceptions"]')
+  }
+
+  //Documents elements
+  get documentsSideMenu () {
+    return cy.get('a[href="#"]').contains('Documents').should('be.visible')
+  }
+
+  get management () {
+    return cy.get('a[href="/documents"]')    
+  }
+
+  get research () {
+    return cy.get('a[href="/documents/research"]')    
+  }
+
+  get researchArchived () {
+    return cy.get('a[href="/archive_documents/research"]')    
+  } 
+
+  //Reporting elements
+
+  get reportingSideMenu () {
+    return cy.get('a[href="#"]').contains('Reporting').should('be.visible')
   }
 
   open() {
@@ -135,5 +172,17 @@ export class HomePage extends LiftBase {
 
   clickMspRecurringPayment() {
     this.paymentsMSPRecurringPayment.click()
+  }
+  
+  clickSecureExchangeSideMenu() {
+    this.secureExchangeSideMenu.click()
+  }
+
+  clickDocumentsSideMenu() {
+    this.documentsSideMenu.click()
+  }
+
+  clickReportingSideMenu() {
+    this.reportingSideMenu.click()
   }
 }

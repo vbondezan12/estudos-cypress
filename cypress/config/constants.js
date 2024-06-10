@@ -10,7 +10,8 @@ export const CLIENT = {
   US_BANK: 5426,
   THRIVE: 5748,
   VHDA: 863,
-  VENTANEX: 1
+  VENTANEX: 1,
+  VILLAGE_CAPITAL: 6763
 };
 
 export const LOAN_STATUS = {
