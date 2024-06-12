@@ -8,7 +8,6 @@
     "google:open": "cypress run --spec cypress/e2e/google.cy.js",
     "open:all": "cypress run --spec cypress/e2e/*.cy.js",
     "open:all:1": "cypress run --spec cypress/e2e/*.cy.js",
-    "open:all:2": "cypress run --spec cypress/e2e/*.cy.js",
     "open:all:3": "cypress run --spec cypress/e2e/*.cy.js"
   },
   "keywords": [],
