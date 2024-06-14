@@ -1,8 +1,8 @@
 import { faker } from '@faker-js/faker';
-import { CLIENT, LOAN_STATUS } from '../../../../../config/constants';
-import { MockLoanServiceApi } from '../../../../../support/api_objects/mock_loan_service/mock_loan_service_api';
-import { LiftLoginPage } from '../../../../../support/page_objects/lift/login/lift_login_page';
-import { LiftMfaPage } from '../../../../../support/page_objects/lift/login/lift_mfa_page';
+import { CLIENT, LOAN_STATUS } from '../../../../config/constants';
+import { MockLoanServiceApi } from '../../../../support/api_objects/mock_loan_service/mock_loan_service_api';
+import { LiftLoginPage } from '../../../../support/page_objects/lift/login/lift_login_page';
+import { LiftMfaPage } from '../../../../support/page_objects/lift/login/lift_mfa_page';
 
 describe('Lift', () => {
   describe('Login', () => {

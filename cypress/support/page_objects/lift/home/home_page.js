@@ -20,7 +20,7 @@ export class HomePage extends LiftBase {
     return cy.get('#profile-name').should('be.visible');
   }
 
-  //User elements
+  // User elements
   get profileButton() {
     return cy.get(':nth-child(1) > .dropdown-item').contains('Profile')
   }
@@ -33,13 +33,14 @@ export class HomePage extends LiftBase {
     return cy.get(':nth-child(5) > .dropdown-item').should('be.visible');
   }
 
-  //Payment Menu elements
-  get paymentsSideMenu() {
-    return cy.contains('span', 'Payments').should('be.visible');
-  }
+  // Payment Menu elements
 
   get paymentsNewMspPayment() {
     return cy.get('[href="/msp_payments/new"]').contains('New MSP Payment');
+  }
+
+  clickPaymentsNewMspPayment() {
+    this.paymentsNewMspPayment.should('be.visible').click()
   }
 
   get paymentsMSPRecurringPayment() {
@@ -49,20 +50,41 @@ export class HomePage extends LiftBase {
       .should('be.visible')
   }
 
+  clickPaymentsMspRecurringPayment() {
+    this.paymentsMSPRecurringPayment.click()
+  }
+
   get paymentsMSPRecurringPaymentManage() {
     return cy.get('a[href="/msp_recurring_payments"]').contains('Manage');
+  }
+
+  clickMspRecurringPaymentManage() {
+    this.paymentsMSPRecurringPaymentManage.should('be.visible').click()
   }
 
   get paymentsMSPRecurringPaymentCreate() {
     return cy.get('a[href="/msp_recurring_payments/new"]').contains('Create');
   }
 
+  clickMspRecurringPaymentCreate() {
+    this.paymentsMSPRecurringPaymentCreate.should('be.visible').click()
+  }
+
+
   get paymentsCollectOneTimePayment() {
     return cy.get('a[href="/payments/new/onetime_debit"]');
   }
 
+  clickPaymentsCollectOneTimePayment() {
+    this.paymentsCollectOneTimePayment.should('be.visible').click()
+  }
+
   get paymentsIssueOneTimePayment() {
     return cy.get('a[href="/payments/new/onetime_credit"]');
+  }
+
+  clickPaymentsIssueOneTimePayment() {
+    this.paymentsIssueOneTimePayment.should('be.visible').click()
   }
 
   get paymentsRecurringPayment() {
@@ -73,60 +95,134 @@ export class HomePage extends LiftBase {
     });
   }
 
+  clickPaymentsRecurringPayment() {
+    this.paymentsRecurringPayment.should('be.visible').click()
+  }
+
   get paymentsRecurringPaymentManage() {
     return cy.get('a[href="/recurring_payments"]').contains('Manage');
   }
 
-  get paymentsRecurringPaymentCreate() {
+  clickPaymentsRecurringPaymentManage() {
+    this.paymentsRecurringPaymentManage.should('be.visible').click()
+  }
+
+  get paymentsRecurringPaymentCollect() {
     return cy.get('a[href="/recurring_payments/new/collect"]').contains('Collect');
+  }
+
+  clickPaymentsRecurringPaymentCollect() {
+    this.paymentsRecurringPaymentCollect.should('be.visible').click()
   }
 
   get paymentsResearch() {
     return cy.get('a[href="#"]').contains('Research').should('be.visible');
   }
 
-  get paymentsReseachEmailConfirmations() {
+  clickPaymentsResearch() {
+    this.paymentsResearch.should('be.visible').click()
+  }
+
+  get paymentsResearchEmailConfirmations() {
     return cy.get('a[href="/email_confirmations"]');
   }
 
-  get paymentsReseachMySummary() {
+  clickPaymentsResearchEmailConfirmations() {
+    this.paymentsResearchEmailConfirmations.should('be.visible').click()
+  }
+
+  get paymentsResearchMySummary() {
     return cy.get('a[href="/stored_payments/my_summary"]');
   }
 
-  //Secure Exchange elements
-  get secureExchangeSideMenu () {
-    return cy.get('a[href="#"]').contains('Secure Exchange').should('be.visible')
+  clickPaymentsResearchMySummary() {
+    this.paymentsResearchMySummary.should('be.visible').click()
   }
+
+  // Secure Exchange elements
 
   get fileManagement () {
     return cy.get('a[href="/client_inbound_files"]')
+  }
+
+  clickFileManagement() {
+    this.fileManagement.should('be.visible').click()
   }
 
   get mspLockboxExceptionItems () {
     return cy.get('a[href="/msp_lockbox_exceptions"]')
   }
 
-  //Documents elements
-  get documentsSideMenu () {
-    return cy.get('a[href="#"]').contains('Documents').should('be.visible')
+  clickMspLockboxExceptionItems() {
+    this.mspLockboxExceptionItems.should('be.visible').click()
   }
 
+  get secureMessages () {
+    return cy.get('a[href="/secure_messages"]')
+  }
+
+  clickSecureMessages() {
+    this.secureMessages.should('be.visible').click()
+  }
+
+  // Documents elements
+
   get management () {
-    return cy.get('a[href="/documents"]')    
+    return cy.get('a[href="/documents"]')
+  }
+
+  clickManagement() {
+    this.management.should('be.visible').click()
   }
 
   get research () {
-    return cy.get('a[href="/documents/research"]')    
+    return cy.get('a[href="/documents/research"]')
+  }
+
+  clickResearch() {
+    this.research.should('be.visible').click()
   }
 
   get researchArchived () {
-    return cy.get('a[href="/archive_documents/research"]')    
-  } 
+    return cy.get('a[href="/archive_documents/research"]')
+  }
 
-  //Reporting elements
+  clickResearchArchived() {
+    this.researchArchived.should('be.visible').click()
+  }
 
-  get reportingSideMenu () {
-    return cy.get('a[href="#"]').contains('Reporting').should('be.visible')
+  // Reporting elements
+
+  get dashboards () {
+    return cy.get('a[href="#"]').contains('Dashboards ').should('be.visible')
+  }
+
+  clickDashboards() {
+    this.dashboards.should('be.visible').click()
+  }
+
+  get transactionDashboard () {
+    return cy.get('a[href="/reports/transaction_dashboard"]')
+  }
+
+  clickTransactionDashboard() {
+    this.transactionDashboard.should('be.visible').click()
+  }
+
+  get slaDashboard () {
+    return cy.get('a[href="/reports/sla_dashboard"]')
+  }
+
+  clickSlaDashboard() {
+    this.slaDashboard.should('be.visible').click()
+  }
+
+  get webpayDashboard () {
+    return cy.get('a[href="/dashboards/webpay"]')
+  }
+
+  clickWebpayDashboard() {
+    this.webpayDashboard.should('be.visible').click()
   }
 
   open() {
@@ -166,23 +262,8 @@ export class HomePage extends LiftBase {
     cy.contains('span', clientId).should('be.visible');
   }
 
-  clickPaymentsSideMenu() {
-    this.paymentsSideMenu.click()
-  }
-
   clickMspRecurringPayment() {
     this.paymentsMSPRecurringPayment.click()
   }
-  
-  clickSecureExchangeSideMenu() {
-    this.secureExchangeSideMenu.click()
-  }
 
-  clickDocumentsSideMenu() {
-    this.documentsSideMenu.click()
-  }
-
-  clickReportingSideMenu() {
-    this.reportingSideMenu.click()
-  }
 }
