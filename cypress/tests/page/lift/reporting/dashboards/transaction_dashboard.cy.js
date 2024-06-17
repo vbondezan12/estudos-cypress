@@ -13,7 +13,7 @@ describe('Lift', () => {
         homePage.clickClientSelectionForm();
         homePage.clientSelection(CLIENT.VHDA);
       });
-      it('VEN-15594_lift_home_should_access_Reporting_Dashboards_transaction_dashboard_successfully', { tags: '@smoke' }, function () {
+      it('VEN-15594_lift_home_should_access_reporting_dashboards_transaction_dashboard_successfully', { tags: '@smoke' }, function () {
         cy.intercept('GET', `${ Cypress.config().lift.baseUrl }/reports/transaction_dashboard`).as('transactionDashboard');
 
         homePage.clickReportingSideMenu()

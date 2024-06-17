@@ -20,7 +20,7 @@ export class HomePage extends LiftBase {
     return cy.get('#profile-name').should('be.visible');
   }
 
-  // User elements
+  /* User elements */
   get profileButton() {
     return cy.get(':nth-child(1) > .dropdown-item').contains('Profile')
   }
@@ -33,8 +33,7 @@ export class HomePage extends LiftBase {
     return cy.get(':nth-child(5) > .dropdown-item').should('be.visible');
   }
 
-  // Payment Menu elements
-
+  /* Payment Menu */
   get paymentsNewMspPayment() {
     return cy.get('[href="/msp_payments/new"]').contains('New MSP Payment');
   }
@@ -139,7 +138,7 @@ export class HomePage extends LiftBase {
     this.paymentsResearchMySummary.should('be.visible').click()
   }
 
-  // Secure Exchange elements
+  /* Secure Exchange */
 
   get fileManagement () {
     return cy.get('a[href="/client_inbound_files"]')
@@ -165,8 +164,7 @@ export class HomePage extends LiftBase {
     this.secureMessages.should('be.visible').click()
   }
 
-  // Documents elements
-
+  /* Documents */
   get management () {
     return cy.get('a[href="/documents"]')
   }
@@ -191,7 +189,7 @@ export class HomePage extends LiftBase {
     this.researchArchived.should('be.visible').click()
   }
 
-  // Reporting elements
+  /* Reporting */
 
   get dashboards () {
     return cy.get('a[href="#"]').contains('Dashboards ').should('be.visible')
@@ -265,5 +263,4 @@ export class HomePage extends LiftBase {
   clickMspRecurringPayment() {
     this.paymentsMSPRecurringPayment.click()
   }
-
 }

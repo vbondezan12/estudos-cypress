@@ -14,7 +14,7 @@ describe('One-Time Payment', () => {
     homePage.clientSelection(CLIENT.VHDA);
   });
 
-  it('VEN-15594_lift_home_should_access_Collect_Onetime_Payment_page_successfully', { tags: '@smoke' }, function () {
+  it('VEN-15594_lift_home_should_access_collect_onetime_payment_page_successfully', { tags: '@smoke' }, function () {
     cy.intercept('GET', `${ Cypress.config().lift.baseUrl }/payments/new/onetime_debit`).as('oneTimeDebit');
 
     homePage.clickPaymentsSideMenu()
@@ -33,11 +33,11 @@ describe('One-Time Payment', () => {
     paymentPage.inputPaymentAmount();
     // Hard wait needed for payments amount save
     // eslint-disable-next-line
-        cy.wait(1000);
+    cy.wait(1000);
     paymentPage.clickNextButton();
     // Hard wait needed to change from one page to the other
     // eslint-disable-next-line
-        cy.wait(3000);
+    cy.wait(3000);
     paymentPage.clickPaymentMethod();
     paymentPage.addingNewCard();
     paymentPage.clickFinishButton();
@@ -61,11 +61,11 @@ describe('One-Time Payment', () => {
     paymentPage.inputPaymentAmount();
     // Hard wait needed for payments amount save
     // eslint-disable-next-line
-        cy.wait(1000);
+    cy.wait(1000);
     paymentPage.clickNextButton();
     // Hard wait needed to change from one page to the other
     // eslint-disable-next-line
-        cy.wait(3000);
+    cy.wait(3000);
     paymentPage.selectAvailablePaymentAccount();
     paymentPage.nameOnPaymentAccount;
     paymentPage.clickFinishButton();

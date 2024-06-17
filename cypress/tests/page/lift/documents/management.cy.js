@@ -12,7 +12,8 @@ describe('Lift', () => {
       homePage.clickClientSelectionForm();
       homePage.clientSelection(CLIENT.VHDA);
     });
-    it('VEN-15594_lift_home_should_access_Documents_management_successfully', { tags: '@smoke' }, function () {
+
+    it('VEN-15594_lift_home_should_access_documents_management_successfully', { tags: '@smoke' }, function () {
       homePage.clickDocumentsSideMenu()
       homePage.clickManagement()
 

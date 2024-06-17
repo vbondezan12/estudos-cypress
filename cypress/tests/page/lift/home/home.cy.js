@@ -8,7 +8,6 @@ describe('Lift', () => {
     beforeEach(() => {
       cy.liftLogin(CLIENT.VENTANEX);
       homePage.open();
-
     });
 
     it('VEN-15594_lift_home_with_valid_client_selection', { tags: '@smoke' }, function () {
@@ -22,7 +21,6 @@ describe('Lift', () => {
     });
 
     describe('User Section', () => {
-
       it('VEN-15594_lift_home_should_open_profile_page', { tags: '@smoke' }, function () {
         homePage.clickUserButton()
         homePage.clickProfileButton()
@@ -43,10 +41,8 @@ describe('Lift', () => {
         homePage.clickLogoutButton()
 
         cy.url().should('contains', `${ Cypress.config().lift.baseUrl }/sessions/logout`);
-        homePage.toastMessage
-          .should('contains.text', 'Successfully Logged Out')
+        homePage.toastMessage.should('contains.text', 'Successfully Logged Out')
       });
-
     });
   });
 });

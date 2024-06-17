@@ -13,7 +13,7 @@ describe('Lift', () => {
       homePage.clientSelection(CLIENT.VHDA);
     });
 
-    it('VEN-15594_lift_home_should_access_New_MSP_Payment_page_successfully', { tags: '@smoke' }, function () {
+    it('VEN-15594_lift_home_should_access_new_msp_payment_page_successfully', { tags: '@smoke' }, function () {
       cy.intercept('GET', `${ Cypress.config().lift.baseUrl }/msp_payments/new`).as('newMspPaymentPage');
 
       homePage.clickPaymentsSideMenu()

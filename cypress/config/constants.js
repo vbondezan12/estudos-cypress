@@ -9,8 +9,8 @@ export const CLIENT = {
   SERVICE_MAC: 5409,
   US_BANK: 5426,
   THRIVE: 5748,
-  VHDA: 863,
   VENTANEX: 1,
+  VHDA: 863,
   VILLAGE_CAPITAL: 6763
 };
 

@@ -12,7 +12,8 @@ describe('Lift', () => {
       homePage.clickClientSelectionForm();
       homePage.clientSelection(CLIENT.VHDA);
     });
-    it('VEN-15594_lift_home_should_access_MSP_Recurring_Payments_Create_page_successfully', { tags: '@smoke' }, function () {
+
+    it('VEN-15594_lift_home_should_access_msp_recurring_payments_create_page_successfully', { tags: '@smoke' }, function () {
       cy.intercept('GET', `${ Cypress.config().lift.baseUrl }/msp_recurring_payments/new`).as('newMspRecurringPayments');
 
       homePage.clickPaymentsSideMenu()

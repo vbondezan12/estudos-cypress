@@ -12,7 +12,8 @@ describe('Lift', () => {
       homePage.clickClientSelectionForm();
       homePage.clientSelection(CLIENT.VHDA);
     });
-    it('VEN-15594_lift_home_should_access_Research_Email_Confirmation_page_successfully', { tags: '@smoke' }, function () {
+
+    it('VEN-15594_lift_home_should_access_research_email_confirmation_page_successfully', { tags: '@smoke' }, function () {
       cy.intercept('GET', `${ Cypress.config().lift.baseUrl }/email_confirmations`).as('emailConfirmation');
 
       homePage.clickPaymentsSideMenu()

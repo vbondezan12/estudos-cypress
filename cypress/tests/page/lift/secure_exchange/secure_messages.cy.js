@@ -13,7 +13,7 @@ describe('Lift', () => {
       homePage.clientSelection(CLIENT.VILLAGE_CAPITAL);
     });
 
-    it('VEN-15594_lift_home_should_access_File_management_successfully', { tags: '@smoke' }, function () {
+    it('VEN-15594_lift_home_should_access_file_management_successfully', { tags: '@smoke' }, function () {
       cy.intercept('GET', `${ Cypress.config().lift.baseUrl }/msp_lockbox_exceptions`).as('mspLockBoxExceptions');
 
       homePage.clickSecureExchangeSideMenu()

@@ -12,7 +12,8 @@ describe('Lift', () => {
       homePage.clickClientSelectionForm();
       homePage.clientSelection(CLIENT.VHDA);
     });
-    it('VEN-15594_lift_home_should_access_Issue_Onetime_Payment_page_successfully', { tags: '@smoke' }, function () {
+
+    it('VEN-15594_lift_home_should_access_issue_onetime_payment_page_successfully', { tags: '@smoke' }, function () {
       cy.intercept('GET', `${ Cypress.config().lift.baseUrl }/payments/new/onetime_credit`).as('oneTimeCredit');
 
       homePage.clickPaymentsSideMenu()
