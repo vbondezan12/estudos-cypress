@@ -20,6 +20,19 @@ export class HomePage extends LiftBase {
     return cy.get('#profile-name').should('be.visible');
   }
 
+  /* Account Lookup */
+
+  get accountLookup() {
+    return cy.get('a[href="/account_lookup/search"]')
+    .contains('Account Lookup')
+    .should('exist')
+    .should('be.visible');
+  }
+
+  clickAccountLookup() {
+    this.accountLookup.should('be.visible').click()
+  }
+  
   /* User elements */
   get profileButton() {
     return cy.get(':nth-child(1) > .dropdown-item').contains('Profile')
@@ -139,7 +152,6 @@ export class HomePage extends LiftBase {
   }
 
   /* Secure Exchange */
-
   get fileManagement () {
     return cy.get('a[href="/client_inbound_files"]')
   }
@@ -190,7 +202,6 @@ export class HomePage extends LiftBase {
   }
 
   /* Reporting */
-
   get dashboards () {
     return cy.get('a[href="#"]').contains('Dashboards ').should('be.visible')
   }
