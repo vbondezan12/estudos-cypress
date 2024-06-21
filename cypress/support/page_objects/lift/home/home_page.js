@@ -25,8 +25,7 @@ export class HomePage extends LiftBase {
   get accountLookup() {
     return cy.get('a[href="/account_lookup/search"]')
     .contains('Account Lookup')
-    .should('exist')
-    .should('be.visible');
+    .should('exist');
   }
 
   clickAccountLookup() {

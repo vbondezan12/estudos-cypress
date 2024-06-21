@@ -11,19 +11,16 @@ describe('Lift', () => {
 
     before(() => {
       homePage.getTestLoans(CLIENT.VHDA, LOAN_STATUS.CURRENT).then((response) => {
-        testCredential = response.body[1];
+        testCredential = response.body[4];
       });
     });
 
     beforeEach(() => {
-      cy.liftLogin(CLIENT.VENTANEX);
-      homePage.open();
-      homePage.clickEndtourButton();
-      homePage.clickClientSelectionForm();
-      homePage.clientSelection(CLIENT.VHDA);
+      cy.liftLoginClientSelection(CLIENT.VENTANEX, CLIENT.VHDA);
+      homePage.open()
     });
 
-    it('VEN-15594_lift_home_should_access_account_lookup_successfully', { tags: '@smoke' }, function () {
+    it('VEN-15594_lift_home_should_access_account_lookup_successfully', { tags: '@smoke' }, function () {      
       cy.intercept('GET', `${Cypress.config().lift.baseUrl}/account_lookup/search`).as('accountLookupSearch');
 
       homePage.clickAccountLookup()
@@ -33,7 +30,7 @@ describe('Lift', () => {
     });
 
     it('VEN-15594_lift_home_should_lookup_invalid_loan', { tags: '@smoke' }, function () {
-      const invalidLoanNumber = faker.number.int( {min: 1, max: 12} )
+      const invalidLoanNumber = faker.number.int( {min: 100000, max: 999999} )
 
       homePage.clickAccountLookup()
       accountLookup.inputLoanNumber(invalidLoanNumber)

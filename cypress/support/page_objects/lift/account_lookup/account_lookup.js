@@ -6,6 +6,8 @@ export class AccountLookup extends LiftBase {
 
   get loanNumberLookup() {
     return cy.get('input[id="loan_number"]')
+      .should('be.visible')
+      .should('exist')
   }
 
   inputLoanNumber(loanNumber) {
